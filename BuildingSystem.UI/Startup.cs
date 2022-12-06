@@ -1,6 +1,9 @@
+using BuildingSystem.Business.AutoMapper;
+using BuildingSystem.DataAccess.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +27,14 @@ namespace BuildingSystem.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(MapProfile));
+            services.AddDbContext<ApplicationDbContext>(
+             opts =>
+             {
+                 opts.UseSqlServer(Configuration.GetConnectionString("BuildingSystem"));
+             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +61,7 @@ namespace BuildingSystem.UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Building}/{action=Save}/{id?}");
             });
         }
     }

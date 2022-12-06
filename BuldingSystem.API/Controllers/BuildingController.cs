@@ -3,13 +3,12 @@ using BuildingSystem.Business.Abstract;
 using BuildingSystem.Business.Concrete;
 using BuildingSystem.Entities.Dtos;
 using BuildingSystem.Entities.Entity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuldingSystem.API.Controllers
+namespace BuldingSystem.UI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
