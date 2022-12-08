@@ -3,6 +3,7 @@ using BuildingSystem.Business.Abstract;
 using BuildingSystem.Entities.Dtos;
 using BuildingSystem.Entities.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,14 @@ namespace BuildingSystem.UI.Controllers
     {
 
         private readonly IBuildingService _buildingService;
+        private readonly IBlockService _blockService;
         private readonly IMapper _mapper;
 
-        public BuildingController(IBuildingService buildingService, IMapper mapper)
+
+        public BuildingController(IBuildingService buildingService, IBlockService blockService, IMapper mapper)
         {
             _buildingService = buildingService;
+            _blockService = blockService;
             _mapper = mapper;
         }
 
@@ -33,31 +37,38 @@ namespace BuildingSystem.UI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var buildings = await _buildingService.GetAllAsync();
-            var buildingsDto = _mapper.Map<List<BuildingDto>>(buildings.ToList());
-            return View(buildingsDto);
+            return View(buildings);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetById(int Id)
         {
             var buildings = await _buildingService.GetById(Id);
-            var buildingsDto = _mapper.Map<BuildingDto>(buildings);
-            return View(buildingsDto);
+            return View(buildings);
         }
 
         [HttpGet]
-        public IActionResult Save ()
+        public async Task<IActionResult> Save ()
         {
+            var blocks = await _blockService.GetAllAsync();
+            ViewBag.School = new SelectList(blocks, "Id", "BlockName");
             return View();
+           
         }
         
 
         [HttpPost]
         public async Task<IActionResult> Save(BuildingDto buildingDto)
         {
-            var buildings = await _buildingService.AddAsync(_mapper.Map<Building>(buildingDto));
-            var buildingsDto = _mapper.Map<BuildingDto>(buildings);
-            return RedirectToAction("GetAll");
+            if (ModelState.IsValid)
+            {
+                var buildings = await _buildingService.AddAsync(buildingDto);
+                return RedirectToAction("GetAll");
+            }
+            var block = await _blockService.GetAllAsync();
+            ViewBag.blocks = new SelectList(block, "Id", "BlockName");
+            return View();
+
         }
 
         [HttpGet]
@@ -71,7 +82,7 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public IActionResult Update(BuildingDto buildingDto)
         {
-            _buildingService.UpdateAsync(_mapper.Map<Building>(buildingDto));
+            _buildingService.UpdateAsync(buildingDto);
             return RedirectToAction("GetAll");
         }
 

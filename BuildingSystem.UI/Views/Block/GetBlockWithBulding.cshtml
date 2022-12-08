@@ -1,6 +1,6 @@
-﻿@model IEnumerable<BuildingDto>
+﻿@model IEnumerable<BlockWithBuildingDto>
 @{
-    ViewData["Title"] = "GetAll";
+    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,12 +11,12 @@
     </a>
 </div>
 
-<table id="myDataTable" class="table table-hover table-striped">
+<table  class="table table-hover table-striped">
     <thead class="thead-light">
         <tr>
-            
-            
-            <th scope="col">Binanın İsmi</th>
+
+            <th scope="col">Block İsmi</th>
+        <th scope="col">Binanın İsmi</th>
             <th scope="col">Toplam Daire Sayısı</th>
             <th></th>
 
@@ -26,18 +26,16 @@
         @foreach (var building in Model)
         {
             <tr>
-             
-               
-                <td>@building.Name</td>
-                <td>@building.TotalFlat</td>
-             
+                <td>@building.Building.Name</td>
+                <td>@building.Building.TotalFlat</td>
+
                 <td>
                     <a class="btn btn-warning" asp-controller="Building" asp-action="Update"
-                   asp-route-id="@building.Id">
+                   asp-route-id="@building.Building.Id">
                         Güncelle
                     </a>
                     <a class="btn btn-danger" asp-controller="Building" asp-action="Delete"
-                   asp-route-id="@building.Id">
+                   asp-route-id="@building.Building.Id">
                         Sil
                     </a>
                 </td>
@@ -45,3 +43,4 @@
         }
     </tbody>
 </table>
+

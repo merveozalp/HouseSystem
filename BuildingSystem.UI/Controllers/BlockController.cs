@@ -14,28 +14,26 @@ namespace BuildingSystem.UI.Controllers
     public class BlockController : Controller
     {
         private readonly IBlockService _blockService;
-        private readonly IMapper _mapper;
+        
 
-        public BlockController(IBlockService blockService, IMapper mappper)
+        public BlockController(IBlockService blockService)
         {
             _blockService = blockService;
-            _mapper = mappper;
+           
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var blocks = await _blockService.GetAllAsync();
-            var blocksDto = _mapper.Map<List<BlockDto>>(blocks.ToList());
-            return View(blocksDto);
+            return View(blocks);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetById(int Id)
         {
             var buildings = await _blockService.GetById(Id);
-            var buildingsDto = _mapper.Map<BuildingDto>(buildings);
-            return View(buildingsDto);
+            return View(buildings);
         }
 
         [HttpGet]
@@ -46,8 +44,7 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(BlockDto blockDto)
         {
-            var block = await _blockService.AddAsync(_mapper.Map<Block>(blockDto));
-            var blocksDto = _mapper.Map<Block>(blockDto);
+            var block = await _blockService.AddAsync(blockDto);
             return RedirectToAction("GetAll");
         }
 
@@ -63,8 +60,7 @@ namespace BuildingSystem.UI.Controllers
         // Update metot hatalı Servisleri güncellemen lazım.
         public IActionResult Update(BlockDto blockDto)
         {
-            var blocksDto = _mapper.Map<Block>(blockDto);
-            _blockService.UpdateAsync(blocksDto);
+            _blockService.UpdateAsync(blockDto);
             return RedirectToAction("Getall");
         }
 
@@ -77,7 +73,7 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBlockWithBuldingAsync()
+        public async Task<IActionResult> GetBlockWithBulding()
         {
            var blockWithBuilding =  await _blockService.GetBlockWithBuldingAsync();
            return View(blockWithBuilding);

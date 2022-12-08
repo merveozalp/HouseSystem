@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Entities.Dtos
 {
-
-    public class BlockWithBuildingDto
+    public class BlockAndBuildingDto
     {
-        public Block Block { get; set; }
+        public BlockDto BlockName { get; set; }
         public Building Building { get; set; }
     }
 }

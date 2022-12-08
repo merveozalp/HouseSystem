@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Business.Abstract
 {
-    public interface IBlockService:IService<Block>
+    public interface IBlockService
     {
-        
+        Task<BlockDto> GetById(int Id);
+        Task<IEnumerable<BlockDto>> GetAllAsync();
+        Task<BlockDto> AddAsync(BlockDto dto);
+        Task UpdateAsync(BlockDto dto);
+        Task DeleteAsync(BlockDto dto);
+
         Task<List<BlockWithBuildingDto>> GetBlockWithBuldingAsync();
 
-        //Task<Block> GetsingleBlocByIdkWithBulding(int blockId);
+        
     }
 }

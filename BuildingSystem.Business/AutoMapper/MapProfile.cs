@@ -20,6 +20,7 @@ namespace BuildingSystem.Business.AutoMapper
             CreateMap<Building, BuildingDto>().ReverseMap();
             CreateMap<Building, BuildingWithBlockDto>().ReverseMap();
             CreateMap<Building, BuildingWithFlatDto>().ReverseMap();
+            CreateMap<Building, BlockAndBuildingDto>().ReverseMap();
             CreateMap<Expense,ExpenseDto>().ReverseMap();
             CreateMap<ExpenseType,ExpenseDto>().ReverseMap();
             CreateMap<Flat,FlatDto>().ReverseMap();

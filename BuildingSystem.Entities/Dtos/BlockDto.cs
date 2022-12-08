@@ -10,6 +10,7 @@ namespace BuildingSystem.Entities.Dtos
     {
         public int Id { get; set; }
         public string BlockName { get; set; }
+        public int BlockId { get; set; }
 
     }
 }

@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Business.Abstract
 {
-    public interface IBuildingService:IService<Building>
+    public interface IBuildingService
     {
+        Task<BuildingDto> GetById(int Id);
+        Task<IEnumerable<BlockAndBuildingDto>> GetAllAsync();
+        Task<BuildingDto> AddAsync(BuildingDto dto);
+        Task UpdateAsync(BuildingDto dto);
+        Task DeleteAsync(BuildingDto dto);
         Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId);
     }
 }
