@@ -9,7 +9,7 @@ namespace Entites.Entitiy
 {
     public class Expense:Base
     {
-        // Enum ile elektirk / doğalgaz/ su/aidat seçeneleri sunulması.
+        
         public string Name { get; set; }
         public double Cost { get; set; }
         public bool IsPaid  { get; set; }

@@ -29,33 +29,33 @@ namespace BuldingSystem.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddTransient(typeof(IService<>), typeof(Service<>));
-            services.AddAutoMapper(typeof(MapProfile));
+            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+           
+            //services.AddAutoMapper(typeof(MapProfile));
 
-            services.AddTransient<IBlockRepository, BlockRepository>();
-            services.AddTransient<IBlockService, BlockService>();
-            services.AddTransient<IBuildingRepository, BuildingRepository>();
-            services.AddTransient<IBuildingService, BuildingService>();
+            //services.AddTransient<IBlockRepository, BlockRepository>();
+            //services.AddTransient<IBlockService, BlockService>();
+            //services.AddTransient<IBuildingRepository, BuildingRepository>();
+            //services.AddTransient<IBuildingService, BuildingService>();
 
-            services.AddTransient<IExpenseRepository, ExpenseRepository>();
-            services.AddTransient<IExpenseService, ExpenseService>();
+            //services.AddTransient<IExpenseRepository, ExpenseRepository>();
+            //services.AddTransient<IExpenseService, ExpenseService>();
 
-            services.AddTransient<IExpenseTypeRepository, ExpenseTypeRepository>();
-            services.AddTransient<IExpenseTypeService, ExpenseTypeService>();
+            //services.AddTransient<IExpenseTypeRepository, ExpenseTypeRepository>();
+            //services.AddTransient<IExpenseTypeService, ExpenseTypeService>();
 
-            services.AddTransient<IFlatRepository, FlatRepository>();
-            services.AddTransient<IFlatService, FlatService>();
+            //services.AddTransient<IFlatRepository, FlatRepository>();
+            //services.AddTransient<IFlatService, FlatService>();
 
-            services.AddTransient<IMessageRepository, MessangeRepository>();
-            services.AddTransient<IMessageService, MessageService>();
+            //services.AddTransient<IMessageRepository, MessangeRepository>();
+            //services.AddTransient<IMessageService, MessageService>();
 
-            services.AddTransient<IRoleRepository, RoleRepository>();
-            services.AddTransient<IRoleService, RoleService>();
+            //services.AddTransient<IRoleRepository, RoleRepository>();
+            //services.AddTransient<IRoleService, RoleService>();
 
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserService, UserService>();
+            //services.AddTransient<IUserRepository, UserRepository>();
+            //services.AddTransient<IUserService, UserService>();
 
 
             services.AddDbContext<ApplicationDbContext>(
@@ -64,15 +64,6 @@ namespace BuldingSystem.API
                     opts.UseSqlServer(Configuration.GetConnectionString("BuildingSystem"));
                 });
             services.AddControllers();
-           
-
-
-
-
-
-
-
-
 
             // Filter ile validation iþlemini merkezileþtirdim.
             //services.AddControllers(opt =>  opt.Filters.Add(new ValidateFilterAttribute()))

@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Entities.Dtos
 {
-    public class ExpenseDto
+    public class ExpenseCreateDto
     {
-        public string Id { get; set; }
         public bool IsPaid { get; set; }
         public double Cost { get; set; }
-        public string UserName { get; set; }
+        public int ExpenseTypeId { get; set; }
         public int FlatId { get; set; }
-        public byte FlatNumber { get; set; }
+
         public string TypeName { get; set; }
+
+        public byte FlatNumber { get; set; }
+        public IEnumerable<ExpenseTypeDto> ExpenseTypes { get; set; }
+        public IEnumerable<FlatDto> Flats { get; set; }
     }
 }

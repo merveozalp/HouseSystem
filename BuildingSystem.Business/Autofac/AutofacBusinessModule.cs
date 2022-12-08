@@ -16,8 +16,6 @@ namespace BuildingSystem.Business.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>)).InstancePerLifetimeScope();
-
             builder.RegisterType<BuildingSystem.Business.UnitOfWork.UnitOfWork>().As<IUnitOfWork>();
 
 

@@ -14,8 +14,8 @@ namespace Entites.Entitiy
         {
             Expenses = new HashSet<Expense>();
         }
-        public int FlatNumber { get; set; }
-        public byte FloorNumber { get; set; }
+        public byte FlatNumber { get; set; }
+        //public byte FloorNumber { get; set; }
         public string FlatType { get; set; }  // 2+1 vs oluşu
         public bool IsEmpty { get; set; }
         public int HouseType { get; set; }  // kiracı,ev sahibi

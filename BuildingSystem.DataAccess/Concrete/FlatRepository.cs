@@ -15,5 +15,10 @@ namespace BuildingSystem.DataAccess.Concrete
         public FlatRepository(ApplicationDbContext db) : base(db)
         {
         }
+
+        public async Task<List<Flat>> GetAllFlats()
+        {
+            return await _db.Flats.Include(x => x.User).Include(x => x.FlatNumber).Include(x => x.User).ToListAsync();
+        }
     }
 }

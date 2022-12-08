@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Entities.Dtos
 {
-    public class ExpenseTypeDto
+    public class UpdateExpenseDto
     {
-        public int Id { get; set; }
-        public string TypeName { get; set; }
     }
 }
