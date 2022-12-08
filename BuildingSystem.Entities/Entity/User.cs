@@ -12,7 +12,6 @@ namespace Entites.Entitiy
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string IdentityNo { get; set; }
-       
         public string CarNo { get; set; }
 
         public ICollection<Flat> Flats { get; set; }

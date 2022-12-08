@@ -17,13 +17,33 @@ namespace BuildingSystem.Business.AutoMapper
         {
             CreateMap<Block,BlockDto>().ReverseMap();
             CreateMap<Block, BlockWithBuildingDto>().ReverseMap();
+            CreateMap<Block, BlockAndBuildingDto>().ReverseMap();
+            
+
+
+            //------------------------------------------------------------------------
+
             CreateMap<Building, BuildingDto>().ReverseMap();
             CreateMap<Building, BuildingWithBlockDto>().ReverseMap();
             CreateMap<Building, BuildingWithFlatDto>().ReverseMap();
-            CreateMap<Building, BlockAndBuildingDto>().ReverseMap();
+           
+
+            //--------------------------------------------------------------------------
             CreateMap<Expense,ExpenseDto>().ReverseMap();
-            CreateMap<ExpenseType,ExpenseDto>().ReverseMap();
+            CreateMap<Expense,ExpenseCreateDto>().ReverseMap();
+            CreateMap<Expense,UpdateExpenseDto>().ReverseMap();
+            //-------------------------------------------------------------------------
+
+            CreateMap<ExpenseType,ExpenseTypeDto>().ReverseMap();
+           
+
+            //--------------------------------------------------------------------------
             CreateMap<Flat,FlatDto>().ReverseMap();
+            CreateMap<Flat,FlatCreateDto>().ReverseMap();
+            CreateMap<Flat,FlatUpdateDto>().ReverseMap();
+
+
+            //-------------------------------------------------------------------------
             CreateMap<Messange,MessageDto>().ReverseMap();
             CreateMap<Role,RoleDto>().ReverseMap();
             CreateMap<User,UserDto>().ReverseMap();

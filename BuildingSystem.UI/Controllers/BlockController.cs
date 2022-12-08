@@ -67,8 +67,8 @@ namespace BuildingSystem.UI.Controllers
         [HttpGet]
         public async  Task<IActionResult> Delete(int id)
         {
-            var blocks = await _blockService.GetById(id);
-            await _blockService.DeleteAsync(blocks);
+            
+            await _blockService.DeleteAsync(id);
             return RedirectToAction("GetAll");
         }
 

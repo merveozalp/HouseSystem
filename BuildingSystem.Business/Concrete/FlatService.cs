@@ -34,10 +34,10 @@ namespace BuildingSystem.Business.Concrete
             return dto;
         }
 
-        public async Task DeleteAsync(FlatDto dto)
+        public async Task DeleteAsync(int id)
         {
-            var entityDto = _mapper.Map<Flat>(dto);
-            _flatRepository.Delete(entityDto);
+            var flat = await _flatRepository.GetById(id);
+            _flatRepository.Delete(flat);
             await _unitOfWork.CommitAsync();
         }
 
@@ -48,7 +48,7 @@ namespace BuildingSystem.Business.Concrete
             return flatDto;
         }
 
-        public async Task<FlatDto> GetAllFlats()
+        public async Task<List<FlatDto>> GetAllFlats()
         {
             var flat = await _flatRepository.GetAllFlats();
             var flatsDto = flat.Select(x=> new FlatDto()

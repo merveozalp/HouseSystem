@@ -87,10 +87,9 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var buildings = await _buildingService.GetById(Id);
-            await _buildingService.DeleteAsync(buildings);
+            await _buildingService.DeleteAsync(id);
             return RedirectToAction("GetAll");
         }
     }

@@ -28,6 +28,8 @@ namespace BuildingSystem.UI
         {
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(MapProfile));
+            // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDbContext<ApplicationDbContext>(
              opts =>
              {

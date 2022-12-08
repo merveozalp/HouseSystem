@@ -8,7 +8,7 @@ namespace BuildingSystem.Entities.Dtos
 {
     public class ExpenseDto
     {
-        public string Id { get; set; }
+       public int Id { get; set; }
         public bool IsPaid { get; set; }
         public double Cost { get; set; }
         public string UserName { get; set; }

@@ -1,4 +1,5 @@
 ﻿using BuildingSystem.Entities.Dtos;
+using Entites.Entitiy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace BuildingSystem.Business.Abstract
         Task<IEnumerable<ExpenseDto>> GetAllAsync();
         Task<ExpenseCreateDto> AddAsync(ExpenseCreateDto dto);
         Task UpdateAsync(UpdateExpenseDto dto);
-        Task DeleteAsync(ExpenseDto dto);
-    }
+        Task DeleteAsync(int id);
+        Task<List<ExpenseDto>> GetAllExpenses();
+  
+}
 }

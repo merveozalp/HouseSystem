@@ -1,7 +1,17 @@
-﻿
-@{
-    ViewData["Title"] = "Add";
-}
+﻿@model ExpenseCreateDto
 
-<h1>Add</h1>
+<form asp-controller="Expense" asp-action="Add" class="was-validated">
 
+    <div class="mb-3">
+        <label asp-for="ExpenseId" class="form-label"> Gider Seçiniz </label>
+        <select asp-for="ExpenseId" asp-items="ViewBag.ExpensesType" class="form-control"></select>
+        <span asp-validation-for="ExpenseId" class="text-danger"></span>
+    </div>
+    <div class="mb-3 ">
+        <label asp-for="Cost">Ücret</label>
+        <input type="number" class="form-control" asp-for="Cost" required />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>

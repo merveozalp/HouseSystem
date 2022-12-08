@@ -10,13 +10,13 @@ namespace BuildingSystem.Entities.Dtos
     {
         public bool IsPaid { get; set; }
         public double Cost { get; set; }
-        public int ExpenseTypeId { get; set; }
-        public int FlatId { get; set; }
+        public int ExpenseId { get; set; }
 
-        public string TypeName { get; set; }
+       public int FlatId { get; set; }
+
+       public string TypeName { get; set; }
 
         public byte FlatNumber { get; set; }
-        public IEnumerable<ExpenseTypeDto> ExpenseTypes { get; set; }
-        public IEnumerable<FlatDto> Flats { get; set; }
+      
     }
 }

@@ -15,5 +15,10 @@ namespace BuildingSystem.DataAccess.Concrete
         public ExpenseRepository(ApplicationDbContext db) : base(db)
         {
         }
+
+        public async Task<List<Expense>> GetAllExpenses()
+        {
+           return await _db.Expenses.Include(x=>x.ExpenceType).Include(x=>x.Flat).ThenInclude(x=>x.User).ToListAsync();
+        }
     }
 }

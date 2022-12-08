@@ -13,6 +13,6 @@ namespace BuildingSystem.Business.Abstract
         Task<IEnumerable<ExpenseTypeDto>> GetAllAsync();
         Task<ExpenseTypeDto> AddAsync(ExpenseTypeDto dto);
         Task UpdateAsync(ExpenseTypeDto dto);
-        Task DeleteAsync(ExpenseTypeDto dto);
+        Task DeleteAsync(int id);
     }
 }

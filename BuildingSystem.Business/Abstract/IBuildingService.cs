@@ -14,7 +14,7 @@ namespace BuildingSystem.Business.Abstract
         Task<IEnumerable<BlockAndBuildingDto>> GetAllAsync();
         Task<BuildingDto> AddAsync(BuildingDto dto);
         Task UpdateAsync(BuildingDto dto);
-        Task DeleteAsync(BuildingDto dto);
+        Task DeleteAsync(int id);
         Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId);
     }
 }

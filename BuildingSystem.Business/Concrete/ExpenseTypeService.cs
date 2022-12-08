@@ -18,6 +18,14 @@ namespace BuildingSystem.Business.Concrete
         private readonly IExpenseTypeRepository _expenseTypeRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
+        public ExpenseTypeService(IExpenseTypeRepository expenseTypeRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _expenseTypeRepository = expenseTypeRepository;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
         public async Task<ExpenseTypeDto> AddAsync(ExpenseTypeDto dto)
         {
             var entityDto = _mapper.Map<ExpenseType>(dto);
@@ -26,10 +34,10 @@ namespace BuildingSystem.Business.Concrete
             return dto;
         }
 
-        public async Task DeleteAsync(ExpenseTypeDto dto)
+        public async Task DeleteAsync(int id)
         {
-            var entityDto = _mapper.Map<ExpenseType>(dto);
-            _expenseTypeRepository.Delete(entityDto);
+            var expenses = await _expenseTypeRepository.GetById(id);
+            _expenseTypeRepository.Delete(expenses);
             await _unitOfWork.CommitAsync();
         }
 

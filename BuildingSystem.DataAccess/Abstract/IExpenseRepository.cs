@@ -9,5 +9,6 @@ namespace BuildingSystem.DataAccess.Abstract
 {
     public interface IExpenseRepository:IGenericRepository<Expense>
     {
+        Task<List<Expense>> GetAllExpenses();
     }
 }

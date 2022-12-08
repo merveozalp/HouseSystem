@@ -13,8 +13,8 @@ namespace BuildingSystem.Business.Abstract
         Task<IEnumerable<FlatDto>> GetAllAsync();
         Task<FlatCreateDto> AddAsync(FlatCreateDto dto);
         Task UpdateAsync(FlatUpdateDto dto);
-        Task DeleteAsync(FlatDto dto);
+        Task DeleteAsync(int id);
 
-        Task<FlatDto> GetAllFlats();
+        Task<List<FlatDto>> GetAllFlats();
     }
 }

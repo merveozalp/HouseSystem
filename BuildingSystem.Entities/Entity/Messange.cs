@@ -12,5 +12,6 @@ namespace BuildingSystem.Entities.Entity
         public string SenderMail { get; set; }
         public string ReceiverMail { get; set; }
         public string MessageContent { get; set; }
+        public bool IsRead { get; set; } = false;
     }
 }

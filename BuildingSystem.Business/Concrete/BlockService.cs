@@ -33,10 +33,10 @@ namespace BuildingSystem.Business.Concrete
             await _unitOfWork.CommitAsync();
             return dto;
         }
-        public async Task DeleteAsync(BlockDto dto)
+        public async Task DeleteAsync(int id)
         {
-            var entityDto = _mapper.Map<Block>(dto);
-            _blockRepository.Delete(entityDto);
+            var block = await _blockRepository.GetById(id);
+            _blockRepository.Delete(block);
             await _unitOfWork.CommitAsync();
         }
 
