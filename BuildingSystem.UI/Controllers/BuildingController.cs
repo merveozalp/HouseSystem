@@ -34,36 +34,32 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllBuilding()
         {
             var buildings = await _buildingService.GetAllAsync();
             return View(buildings);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetById(int Id)
-        {
-            var buildings = await _buildingService.GetById(Id);
-            return View(buildings);
-        }
+        
+     
 
         [HttpGet]
-        public async Task<IActionResult> Save ()
+        public async Task<IActionResult> AddBuilding ()
         {
             var blocks = await _blockService.GetAllAsync();
-            ViewBag.School = new SelectList(blocks, "Id", "BlockName");
+            ViewBag.Building = new SelectList(blocks, "Id", "BlockName");
             return View();
            
         }
         
 
         [HttpPost]
-        public async Task<IActionResult> Save(BuildingDto buildingDto)
+        public async Task<IActionResult> AddBuilding(BuildingDto buildingDto)
         {
             if (ModelState.IsValid)
             {
                 var buildings = await _buildingService.AddAsync(buildingDto);
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllBuilding");
             }
             var block = await _blockService.GetAllAsync();
             ViewBag.blocks = new SelectList(block, "Id", "BlockName");
@@ -72,18 +68,18 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> UpdateBuilding(int id)
         {
             var building = await _buildingService.GetById(id);
-            if (building == null) return RedirectToAction("GetAll");
+            if (building == null) return RedirectToAction("GetAllBuilding");
             return View(building);
         }
 
         [HttpPost]
-        public IActionResult Update(BuildingDto buildingDto)
+        public IActionResult UpdateBuilding(BuildingDto buildingDto)
         {
             _buildingService.UpdateAsync(buildingDto);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllBuilding");
         }
 
         [HttpDelete]

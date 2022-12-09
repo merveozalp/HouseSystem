@@ -38,9 +38,16 @@ namespace BuildingSystem.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var ExpenseType = await _expenseTypeService.GetAllAsync();
-            ViewBag.ExpensesType = new SelectList(ExpenseType, "Id", "TypeName");
-            return View();
+           
+
+            var expenseType = await _expenseTypeService.GetAllAsync();
+            var flats = await _flatService.GetAllAsync();
+            var createExpense = new ExpenseCreateDto()
+            {
+                ExpenseTypes = expenseType,
+                Flats = flats
+            };
+            return View (createExpense);
         }
 
         [HttpPost]
@@ -53,8 +60,7 @@ namespace BuildingSystem.UI.Controllers
                 return RedirectToAction("GetAll");
             }
 
-            var ExpenseType = await _expenseTypeService.GetAllAsync();
-            ViewBag.ExpensesType = new SelectList(ExpenseType, "Id ", "TypeName");
+           
             return View();
           
 
@@ -63,6 +69,10 @@ namespace BuildingSystem.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
+            var ExpenseType = await _expenseTypeService.GetAllAsync();
+            ViewBag.ExpensesType = new SelectList(ExpenseType, "Id", "TypeName");
+            var flats = await _flatService.GetAllAsync();
+            ViewBag.Flat = new SelectList(flats, "Id", "FlatNumber");
             var expenses = await _expenseService.GetById(id);
             if (expenses is null) return RedirectToAction("GetAll");
             return View(expenses);
@@ -71,6 +81,7 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public IActionResult Update(UpdateExpenseDto updateExpenseDto)
         {
+            if (!ModelState.IsValid) return View(updateExpenseDto);
             _expenseService.UpdateAsync(updateExpenseDto);
             return RedirectToAction("GetAll");
 

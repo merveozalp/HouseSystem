@@ -18,7 +18,7 @@ namespace BuildingSystem.DataAccess.Concrete
 
         public async Task<List<Flat>> GetAllFlats()
         {
-            return await _db.Flats.Include(x => x.User).Include(x => x.FlatNumber).Include(x => x.User).ToListAsync();
+            return await _db.Flats.Include(x => x.User).Include(x=>x.Building).OrderBy(x=>x.FlatNumber).ToListAsync();
         }
     }
 }

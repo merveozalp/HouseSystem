@@ -1,0 +1,10 @@
+﻿
+@model ExpenseTypeDto
+<form asp-controller="ExpenseType" asp-action="AddEcpenseType" class="was-validated">
+    <div class="mb-3">
+        <label asp-for="TypeName" class="form-label"> Fatura/Gider İsmi</label>
+        <input type="text" class="form-control" asp-for="TypeName" required>
+        <span asp-validation-for="TypeName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Gönder</button>
+</form>

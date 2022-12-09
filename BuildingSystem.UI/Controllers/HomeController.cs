@@ -1,4 +1,8 @@
-﻿using BuildingSystem.UI.Models;
+﻿using BuildingSystem.Business.Abstract;
+using BuildingSystem.Entities.Dtos;
+using BuildingSystem.UI.Models;
+using Entites.Entitiy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +16,47 @@ namespace BuildingSystem.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserService _userService;
+        private UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserService userService, UserManager<User> userManager)
         {
             _logger = logger;
+            _userService = userService;
+            _userManager = userManager;
         }
-
-        public IActionResult Index()
+        public IActionResult LogIn()
         {
             return View();
+        }
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async IActionResult SignUp(UserDto dto)
+        {
+            User user = new User()
+            {
+                IdentityNo = dto.IdentityNo,
+                UserName = dto.UserName,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                CarNo = dto.CarNo,
+                PhoneNumber = dto.PhoneNumber,
+
+            };
+            IdentityResult result = await _userManager.CreateAsync(user, dto.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login");
+            }
+            return View(dto);
+           
+           
+            
         }
 
         public IActionResult Privacy()
@@ -28,10 +64,6 @@ namespace BuildingSystem.UI.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }

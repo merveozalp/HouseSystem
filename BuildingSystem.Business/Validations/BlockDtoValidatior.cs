@@ -13,6 +13,7 @@ namespace BuildingSystem.Business.Validations
         public BlockDtoValidatior()
         {
             RuleFor(x => x.BlockName).NotNull().WithMessage("{PropertyName} is required").NotEmpty().WithMessage("{PropertyName} is required");
+            
         }
     }
 }

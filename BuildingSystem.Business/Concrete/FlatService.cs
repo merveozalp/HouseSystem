@@ -57,7 +57,7 @@ namespace BuildingSystem.Business.Concrete
                 FlatNumber=x.FlatNumber,
                 FlatType=x.FlatType,
                 IsEmpty=x.IsEmpty,
-                UserName=x.User.UserName,
+                //UserName=x.User.UserName,
                 BuildingName=x.Building.Name
             }).ToList();
 

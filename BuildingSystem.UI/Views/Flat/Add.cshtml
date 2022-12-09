@@ -1,7 +1,43 @@
-﻿
-@{
-    ViewData["Title"] = "Add";
-}
+﻿@model FlatCreateDto
 
-<h1>Add</h1>
+<form asp-controller="Flat" asp-action="Add" class="was-validated">
+    <div class="mb-3 ">
+        <label asp-for="FlatNumber">Daire Numarası</label>
+        <input type="number" class="form-control" asp-for="FlatNumber" required />
+        <span asp-validation-for="FlatNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3 form-group">
+        <label asp-for="FlatType">Daire Tipi</label>
+        <input type="text" class="form-control" asp-for="FlatType" required />
+        <span asp-validation-for="FlatType" class="text-danger"></span>
+    </div>
+  @*  <div class="mb-3">
+        <label asp-for="UserId">Kullanıcı</label>
+        <select asp-for="UserId" class="form-control"
+                asp-items="ViewBag.Users" required>
+            <option>Lütfen birini seçiniz</option>
+        </select>
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>*@
 
+@*    <div class="mb-3">
+        <label asp-for="blockId">Blok</label>
+        <select asp-for="blockId" class="form-control"
+                asp-items="ViewBag.Block" required>
+            <option>Lütfen birini seçiniz</option>
+        </select>
+        <span asp-validation-for="BuildingId" class="text-danger"></span>
+    </div>*@
+
+       <div class="mb-3">
+        <label asp-for="BuildingId">Daire</label>
+        <select asp-for="BuildingId" class="form-control"
+                asp-items="ViewBag.Building" required>
+            <option>Lütfen birini seçiniz</option>
+        </select>
+        <span asp-validation-for="BuildingId" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>

@@ -16,24 +16,24 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllExpenseType()
         {
             var expensesType = await _expenseTypeService.GetAllAsync();
             return View(expensesType);
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult AddExpenseType()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add (ExpenseTypeDto expenseTypeDto)
+        public async Task<IActionResult> AddExpenseType (ExpenseTypeDto expenseTypeDto)
         {
             if (!ModelState.IsValid) return View(expenseTypeDto);
             await _expenseTypeService.AddAsync(expenseTypeDto);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllExpenseType");
         }
 
         [HttpGet]
@@ -41,22 +41,22 @@ namespace BuildingSystem.UI.Controllers
         {
            
             await _expenseTypeService.DeleteAsync(id);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllExpenseType");
         }
         [HttpGet]
-        public async  Task<IActionResult> Update(int id)
+        public async  Task<IActionResult> UpdateExpenseType(int id)
         {
             var expensesType = await _expenseTypeService.GetById(id);
-            if (expensesType is null) return RedirectToAction("GetAll");
+            if (expensesType is null) return RedirectToAction("GetAllExpenseType");
             return View(expensesType);
             
         }
 
         [HttpPost]
-        public IActionResult Update(ExpenseTypeDto expenseTypeDto)
+        public IActionResult UpdateExpenseType(ExpenseTypeDto expenseTypeDto)
         {
             _expenseTypeService.UpdateAsync(expenseTypeDto);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllExpenseType");
 
         }
     }

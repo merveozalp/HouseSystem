@@ -13,10 +13,14 @@ namespace BuildingSystem.Entities.Dtos
         public string FlatType { get; set; }
         public string HouseType { get; set; }
         public string UserId { get; set; }
+        //public string UserName { get; set; }
         public int BuildingId { get; set; }
+        //public string Name { get; set; }
+        public int blockId { get; set; }
+        //public string BlockName { get; set; }
 
 
-        public IEnumerable<BuildingDto> Buildings { get; set; } //id
-        public IEnumerable<UserDto> Users { get; set; }//id
+        //public IEnumerable<BuildingDto> Buildings { get; set; } //id
+        //public IEnumerable<UserDto> Users { get; set; }//id
     }
 }

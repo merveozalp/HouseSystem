@@ -23,45 +23,39 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllBlock()
         {
             var blocks = await _blockService.GetAllAsync();
             return View(blocks);
         }
 
+      
         [HttpGet]
-        public async Task<IActionResult> GetById(int Id)
-        {
-            var buildings = await _blockService.GetById(Id);
-            return View(buildings);
-        }
-
-        [HttpGet]
-        public IActionResult Save()
+        public IActionResult AddBlock()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Save(BlockDto blockDto)
+        public async Task<IActionResult> AddBlock(BlockDto blockDto)
         {
             var block = await _blockService.AddAsync(blockDto);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllBlock");
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> UpdateBlock(int id)
         {
             var blocks = await _blockService.GetById(id);
-            if (blocks == null) return RedirectToAction("GetAll");
+            if (blocks == null) return RedirectToAction("GetAllBlock");
             return View(blocks);
         }
 
         [HttpPost]
         // Update metot hatalı Servisleri güncellemen lazım.
-        public IActionResult Update(BlockDto blockDto)
+        public IActionResult UpdateBlock(BlockDto blockDto)
         {
             _blockService.UpdateAsync(blockDto);
-            return RedirectToAction("Getall");
+            return RedirectToAction("GetAllBlock");
         }
 
         [HttpGet]
@@ -69,7 +63,7 @@ namespace BuildingSystem.UI.Controllers
         {
             
             await _blockService.DeleteAsync(id);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllBlock");
         }
 
         [HttpGet]

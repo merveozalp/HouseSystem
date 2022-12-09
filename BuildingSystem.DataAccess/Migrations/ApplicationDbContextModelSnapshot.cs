@@ -79,6 +79,9 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
                     b.Property<string>("MessageContent")
                         .HasColumnType("nvarchar(max)");
 
@@ -103,10 +106,7 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.Property<double>("Cost")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ExpenceTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExpenseId")
+                    b.Property<int>("ExpenseTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("FlatId")
@@ -120,7 +120,7 @@ namespace BuildingSystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpenceTypeId");
+                    b.HasIndex("ExpenseTypeId");
 
                     b.HasIndex("FlatId");
 
@@ -137,14 +137,11 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FlatNumber")
-                        .HasColumnType("int");
+                    b.Property<byte>("FlatNumber")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("FlatType")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("FloorNumber")
-                        .HasColumnType("tinyint");
 
                     b.Property<int>("HouseType")
                         .HasColumnType("int");
@@ -155,11 +152,16 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("blockId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("blockId");
 
                     b.ToTable("Flats");
                 });
@@ -387,7 +389,9 @@ namespace BuildingSystem.DataAccess.Migrations
                 {
                     b.HasOne("BuildingSystem.Entities.Entity.ExpenseType", "ExpenceType")
                         .WithMany("Expenses")
-                        .HasForeignKey("ExpenceTypeId");
+                        .HasForeignKey("ExpenseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Entites.Entitiy.Flat", "Flat")
                         .WithMany("Expenses")
@@ -411,6 +415,14 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.HasOne("Entites.Entitiy.User", "User")
                         .WithMany("Flats")
                         .HasForeignKey("UserId");
+
+                    b.HasOne("BuildingSystem.Entities.Entity.Block", "Block")
+                        .WithMany("Flats")
+                        .HasForeignKey("blockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Block");
 
                     b.Navigation("Building");
 
@@ -471,6 +483,8 @@ namespace BuildingSystem.DataAccess.Migrations
             modelBuilder.Entity("BuildingSystem.Entities.Entity.Block", b =>
                 {
                     b.Navigation("Buildings");
+
+                    b.Navigation("Flats");
                 });
 
             modelBuilder.Entity("BuildingSystem.Entities.Entity.Building", b =>

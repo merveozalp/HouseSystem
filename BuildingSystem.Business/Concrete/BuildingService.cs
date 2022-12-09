@@ -39,10 +39,10 @@ namespace BuildingSystem.Business.Concrete
             await _unitOfWork.CommitAsync();
          }
 
-        public async Task<IEnumerable<BlockAndBuildingDto>> GetAllAsync()
+        public async Task<IEnumerable<BuildingDto>> GetAllAsync()
         {
             var buildingList = await _buildingRepository.GetAll().ToListAsync();
-            var buildingDto = _mapper.Map<IEnumerable<BlockAndBuildingDto>>(buildingList);
+            var buildingDto = _mapper.Map<IEnumerable<BuildingDto>>(buildingList);
             return buildingDto;
         }
 

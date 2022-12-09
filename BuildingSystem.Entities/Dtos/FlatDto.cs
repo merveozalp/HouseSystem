@@ -14,5 +14,7 @@ namespace BuildingSystem.Entities.Dtos
         public bool IsEmpty { get; set; }
         public string UserName { get; set; }
         public string BuildingName { get; set; }
+
+      
     }
 }

@@ -2,10 +2,10 @@
 <div class="m-0">
     <h3>Borçlandırma İşlemleri</h3>
     @*<a class="btn btn-success btn-sm" asp-controller="Expense" asp-action="AddExpenseToAll">
-        Toplu Borçlandır
+    Toplu Borçlandır
     </a>
-*@
-    <a class="btn btn-success btn-sm" asp-controller="Expense" asp-action="Add">
+    *@
+    <a class="btn btn-success btn-sm" asp-controller="Expense" asp-action="AddExpense">
         Borçlandır
     </a>
 </div>
@@ -44,7 +44,7 @@
 
 
                 <td>
-                    <a class="btn btn-warning " asp-controller="Expense" asp-action="Update"
+                    <a class="btn btn-warning " asp-controller="Expense" asp-action="UpdateExpense"
                    asp-route-id="@expense.Id">
                         Güncelle
                     </a>

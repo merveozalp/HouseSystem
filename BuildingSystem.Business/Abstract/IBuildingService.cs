@@ -11,7 +11,7 @@ namespace BuildingSystem.Business.Abstract
     public interface IBuildingService
     {
         Task<BuildingDto> GetById(int Id);
-        Task<IEnumerable<BlockAndBuildingDto>> GetAllAsync();
+        Task<IEnumerable<BuildingDto>> GetAllAsync();
         Task<BuildingDto> AddAsync(BuildingDto dto);
         Task UpdateAsync(BuildingDto dto);
         Task DeleteAsync(int id);

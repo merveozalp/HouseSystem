@@ -15,7 +15,7 @@ namespace Entites.Entitiy
         public bool IsPaid  { get; set; }
 
         public ExpenseType ExpenceType { get; set; }
-        public int ExpenseId { get; set; }
+        public int ExpenseTypeId { get; set; } 
 
         public Flat Flat { get; set; }
         public int FlatId { get; set; }

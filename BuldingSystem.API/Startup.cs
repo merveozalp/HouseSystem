@@ -29,27 +29,7 @@ namespace BuldingSystem.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-           
-            //services.AddAutoMapper(typeof(MapProfile));
-
-            //services.AddTransient<IBlockRepository, BlockRepository>();
-            //services.AddTransient<IBlockService, BlockService>();
-            //services.AddTransient<IBuildingRepository, BuildingRepository>();
-            //services.AddTransient<IBuildingService, BuildingService>();
-
-            //services.AddTransient<IExpenseRepository, ExpenseRepository>();
-            //services.AddTransient<IExpenseService, ExpenseService>();
-
-            //services.AddTransient<IExpenseTypeRepository, ExpenseTypeRepository>();
-            //services.AddTransient<IExpenseTypeService, ExpenseTypeService>();
-
-            //services.AddTransient<IFlatRepository, FlatRepository>();
-            //services.AddTransient<IFlatService, FlatService>();
-
-            //services.AddTransient<IMessageRepository, MessangeRepository>();
-            //services.AddTransient<IMessageService, MessageService>();
+            
 
             //services.AddTransient<IRoleRepository, RoleRepository>();
             //services.AddTransient<IRoleService, RoleService>();

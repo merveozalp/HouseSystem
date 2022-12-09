@@ -1,4 +1,5 @@
 ﻿using BuildingSystem.Entities.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace Entites.Entitiy
         public Flat()
         {
             Expenses = new HashSet<Expense>();
+          
         }
+       
         public byte FlatNumber { get; set; }
         //public byte FloorNumber { get; set; }
         public string FlatType { get; set; }  // 2+1 vs oluşu
@@ -26,7 +29,12 @@ namespace Entites.Entitiy
         public User User { get; set; }
         public string UserId { get; set; }
 
+      
+
+       
+
         public ICollection<Expense> Expenses { get; set; }
+     
 
 
 

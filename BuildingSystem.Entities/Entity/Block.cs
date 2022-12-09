@@ -16,5 +16,6 @@ namespace BuildingSystem.Entities.Entity
         public string BlockName { get; set; }
 
         public ICollection<Building> Buildings { get; set; }
+      
     }
 }

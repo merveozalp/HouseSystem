@@ -1,5 +1,6 @@
 using BuildingSystem.Business.AutoMapper;
 using BuildingSystem.DataAccess.Context;
+using Entites.Entitiy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace BuildingSystem.UI
             services.AddAutoMapper(typeof(MapProfile));
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddDbContext<ApplicationDbContext>(
              opts =>
              {
@@ -58,6 +60,7 @@ namespace BuildingSystem.UI
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

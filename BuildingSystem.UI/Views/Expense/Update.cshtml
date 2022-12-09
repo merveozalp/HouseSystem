@@ -1,7 +1,28 @@
-﻿
-@{
-    ViewData["Title"] = "Update";
-}
+﻿@model UpdateExpenseDto
+<form asp-controller="Expense" asp-action="UpdateExpense" class="was-validated">
+    <div class="mb-3 ">
+        <label asp-for="Cost">Ücret</label>
+        <input type="number" class="form-control" asp-for="Cost" required />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="FlatId">Daire Numarası</label>
+        <select asp-for="FlatId" class="form-control"
+                asp-items= "ViewBag.Flat" required>
+            <option>Lütfen birini seçiniz</option>
+        </select>
+        <span asp-validation-for="FlatId" class="text-danger"></span>
+    </div>
 
-<h1>Update</h1>
+    <div class="mb-3">
+        <label asp-for="ExpenseTypeId">Gider Türü</label>
+        <select asp-for="ExpenseTypeId" class="form-control"
+                asp-items="ViewBag.ExpensesType" required>
+            <option>Lütfen birini seçiniz</option>
+        </select>
+        <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>
+    </div>
 
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>

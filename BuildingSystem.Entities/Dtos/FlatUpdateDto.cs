@@ -15,9 +15,12 @@ namespace BuildingSystem.Entities.Dtos
         public string HouseType { get; set; }
         public string UserId { get; set; }
         public int BuildingId { get; set; }
+       
+
 
 
         public IEnumerable<BuildingDto> Buildings { get; set; } //id
         public IEnumerable<UserDto> Users { get; set; }//id
+       
     }
 }
