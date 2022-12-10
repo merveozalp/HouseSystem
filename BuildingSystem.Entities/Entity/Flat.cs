@@ -29,10 +29,6 @@ namespace Entites.Entitiy
         public User User { get; set; }
         public string UserId { get; set; }
 
-      
-
-       
-
         public ICollection<Expense> Expenses { get; set; }
      
 

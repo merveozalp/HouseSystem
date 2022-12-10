@@ -31,11 +31,11 @@ namespace BuldingSystem.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.Configure<ApiBehaviorOptions>(x =>
-            {
-                x.SuppressModelStateInvalidFilter = true;
-            });
+            services.AddDbContext<ApplicationDbContext>(
+                       opts =>
+                       {
+                           opts.UseSqlServer(Configuration.GetConnectionString("BuildingSystem"));
+                       });
 
             services.AddSwaggerGen(c =>
             {

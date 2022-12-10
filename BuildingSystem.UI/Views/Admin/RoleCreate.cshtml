@@ -11,13 +11,13 @@
         <form asp-action="RoleCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="RoleName" class="control-label"></label>
+                <label asp-for="RoleName" class="control-label">Rol İsmi giriniz</label>
                 <input asp-for="RoleName" class="form-control" />
                 <span asp-validation-for="RoleName" class="text-danger"></span>
             </div>
            
             <div class="form-group">
-                <input type="submit" value="RoleCreate" class="btn btn-primary" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
             </div>
         </form>
     </div>

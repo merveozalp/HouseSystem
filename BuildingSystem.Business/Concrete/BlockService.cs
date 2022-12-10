@@ -51,8 +51,13 @@ namespace BuildingSystem.Business.Concrete
         public async Task<List<BlockWithBuildingDto>> GetBlockWithBuldingAsync()
         {
             var block = await _blockRepository.GetBlockWithBuldingAsync();
-            var blockDto = _mapper.Map<List<BlockWithBuildingDto>>(block);
-            return blockDto.ToList();
+            var blockDto = block.Select(b => new BlockWithBuildingDto()
+            {
+                BlockName = b.BlockName,
+                BuildingName = b.Buildings.First().BuildingName,
+            }).ToList();
+
+            return blockDto;
         }
 
         public async Task<BlockDto> GetById(int Id)

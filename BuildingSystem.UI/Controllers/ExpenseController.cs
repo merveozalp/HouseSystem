@@ -57,11 +57,11 @@ namespace BuildingSystem.UI.Controllers
             {
                 expenseCreateDto.IsPaid = true;
                 var expenses = await _expenseService.AddAsync(expenseCreateDto);
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllExpenses");
             }
 
            
-            return View();
+            return View(expenseCreateDto);
           
 
         }
@@ -74,7 +74,7 @@ namespace BuildingSystem.UI.Controllers
             var flats = await _flatService.GetAllAsync();
             ViewBag.Flat = new SelectList(flats, "Id", "FlatNumber");
             var expenses = await _expenseService.GetById(id);
-            if (expenses is null) return RedirectToAction("GetAll");
+            if (expenses is null) return RedirectToAction("GetAllExpenses");
             return View(expenses);
         }
 
@@ -83,7 +83,7 @@ namespace BuildingSystem.UI.Controllers
         {
             if (!ModelState.IsValid) return View(updateExpenseDto);
             _expenseService.UpdateAsync(updateExpenseDto);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllExpenses");
 
         }
 
@@ -92,7 +92,7 @@ namespace BuildingSystem.UI.Controllers
         {
            
             await _expenseService.DeleteAsync(id);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllExpenses");
         }
 
         [HttpGet]

@@ -3,6 +3,7 @@ using BuildingSystem.Business.Abstract;
 using BuildingSystem.Business.Concrete;
 using BuildingSystem.Entities.Dtos;
 using BuildingSystem.Entities.Entity;
+using BuildingSystem.UI.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    [Validatefilter]
     public class BlockController : Controller
     {
         private readonly IBlockService _blockService;
@@ -69,8 +71,8 @@ namespace BuildingSystem.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBlockWithBulding()
         {
-           var blockWithBuilding =  await _blockService.GetBlockWithBuldingAsync();
-           return View(blockWithBuilding);
+            var blockWithBuilding = await _blockService.GetBlockWithBuldingAsync();
+            return View(blockWithBuilding);
         }
 
 

@@ -26,12 +26,12 @@ namespace BuildingSystem.UI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetBuildingByIdWithFlatAsync(int buildingId)
-        {
-            var buildingWithFlat = await _buildingService.GetBuildingByIdWithFlatAsync(buildingId);
-            return View(buildingWithFlat);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetBuildingByIdWithFlatAsync(int buildingId)
+        //{
+        //    var buildingWithFlat = await _buildingService.GetBuildingByIdWithFlatAsync(buildingId);
+        //    return View(buildingWithFlat);
+        //}
 
         [HttpGet]
         public async Task<IActionResult> GetAllBuilding()

@@ -10,7 +10,9 @@ namespace BuildingSystem.Entities.Dtos
 
     public class BlockWithBuildingDto
     {
-        public Block Block { get; set; }
-        public Building Building { get; set; }
+        public string BlockName { get; set; }
+        public int BuildingId { get; set; }
+        public string BuildingName { get; set; }
+        public IEnumerable<BuildingDto> Building { get; set; }
     }
 }

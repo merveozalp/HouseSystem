@@ -20,8 +20,7 @@ namespace BuildingSystem.DataAccess.Concrete
 
         public async Task<List<Block>> GetBlockWithBuldingAsync()
         {
-            //Eager Loading 
-            //Lazy Loading 
+            
             return await _db.Blocks.Include(x=>x.Buildings).ToListAsync();
         }
 

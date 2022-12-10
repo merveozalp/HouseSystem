@@ -2,6 +2,7 @@ using BuildingSystem.Business.AutoMapper;
 using BuildingSystem.DataAccess.Context;
 using Entites.Entitiy;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,8 @@ namespace BuildingSystem.UI
         {
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddAutoMapper(typeof(MapProfile));
+
+
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddIdentity<User, Role>
@@ -44,12 +47,16 @@ namespace BuildingSystem.UI
              {
                  opts.UseSqlServer(Configuration.GetConnectionString("BuildingSystem"));
              });
+            services.AddHangfireServer();
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("BuildingSystem")));
 
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs,
+            IRecurringJobManager recurringJobManager, IWebHostEnvironment env,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +69,10 @@ namespace BuildingSystem.UI
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseHangfireDashboard("/myjobs");
+
+            app.UseApplicationModule(backgroundJobs, recurringJobManager, serviceProvider); // Hangfire
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -73,7 +84,7 @@ namespace BuildingSystem.UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Building}/{action=Save}/{id?}");
+                    pattern: "{controller=Building}/{action=AddBuilding}/{id?}");
             });
         }
     }

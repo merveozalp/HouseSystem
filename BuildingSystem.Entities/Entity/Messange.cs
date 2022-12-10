@@ -9,9 +9,12 @@ namespace BuildingSystem.Entities.Entity
 {
     public class Messange:Base
     {
+        
         public string SenderMail { get; set; }
         public string ReceiverMail { get; set; }
         public string MessageContent { get; set; }
+        public string Body { get; set; }
         public bool IsRead { get; set; } = false;
+
     }
 }

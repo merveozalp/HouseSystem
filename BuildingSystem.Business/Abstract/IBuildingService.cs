@@ -15,6 +15,6 @@ namespace BuildingSystem.Business.Abstract
         Task<BuildingDto> AddAsync(BuildingDto dto);
         Task UpdateAsync(BuildingDto dto);
         Task DeleteAsync(int id);
-        Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId);
+        //Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId);
     }
 }

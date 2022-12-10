@@ -46,12 +46,12 @@ namespace BuildingSystem.Business.Concrete
             return buildingDto;
         }
 
-        public async Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId)
-        {
-            var building = await _buildingRepository.GetBuildingByIdWithFlatAsync(buildingId);
-            var buildingDto = _mapper.Map<BuildingWithFlatDto>(building);
-            return buildingDto;
-        }
+        //public async Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId)
+        //{
+        //    var building = await _buildingRepository.GetBuildingByIdWithFlatAsync(buildingId);
+        //    var buildingDto = _mapper.Map<BuildingWithFlatDto>(building);
+        //    return buildingDto;
+        //}
 
         public async Task<BuildingDto> GetById(int Id)
         {

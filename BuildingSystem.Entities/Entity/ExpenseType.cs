@@ -13,7 +13,7 @@ namespace BuildingSystem.Entities.Entity
         {
             Expenses = new HashSet<Expense>();
         }
-        public string TypeName { get; set; }
+        public string ExpenseTypeName { get; set; }
 
         public ICollection<Expense> Expenses { get; set; }
     }

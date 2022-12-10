@@ -16,6 +16,8 @@ namespace BuildingSystem.Business.Abstract
         Task UpdateAsync(UpdateExpenseDto dto);
         Task DeleteAsync(int id);
         Task<List<ExpenseDto>> GetAllExpenses();
+
+        Task SendMail();
   
 }
 }

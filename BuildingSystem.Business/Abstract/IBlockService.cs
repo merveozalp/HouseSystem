@@ -19,6 +19,6 @@ namespace BuildingSystem.Business.Abstract
 
         Task<List<BlockWithBuildingDto>> GetBlockWithBuldingAsync();
 
-        
+
     }
 }

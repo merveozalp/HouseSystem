@@ -58,7 +58,7 @@ namespace BuildingSystem.Business.Concrete
                 Cost=x.Cost,
                 UserName=x.Flat.User.UserName,
                 FlatNumber=x.Flat.FlatNumber,
-                TypeName=x.ExpenceType.TypeName
+                TypeName=x.ExpenceType.ExpenseTypeName
             }).ToList();
             return ExpensesDto;
         }
@@ -68,6 +68,12 @@ namespace BuildingSystem.Business.Concrete
             var blocks = await _expenseRepository.GetById(Id);
             var blockDto =_mapper.Map<ExpenseDto>(blocks);
             return blockDto;
+        }
+
+        public async Task SendMail()
+        {
+            var value = "merve";
+            
         }
 
         public async Task UpdateAsync(UpdateExpenseDto dto)

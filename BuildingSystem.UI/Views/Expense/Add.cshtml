@@ -1,24 +1,6 @@
 ﻿@model ExpenseCreateDto
 <form asp-controller="Expense" asp-action="Add" class="was-validated">
-@* <div class="mb-3">
-        <div class="mb-3">
-            <label asp-for="FlatId" class="form-label"> Daire Seçiniz </label>
-            <select asp-for="FlatId" asp-items="ViewBag.Flat" class="form-control" required></select>
-            <span asp-validation-for="FlatId" class="text-danger"></span>
-        </div>
 
-    </div>*@
-
- @*   <div class="mb-3">
-        <div class="mb-3">
-            <label asp-for="ExpenseTypeId" class="form-label"> Gider Seçiniz </label>
-            <select asp-for="ExpenseTypeId" asp-items="ViewBag.ExpensesType" class="form-control" required>
-                <option>Lütfen birini seçiniz</option>
-            </select>
-            <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>
-        </div>
-
-    </div>*@
       <div class="mb-3">
         <label asp-for="FlatId">Daire Numarası</label>
         <select asp-for="FlatId" class="form-control"
@@ -43,12 +25,5 @@
         <input type="number" class="form-control" asp-for="Cost" required />
         <span asp-validation-for="Cost" class="text-danger"></span>
     </div>
-
-    
-
-
-
-
-
     <button type="submit" class="btn btn-primary">Ekle</button>
 </form>

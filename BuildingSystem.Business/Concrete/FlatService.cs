@@ -18,6 +18,7 @@ namespace BuildingSystem.Business.Concrete
         private readonly IFlatRepository _flatRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IBuildingService buildingService;
 
         public FlatService(IFlatRepository flatRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
@@ -28,6 +29,7 @@ namespace BuildingSystem.Business.Concrete
 
         public async Task<FlatCreateDto> AddAsync(FlatCreateDto dto)
         {
+           
             var entityDto = _mapper.Map<Flat>(dto);
             await _flatRepository.AddAsync(entityDto);
             await _unitOfWork.CommitAsync();
@@ -57,8 +59,8 @@ namespace BuildingSystem.Business.Concrete
                 FlatNumber=x.FlatNumber,
                 FlatType=x.FlatType,
                 IsEmpty=x.IsEmpty,
-                //UserName=x.User.UserName,
-                BuildingName=x.Building.Name
+                UserName=x.User.UserName,
+                BuildingName=x.Building.BuildingName
             }).ToList();
 
             return flatsDto;

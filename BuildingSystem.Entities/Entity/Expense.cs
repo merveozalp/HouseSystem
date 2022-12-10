@@ -10,10 +10,10 @@ namespace Entites.Entitiy
     public class Expense:Base
     {
         
-        public string Name { get; set; }
+        public string ExpenseName { get; set; }
         public double Cost { get; set; }
         public bool IsPaid  { get; set; }
-
+        public DateTime InvoiceDate { get; set; }
         public ExpenseType ExpenceType { get; set; }
         public int ExpenseTypeId { get; set; } 
 

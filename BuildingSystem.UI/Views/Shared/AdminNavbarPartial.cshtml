@@ -6,12 +6,12 @@
                     <img alt="image" class="rounded-circle" @*src="~/inspinia-gh-pages/img/Site.jpg"*@ />
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold"> House System </span>
-                        <span class="text-muted text-xs block">software <b class="caret"></b></span>
+                       @* <span class="text-muted text-xs block">software <b class="caret"></b></span>*@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                        @*<li><a class="dropdown-item" href="profile.html">Profile</a></li>
                         <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                        <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                        <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>*@
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" asp-controller="Home" asp-action="LogOut" asp-route-returnUrl="/Home/LogIn">Logout</a></li>
                     </ul>
@@ -20,70 +20,69 @@
                     IN+
                 </div>
             </li>
-             <li>
-                <a  asp-action="_AdminDashboard" asp-controller="Admin"><i class="fa fa-pencil"></i> <span class="nav-label">Dashboard</span>  </a>
-            </li>
+             
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Şirket Bilgileri</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Site Kullanıcı Bilgileri</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Home" asp-action="UserEdit">Kullanıcı Bilgileri</a></li>
-                    <li><a asp-controller="Home" asp-action="ChangePassword">Şifre Güncelle</a></li>
-                    <li><a asp-controller="Admin" asp-action="GetCompanies">Şirket İsimleri</a></li>
-                    <li><a asp-controller="Admin" asp-action="CreateCompany">Şirket Oluştur</a></li>
-                   <li><a asp-controller="Admin" asp-action="Chart">Üye Grafiği</a></li>
-                    <li><a href="#">Sektör Oluştur</a></li>
-                    <li><a asp-action="ManagerList" asp-controller="Admin" >Yönetici Listesi</a></li>
-                    <li><a asp-action="PersonelList" asp-controller="Admin" >Personel Listesi</a></li>
-                   <li><a asp-action="Users" asp-controller="Admin" >Kullanıcılar</a></li>
+                    <li><a asp-controller="Admin" asp-action="Index">Kullanıcı Bilgileri</a></li>
+                    <li><a asp-controller="Admin" asp-action="GetAllRole">Role İsimleri</a></li>
+                    <li><a asp-controller="Admin" asp-action="RoleCreate">Rol  Oluştur</a></li>
+                    
+                    
                 </ul>
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Bina/Daire İşlemleri </span></a>
+                <a href="mailbox.html"><i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Bina İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Home" asp-action="Membership">Bina Listesi</a></li>
-                    <li><a asp-controller="Admin" asp-action="UsersConfirm">Bina Ekle </a></li>
-                    <li><a asp-controller="Home" asp-action="Membership">Bina Güncelle</a></li>
+                    <li><a asp-controller="Building" asp-action="GetAllBuilding">Bina Listesi</a></li>
+                    <li><a asp-controller="Building" asp-action="AddBuilding">Bina Ekle </a></li>
+                   
                 </ul>
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Blok İşlemleri </span></a>
+                <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true" ></i> <span class="nav-label">Blok İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Calendar" asp-action="Calendar">Takvim Görüntüle</a></li>
-                    <li><a asp-controller="Admin" asp-action="CreateUserVacation">Takvime Plan Ekle</a></li>
-                    <li><a asp-controller="Admin" asp-action="CreateVacation">Tatil Tanımla</a></li>
+                    <li><a asp-controller="Block" asp-action="AddBlock">Block Ekle</a></li>
+                    <li><a asp-controller="Block" asp-action="GetAllBlock">Blok Listesi</a></li>
+                    <li><a asp-controller="Block" asp-action="GetBlokWithBuilding">Blok ve Daireler Listesi</a></li>
 
                 </ul>
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Gider İşlemleri </span></a>
+                <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label">Daire İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Home" asp-action="Membership">Gider Listesi</a></li>
-                    <li><a asp-controller="Admin" asp-action="UsersConfirm">Gider Ekle </a></li>
-                    <li><a asp-controller="Home" asp-action="Membership">Gider Bilgisi Güncelle</a></li>
+                    <li><a asp-controller="Flat" asp-action="Add">Daire Ekle</a></li>
+                    <li><a asp-controller="Flat" asp-action="GetAll">Daire Listesi </a></li>
+                   
                 </ul>
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mesaj İşlemleri </span></a>
+                <a href="mailbox.html"><i class="fa fa-money"></i> <span class="nav-label">Gider İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Home" asp-action="Membership">Mesaj Listesi</a></li>
-                    <li><a asp-controller="Admin" asp-action="UsersConfirm">Mesaj Gönder </a></li>
+                    <li><a asp-controller="Expense" asp-action="Add">Gider Ekle</a></li>
+                    <li><a asp-controller="Expense" asp-action="GetAllExpenses"> Gider listesi </a></li>
+                    <li><a asp-controller="Expense" asp-action="GetIsPaid"> Ödeyen Kullanıcı Listesi </a></li>
+                    <li><a asp-controller="Expense" asp-action="GetUnIsPaid"> Ödemeyen Kullanıcı Listesi </a></li>
                 </ul>
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Takvim İşlemleri </span></a>
+                <a href="mailbox.html"><i class="fa fa-money" aria-hidden="true"></i> <span class="nav-label">Gider Türü İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Calendar" asp-action="Calendar">Takvim Görüntüle</a></li>
-                    <li><a asp-controller="Admin" asp-action="CreateUserVacation">Takvime Plan Ekle</a></li>
-                     <li><a asp-controller="Admin" asp-action="CreateVacation">Tatil Tanımla</a></li>
+                    <li><a asp-controller="ExpenseType" asp-action="AddExpenseType"> Gider Türü Ekle</a></li>
+                    <li><a asp-controller="ExpenseType" asp-action="GetAllExpenseType">Giderleri Türlerini Listele</a></li>
+                     
                 </ul>
             </li>
             <li>
-                <a asp-controller="Admin" asp-action="RoleCreate"><i class="fa fa-pie-chart"></i> <span class="nav-label">Rol Oluştur</span> </a>
-            </li>
-            <li>
-                <a asp-controller="Admin" asp-action="Vacations"><i class="fa fa-tags"></i> <span class="nav-label">İzin İşlemleri</span> </a>
-            </li>
-            <li><a asp-action="SendMessageAllUsers" asp-controller="Admin" >Bütün Kullanıcılara Mesaj At</a></li>
+                <a href="mailbox.html"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="nav-label">Mail İşlemleri </span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a asp-controller="Mail" asp-action="Inbox"> Gelen Mailler</a></li>
+                    <li><a asp-controller="Mail" asp-action="OutBox">Gönderilen Mailler</a></li>
+                    <li><a asp-controller="Mail" asp-action="SendMail">Mail Gönderim</a></li>
                 </ul>
+            </li>
+         @*   <li>
+                <a asp-action="SendMail" asp-controller="Mail"><i class="menu-icon tf-icons bx-mail-send"></i> <span class="nav-label">Mail Gönder</span>  </a>
+            </li>*@
     </div>
 </nav>

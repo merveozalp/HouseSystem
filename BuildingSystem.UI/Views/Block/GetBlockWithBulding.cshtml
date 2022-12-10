@@ -23,22 +23,22 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var building in Model)
+        @foreach (var block in Model)
         {
             <tr>
-                <td>@building.Building.Name</td>
-                <td>@building.Building.TotalFlat</td>
+                <td>@block.BuildingName</td>
+                <td>@block.BlockName</td>
 
-                <td>
+               @* <td>
                     <a class="btn btn-warning" asp-controller="Building" asp-action="Update"
-                   asp-route-id="@building.Building.Id">
+                   asp-route-id="@block.Building.Id">
                         Güncelle
                     </a>
                     <a class="btn btn-danger" asp-controller="Building" asp-action="Delete"
-                   asp-route-id="@building.Building.Id">
+                   asp-route-id="@block.Building.Id">
                         Sil
                     </a>
-                </td>
+                </td>*@
             </tr>
         }
     </tbody>

@@ -1,0 +1,32 @@
+﻿@model MessageDto
+@{
+    ViewData["Title"] = "SendMail";
+   
+}
+
+<form method ="post">
+
+
+    <div class="mb-3">
+        <label asp-for="ReceiverMail" class="form-label"> Alıcı Mail Adresi</label>
+        <input type="text" class="form-control" asp-for="ReceiverMail" required>
+        <span asp-validation-for="ReceiverMail" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="MessageContent" class="form-label">konu Başlığı</label>
+        <input type="text" class="form-control" asp-for="MessageContent" required>
+        <span asp-validation-for="MessageContent" class="text-danger"></span>
+    </div>
+
+    @*  <div class="mb-3">
+        <label asp-for="Body" class="form-label"> Mesaj İçeriği</label>
+        <input type="text" class="form-control" asp-for="Body" required>
+        <span asp-validation-for="Body" class="text-danger"></span>
+    </div>*@
+    <button type="submit" class="btn btn-primary">Gönder</button>
+</form>
+
+
+
+
+

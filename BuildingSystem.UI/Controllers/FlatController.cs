@@ -69,6 +69,7 @@ namespace BuildingSystem.UI.Controllers
         {
             var flat = await _flatService.GetById(id);
             var buildingDto = await _buildingService.GetAllAsync();
+            var userDto = await _userService.GetAllAsync();
            
             var flatUpdateDto = new FlatUpdateDto()
             {
@@ -77,6 +78,7 @@ namespace BuildingSystem.UI.Controllers
                 IsEmpty = flat.IsEmpty,
                 FlatType = flat.FlatType,
                 Buildings = buildingDto,
+                Users= userDto
                
 
             };
