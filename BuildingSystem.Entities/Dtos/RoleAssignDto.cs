@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Entities.Dtos
 {
-    public class RoleDto
+    public class RoleAssignDto
     {
+        public string RoleId { get; set; }
         public string RoleName { get; set; }
-
-        public string Id { get; set; }
+        public bool Exist { get; set; }
     }
 }

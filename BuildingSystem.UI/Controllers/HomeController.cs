@@ -35,7 +35,7 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpPost]
-        public async IActionResult SignUp(UserDto dto)
+        public async Task<IActionResult> SignUp(UserDto dto)
         {
             User user = new User()
             {

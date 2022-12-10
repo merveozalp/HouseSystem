@@ -6,6 +6,8 @@ using BuildingSystem.Business.UnitOfWork;
 using BuildingSystem.DataAccess.Abstract;
 using BuildingSystem.DataAccess.Concrete;
 using BuildingSystem.DataAccess.Context;
+using BuldingSystem.API.Filters;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,42 +31,11 @@ namespace BuldingSystem.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
 
-            //services.AddTransient<IRoleRepository, RoleRepository>();
-            //services.AddTransient<IRoleService, RoleService>();
-
-            //services.AddTransient<IUserRepository, UserRepository>();
-            //services.AddTransient<IUserService, UserService>();
-
-
-            services.AddDbContext<ApplicationDbContext>(
-                opts =>
-                {
-                    opts.UseSqlServer(Configuration.GetConnectionString("BuildingSystem"));
-                });
-            services.AddControllers();
-
-            // Filter ile validation iþlemini merkezileþtirdim.
-            //services.AddControllers(opt =>  opt.Filters.Add(new ValidateFilterAttribute()))
-            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
-
-            // benim istediðim filter dönmesi için API kendi hata çýktýsýný kapatýyorum.
-            //services.Configure<ApiBehaviorOptions>(x =>
-            //{
-            //    x.SuppressModelStateInvalidFilter = true;
-            //});
-
-            
-          
-
-
-
-
-
-
-
-
+            services.Configure<ApiBehaviorOptions>(x =>
+            {
+                x.SuppressModelStateInvalidFilter = true;
+            });
 
             services.AddSwaggerGen(c =>
             {

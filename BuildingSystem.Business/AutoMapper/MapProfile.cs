@@ -46,6 +46,7 @@ namespace BuildingSystem.Business.AutoMapper
             //-------------------------------------------------------------------------
             CreateMap<Messange,MessageDto>().ReverseMap();
             CreateMap<Role,RoleDto>().ReverseMap();
+            //CreateMap<Role,RoleAssignDto>().ReverseMap();
             CreateMap<User,UserDto>().ReverseMap();
            
         }

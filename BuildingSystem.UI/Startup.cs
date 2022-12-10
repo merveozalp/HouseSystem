@@ -1,6 +1,7 @@
 using BuildingSystem.Business.AutoMapper;
 using BuildingSystem.DataAccess.Context;
 using Entites.Entitiy;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 namespace BuildingSystem.UI
@@ -27,11 +29,16 @@ namespace BuildingSystem.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddAutoMapper(typeof(MapProfile));
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<User, Role>
+                (opts =>
+                {
+                    opts.User.RequireUniqueEmail = true;
+                    opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddDbContext<ApplicationDbContext>(
              opts =>
              {
