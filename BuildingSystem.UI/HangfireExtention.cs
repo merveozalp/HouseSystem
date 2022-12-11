@@ -1,4 +1,5 @@
 ﻿using BuildingSystem.Business.Abstract;
+using BuildingSystem.UI.Controllers;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,11 +18,7 @@ namespace BuildingSystem.UI
 
             recurringJobManager.AddOrUpdate("ExpenseMail",
                 () => serviceProvider.GetService<IExpenseService>().SendMail(),
-              "*/5 * * * * *");
-
-
-
-
+              Cron.Minutely);
             return app;
         }
     }

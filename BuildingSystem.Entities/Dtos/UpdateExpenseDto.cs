@@ -14,7 +14,7 @@ namespace BuildingSystem.Entities.Dtos
        
         public int ExpenseTypeId { get; set; }  
         public int FlatId { get; set; }
-        public string TypeName { get; set; }
+        public string ExpenseTypeName { get; set; }
 
         public byte FlatNumber { get; set; }
     }

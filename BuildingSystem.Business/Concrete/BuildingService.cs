@@ -32,11 +32,12 @@ namespace BuildingSystem.Business.Concrete
             return dto;
         }
 
-        public async Task DeleteAsync(int id)
+        public void Delete(int id)
         {
-            var building = await _buildingRepository.GetById(id);
+            var building =  _buildingRepository.GetById(id).Result;
             _buildingRepository.Delete(building);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
+            
          }
 
         public async Task<IEnumerable<BuildingDto>> GetAllAsync()
@@ -60,11 +61,11 @@ namespace BuildingSystem.Business.Concrete
             return buildingDto;
         }
 
-        public async Task UpdateAsync(BuildingDto dto)
+        public void Update(BuildingDto dto)
         {
             var entity = _mapper.Map<Building>(dto);
             _buildingRepository.Update(entity);
-            await _unitOfWork.CommitAsync();
+             _unitOfWork.Commit();
         }
     }
 }

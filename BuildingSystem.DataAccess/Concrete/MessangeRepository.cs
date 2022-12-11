@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.DataAccess.Concrete
 {
-    public class MessangeRepository : GenericRepository<Messange>, IMessageRepository
+    public class MessangeRepository : GenericRepository<Message>, IMessageRepository
     {
         public MessangeRepository(ApplicationDbContext db) : base(db)
         {

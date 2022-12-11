@@ -20,8 +20,8 @@
         @foreach (var expenseType in Model)
         {
             <tr>
-                
-                <td>@expenseType.TypeName</td>
+
+                <td>@expenseType.ExpenseTypeName</td>
 
                 <td>
                     <a class="btn btn-warning " asp-controller="ExpenseType" asp-action="UpdateExpenseType"

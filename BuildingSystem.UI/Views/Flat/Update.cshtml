@@ -10,14 +10,14 @@
         <input type="text" class="form-control" asp-for="FlatType" required />
         <span asp-validation-for="FlatType" class="text-danger"></span>
     </div>
-   @* <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="UserId">Kullanıcı</label>
         <select asp-for="UserId" class="form-control"
                 asp-items="@(new SelectList(Model.Users, "Id", "UserName"))" required>
             <option>Lütfen birini seçiniz</option>
         </select>
         <span asp-validation-for="UserId" class="text-danger"></span>
-    </div>*@
+    </div>
 
 
 

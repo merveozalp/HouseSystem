@@ -10,11 +10,16 @@ namespace BuildingSystem.Business.Abstract
     public interface IMessageService
     {
         Task<MessageDto> GetById(int Id);
+        Task<List<MessageDto>> GetAllAsync();
         Task<IEnumerable<MessageDto>> FromGetAll();
+        Task<IEnumerable<MessageDto>> ToGetAll();
         Task<MessageDto> AddAsync(MessageDto dto);
-        Task UpdateAsync(MessageDto dto);
-        Task DeleteAsync(int id);
+        void Update(MessageDto dto);
+        void Delete(int id);
 
-        
+        Task<List<MessageDto>> GetListOutbox(List<MessageDto> messageList);
+        Task<List<MessageDto>> GetListInbox(List<MessageDto> messageList);
+
+
     }
 }

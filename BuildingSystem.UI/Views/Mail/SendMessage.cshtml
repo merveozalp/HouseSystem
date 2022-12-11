@@ -1,0 +1,28 @@
+﻿@model MessageDto
+<form asp-controller="Mail" asp-action="SendMessage" class="was-validated">
+    <div class="mb-3">
+        <label asp-for="ReceiverMail">Kullanıcı</label>
+        <select asp-for="ReceiverMail" class="form-control"
+                asp-items="@(new SelectList(Model.Users, "Id", "UserName"))">
+            <option>Lütfen birini seçiniz</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="MessageContent" class="form-label"></label>
+        <textarea asp-for="MessageContent"></textarea>
+        <script>
+            CKEDITOR.replace('MessageContent');
+        </script>
+        <span asp-validation-for="MessageContent" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Body" class="form-label"></label>
+        <textarea asp-for="Body"></textarea>
+        <script>
+            CKEDITOR.replace('Body');
+        </script>
+        <span asp-validation-for="Body" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>

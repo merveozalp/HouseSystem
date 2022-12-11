@@ -1,4 +1,5 @@
 ﻿using BuildingSystem.Entities.Dtos;
+using BuildingSystem.Entities.Entity;
 using Entites.Entitiy;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace BuildingSystem.Business.Abstract
         Task DeleteAsync(int id);
         Task<List<ExpenseDto>> GetAllExpenses();
 
-        Task SendMail();
-  
-}
+        void SendMail();
+
+    }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.DataAccess.Abstract
 {
-    public interface IMessageRepository:IGenericRepository<Messange>
+    public interface IMessageRepository:IGenericRepository<Message>
     {
     }
 }

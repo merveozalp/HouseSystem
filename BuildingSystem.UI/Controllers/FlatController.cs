@@ -40,7 +40,7 @@ namespace BuildingSystem.UI.Controllers
         {
 
             var buildings = await _buildingService.GetAllAsync();
-            ViewBag.Building = new SelectList(buildings, "Id", "Name");
+            ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace BuildingSystem.UI.Controllers
           
 
             var buildings = await _buildingService.GetAllAsync();
-            ViewBag.Building = new SelectList(buildings, "Id", "Name");
+            ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
             return View(flatCreateDto);
 
 

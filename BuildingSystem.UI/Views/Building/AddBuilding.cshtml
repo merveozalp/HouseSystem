@@ -8,13 +8,13 @@
 
     <div class="mb-3">
         <label asp-for="blockId" class="form-label"> Block Seçiniz </label>
-        <select asp-for="blockId" asp-items="ViewBag.Building" class="form-control"></select>
+        <select asp-for="blockId" asp-items="ViewBag.Block" class="form-control"></select>
         <span asp-validation-for="blockId" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Name" class="form-label"> Bina İsmi</label>
-        <input type="text" class="form-control" asp-for="Name" required>
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="BuildingName" class="form-label"> Bina İsmi</label>
+        <input type="text" class="form-control" asp-for="BuildingName" required>
+        <span asp-validation-for="BuildingName" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="TotalFlat" class="form-label">Toplam Daire Sayısı</label>

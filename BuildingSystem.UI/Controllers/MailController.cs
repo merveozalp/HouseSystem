@@ -3,6 +3,7 @@ using BuildingSystem.Entities.Dtos;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
@@ -12,10 +13,12 @@ namespace BuildingSystem.UI.Controllers
       
     {
         private readonly IMessageService _messageService;
+        private readonly IUserService _userService;
 
-        public MailController(IMessageService messageService)
+        public MailController(IMessageService messageService, IUserService userService)
         {
             _messageService = messageService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -34,8 +37,9 @@ namespace BuildingSystem.UI.Controllers
             mimeMessage.To.Add(mailboxAddressTo);
 
             var bodyByilder = new BodyBuilder();
-            bodyByilder.TextBody=messageDto.MessageContent;
+            bodyByilder.TextBody = messageDto.Body;
             mimeMessage.Body = bodyByilder.ToMessageBody();
+
 
             mimeMessage.Subject = messageDto.MessageContent;
 
@@ -44,13 +48,57 @@ namespace BuildingSystem.UI.Controllers
             client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
             client.Send(mimeMessage);
             client.Disconnect(true);
+            return RedirectToAction("Inbox");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Inbox()
+        {
+            var user = _userService.GetUserFromSession();
+            var allMessages = await _messageService.GetAllAsync();
+            if (allMessages != null)
+            {
+                var messageList = allMessages.Where(m => m.ReceiverMail == user.Id).ToList();
+                var inboxList = await _messageService.GetListInbox(messageList);
+                return View(inboxList);
+            }
             return View();
         }
 
-        public async Task<IActionResult> Inbox() 
+        [HttpGet]
+        public async Task<IActionResult> Outbox()
         {
-            var messageList = await _messageService.FromGetAll();
-            return View(messageList);
+            var user = _userService.GetUserFromSession();
+            var allMessages = await _messageService.GetAllAsync();
+            if (allMessages!= null)
+            {
+                var messageList = allMessages.Where(m => m.SenderMail == user.Id).ToList();
+                var outBoxList = await _messageService.GetListOutbox(messageList);
+                return View(outBoxList);
+            }
+            return View();
         }
+
+        //---------------------------------------------------------------------------------
+        [HttpGet]
+        public async Task<IActionResult> SendMessage()
+        {
+            var userList = await _userService.GetAllAsync();
+            var messageDto = new MessageDto
+            {
+                Users = userList
+            };
+            return View(messageDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(MessageDto message)
+        {
+            var user = _userService.GetUserFromSession();
+            message.SenderMail = user.Id;
+            await _messageService.AddAsync(message);
+            return RedirectToAction("OutBox");
+        }
+
     }
 }

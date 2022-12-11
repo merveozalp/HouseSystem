@@ -11,7 +11,7 @@ namespace BuildingSystem.Entities.Dtos
         public bool IsPaid { get; set; }
         public double Cost { get; set; }
         public int ExpenseTypeId { get; set; } 
-        public string TypeName { get; set; }
+        public string ExpenseTypeName { get; set; }
         public int FlatId { get; set; }
         public byte FlatNumber { get; set; }
 

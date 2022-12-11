@@ -64,7 +64,7 @@ namespace BuildingSystem.UI.Controllers
         public async  Task<IActionResult> Delete(int id)
         {
             
-            await _blockService.DeleteAsync(id);
+            await _blockService.Delete(id);
             return RedirectToAction("GetAllBlock");
         }
 

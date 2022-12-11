@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Entities.Entity
 {
-    public class Messange:Base
+    public class Message:Base
     {
         
         public string SenderMail { get; set; }

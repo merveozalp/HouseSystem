@@ -5,9 +5,9 @@
 }
 
 <div class="m-0">
-    <h3>Siteye Yeni Bir Blok Ekle</h3>
+    <h3>Siteye Yeni Bir Bina Ekle</h3>
     <a class="btn btn-success btn-sm" asp-controller="Building" asp-action="AddBuilding">
-        Blok Ekle
+        Bina Ekle
     </a>
 </div>
 
@@ -16,6 +16,7 @@
         <tr>
             
             
+            <th scope="col">Blok İsmi</th>
             <th scope="col">Binanın İsmi</th>
             <th scope="col">Toplam Daire Sayısı</th>
             <th></th>
@@ -26,9 +27,10 @@
         @foreach (var building in Model)
         {
             <tr>
-             
-               
-                <td>@building.Name</td>
+
+
+                <td>@building.BlockName</td>
+                <td>@building.BuildingName</td>
                 <td>@building.TotalFlat</td>
              
                 <td>

@@ -26,7 +26,7 @@ namespace BuildingSystem.DataAccess.Context
         public DbSet<ExpenseType> ExpenseTypes { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Flat> Flats { get; set; }
-        public DbSet<Messange> Messanges { get; set; }
+        public DbSet<Message> Messages { get; set; }
         
        
 

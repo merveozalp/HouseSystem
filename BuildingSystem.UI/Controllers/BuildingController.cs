@@ -47,7 +47,7 @@ namespace BuildingSystem.UI.Controllers
         public async Task<IActionResult> AddBuilding ()
         {
             var blocks = await _blockService.GetAllAsync();
-            ViewBag.Building = new SelectList(blocks, "Id", "BlockName");
+            ViewBag.Block = new SelectList(blocks, "Id", "BlockName");
             return View();
            
         }
@@ -67,10 +67,14 @@ namespace BuildingSystem.UI.Controllers
 
         }
 
+        // Güncellemede Blok almak lazım alamıyorum . Bakılacak
+
         [HttpGet]
         public async Task<IActionResult> UpdateBuilding(int id)
         {
             var building = await _buildingService.GetById(id);
+            var blocks = await _blockService.GetAllAsync();
+            ViewBag.Block = new SelectList(blocks, "Id", "BlockName");
             if (building == null) return RedirectToAction("GetAllBuilding");
             return View(building);
         }
@@ -78,15 +82,18 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public IActionResult UpdateBuilding(BuildingDto buildingDto)
         {
-            _buildingService.UpdateAsync(buildingDto);
+           
+            _buildingService.Update(buildingDto);
             return RedirectToAction("GetAllBuilding");
+           
+           
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            await _buildingService.DeleteAsync(id);
-            return RedirectToAction("GetAll");
+             _buildingService.Delete(id);
+            return RedirectToAction("GetAllBuilding");
         }
     }
 }
