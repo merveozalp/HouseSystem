@@ -1,4 +1,5 @@
-﻿using Entites.Entitiy;
+﻿using BuildingSystem.Entities.Dtos;
+using Entites.Entitiy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace BuildingSystem.DataAccess.Abstract
     public interface IFlatRepository:IGenericRepository<Flat>
     {
         Task<List<Flat>> GetAllFlats();
+       List<Flat> GetBlockBuildingAndFlat();
     }
 }

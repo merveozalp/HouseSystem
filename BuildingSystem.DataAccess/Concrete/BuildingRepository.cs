@@ -16,9 +16,8 @@ namespace BuildingSystem.DataAccess.Concrete
         {
         }
 
-        public async Task<Building> GetBuildingByIdWithFlatAsync(int buildingId)
-        {
-            return await _db.Buildings.Include(x=>x.Flats).Where(x=>x.Id==buildingId).SingleOrDefaultAsync();
-        }
+       
+
+
     }
 }

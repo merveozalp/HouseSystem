@@ -13,7 +13,7 @@ namespace BuildingSystem.Entities.Entity
         {
             Flats = new HashSet<Flat>();
         }
-        public string BuildingName { get; set; }
+        public byte BuildingName { get; set; }  // 1-2-3 olarak grilecek
         public byte TotalFlat { get; set; }
         public ICollection<Flat> Flats { get; set; }
 

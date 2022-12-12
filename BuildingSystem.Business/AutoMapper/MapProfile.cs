@@ -16,22 +16,15 @@ namespace BuildingSystem.Business.AutoMapper
         public MapProfile()
         {
             CreateMap<Block,BlockDto>().ReverseMap();
-            CreateMap<Block, BlockWithBuildingDto>().ReverseMap();
-            CreateMap<Block, BlockAndBuildingDto>().ReverseMap();
-            
-
 
             //------------------------------------------------------------------------
 
             CreateMap<Building, BuildingDto>().ReverseMap();
-            CreateMap<Building, BuildingWithBlockDto>().ReverseMap();
-            CreateMap<Building, BuildingWithFlatDto>().ReverseMap();
-           
 
             //--------------------------------------------------------------------------
             CreateMap<Expense,ExpenseDto>().ReverseMap();
             CreateMap<Expense,ExpenseCreateDto>().ReverseMap();
-            CreateMap<Expense,UpdateExpenseDto>().ReverseMap();
+            CreateMap<Expense,ExpenseUpdateDto>().ReverseMap();
             //-------------------------------------------------------------------------
 
             CreateMap<ExpenseType,ExpenseTypeDto>().ReverseMap();
@@ -41,6 +34,8 @@ namespace BuildingSystem.Business.AutoMapper
             CreateMap<Flat,FlatDto>().ReverseMap();
             CreateMap<Flat,FlatCreateDto>().ReverseMap();
             CreateMap<Flat,FlatUpdateDto>().ReverseMap();
+            CreateMap<Flat, BlockAndBuildingDto>().ReverseMap();
+            CreateMap<FlatType, FlatTypeDto>().ReverseMap();
 
 
             //-------------------------------------------------------------------------

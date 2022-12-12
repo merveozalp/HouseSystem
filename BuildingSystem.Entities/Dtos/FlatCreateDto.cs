@@ -16,6 +16,7 @@ namespace BuildingSystem.Entities.Dtos
         public string UserId { get; set; }
        
         public int BuildingId { get; set; }
+        public int FlatTypeId { get; set; }
       
         public int BlockId { get; set; }
       

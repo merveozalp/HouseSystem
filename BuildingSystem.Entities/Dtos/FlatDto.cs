@@ -13,7 +13,8 @@ namespace BuildingSystem.Entities.Dtos
         public string FlatType { get; set; }
         public bool IsEmpty { get; set; }
         public string UserName { get; set; }
-        public string BuildingName { get; set; }
+        public byte BuildingName { get; set; }
+        public string BlokName { get; set; }
 
       
     }

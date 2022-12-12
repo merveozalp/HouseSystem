@@ -28,9 +28,7 @@ namespace BuildingSystem.Business.Concrete
             {
                 Name = roleName,
             });
-
         }
-
         public List<Role> GetAllRole()
         {
             var roleList = _roleManager.Roles.ToList();

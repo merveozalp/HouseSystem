@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BuildingDto>
+﻿@using Entites.Entitiy;
+@model IEnumerable<BuildingDto>
 @{
     ViewData["Title"] = "GetAllBuilding";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,31 +20,42 @@
             <th scope="col">Blok İsmi</th>
             <th scope="col">Binanın İsmi</th>
             <th scope="col">Toplam Daire Sayısı</th>
-            <th></th>
+            
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var building in Model)
+        @if (Model.Count() == 0)
         {
             <tr>
-
-
-                <td>@building.BlockName</td>
-                <td>@building.BuildingName</td>
-                <td>@building.TotalFlat</td>
-             
-                <td>
-                    <a class="btn btn-warning" asp-controller="Building" asp-action="UpdateBuilding"
-                   asp-route-id="@building.Id">
-                        Güncelle
-                    </a>
-                    <a class="btn btn-danger" asp-controller="Building" asp-action="Delete"
-                   asp-route-id="@building.Id">
-                        Sil
-                    </a>
-                </td>
+                <td colspan=3>Hiç bir üye yoktur</td>
             </tr>
         }
+        else
+        {
+            @foreach (var building in Model)
+            {
+              <tr>
+
+
+                    <td>@building.BlockName</td>
+                    <td>@building.BuildingName</td>
+                    <td>@building.TotalFlat</td>
+             
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Building" asp-action="UpdateBuilding"
+                         asp-route-id="@building.Id">
+                            Güncelle
+                    </a>
+                        <a class="btn btn-danger" asp-controller="Building" asp-action="Delete"
+                        asp-route-id="@building.Id">
+                        Sil
+                    </a>
+                    </td>
+            </tr>
+            }
+     
+        }
+
     </tbody>
 </table>

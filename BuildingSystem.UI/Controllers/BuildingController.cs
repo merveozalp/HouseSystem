@@ -16,6 +16,7 @@ namespace BuildingSystem.UI.Controllers
 
         private readonly IBuildingService _buildingService;
         private readonly IBlockService _blockService;
+        private readonly IFlatService _flatService;
         private readonly IMapper _mapper;
 
 
@@ -26,12 +27,7 @@ namespace BuildingSystem.UI.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetBuildingByIdWithFlatAsync(int buildingId)
-        //{
-        //    var buildingWithFlat = await _buildingService.GetBuildingByIdWithFlatAsync(buildingId);
-        //    return View(buildingWithFlat);
-        //}
+       
 
         [HttpGet]
         public async Task<IActionResult> GetAllBuilding()
@@ -40,18 +36,13 @@ namespace BuildingSystem.UI.Controllers
             return View(buildings);
         }
 
-        
-     
-
         [HttpGet]
         public async Task<IActionResult> AddBuilding ()
         {
             var blocks = await _blockService.GetAllAsync();
             ViewBag.Block = new SelectList(blocks, "Id", "BlockName");
             return View();
-           
         }
-        
 
         [HttpPost]
         public async Task<IActionResult> AddBuilding(BuildingDto buildingDto)
@@ -85,7 +76,6 @@ namespace BuildingSystem.UI.Controllers
            
             _buildingService.Update(buildingDto);
             return RedirectToAction("GetAllBuilding");
-           
            
         }
 

@@ -27,8 +27,15 @@
                     <li><a asp-controller="Admin" asp-action="Index">Kullanıcı Bilgileri</a></li>
                     <li><a asp-controller="Admin" asp-action="GetAllRole">Role İsimleri</a></li>
                     <li><a asp-controller="Admin" asp-action="RoleCreate">Rol  Oluştur</a></li>
-                    
-                    
+                </ul>
+            </li>
+            <li>
+                <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label">Blok İşlemleri </span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a asp-controller="Block" asp-action="AddBlock">Block Ekle</a></li>
+                    <li><a asp-controller="Block" asp-action="GetAllBlock">Blok Listesi</a></li>
+                    <li><a asp-controller="Block" asp-action="GetBlokWithBuilding">Blok ve Bina Listesi</a></li>
+
                 </ul>
             </li>
             <li>
@@ -37,15 +44,6 @@
                     <li><a asp-controller="Building" asp-action="GetAllBuilding">Bina Listesi</a></li>
                     <li><a asp-controller="Building" asp-action="AddBuilding">Bina Ekle </a></li>
                    
-                </ul>
-            </li>
-            <li>
-                <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true" ></i> <span class="nav-label">Blok İşlemleri </span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Block" asp-action="AddBlock">Block Ekle</a></li>
-                    <li><a asp-controller="Block" asp-action="GetAllBlock">Blok Listesi</a></li>
-                    <li><a asp-controller="Block" asp-action="GetBlokWithBuilding">Blok ve Daireler Listesi</a></li>
-
                 </ul>
             </li>
             <li>

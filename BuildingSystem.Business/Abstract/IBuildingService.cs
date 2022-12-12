@@ -12,9 +12,9 @@ namespace BuildingSystem.Business.Abstract
     {
         Task<BuildingDto> GetById(int Id);
         Task<IEnumerable<BuildingDto>> GetAllAsync();
-        Task<BuildingDto> AddAsync(BuildingDto dto);
-        void Update(BuildingDto dto);
+        Task<BuildingDto> AddAsync(BuildingDto buildingDto);
+        void Update(BuildingDto buildingDto);
         void Delete(int id);
-        //Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId);
+        
     }
 }

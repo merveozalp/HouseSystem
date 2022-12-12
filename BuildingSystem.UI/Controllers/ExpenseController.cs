@@ -79,7 +79,7 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(UpdateExpenseDto updateExpenseDto)
+        public IActionResult Update(ExpenseUpdateDto updateExpenseDto)
         {
             if (!ModelState.IsValid) return View(updateExpenseDto);
             _expenseService.UpdateAsync(updateExpenseDto);

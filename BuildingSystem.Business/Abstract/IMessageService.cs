@@ -9,12 +9,12 @@ namespace BuildingSystem.Business.Abstract
 {
     public interface IMessageService
     {
-        Task<MessageDto> GetById(int Id);
+        Task<MessageDto> GetById(int id);
         Task<List<MessageDto>> GetAllAsync();
         Task<IEnumerable<MessageDto>> FromGetAll();
         Task<IEnumerable<MessageDto>> ToGetAll();
-        Task<MessageDto> AddAsync(MessageDto dto);
-        void Update(MessageDto dto);
+        Task<MessageDto> AddAsync(MessageDto messageDto);
+        void Update(MessageDto messageDto);
         void Delete(int id);
 
         Task<List<MessageDto>> GetListOutbox(List<MessageDto> messageList);

@@ -9,10 +9,10 @@ namespace BuildingSystem.Business.Abstract
 {
     public interface IExpenseTypeService
     {
-        Task<ExpenseTypeDto> GetById(int Id);
+        Task<ExpenseTypeDto> GetById(int id);
         Task<IEnumerable<ExpenseTypeDto>> GetAllAsync();
-        Task<ExpenseTypeDto> AddAsync(ExpenseTypeDto dto);
-        Task UpdateAsync(ExpenseTypeDto dto);
+        Task<ExpenseTypeDto> AddAsync(ExpenseTypeDto expenseTypeDto);
+        Task UpdateAsync(ExpenseTypeDto expenseTypeDto);
         Task DeleteAsync(int id);
     }
 }

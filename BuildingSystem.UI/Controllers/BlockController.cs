@@ -16,21 +16,16 @@ namespace BuildingSystem.UI.Controllers
     public class BlockController : Controller
     {
         private readonly IBlockService _blockService;
-        
-
         public BlockController(IBlockService blockService)
         {
             _blockService = blockService;
-           
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAllBlock()
         {
             var blocks = await _blockService.GetAllAsync();
             return View(blocks);
         }
-
       
         [HttpGet]
         public IActionResult AddBlock()
@@ -68,12 +63,7 @@ namespace BuildingSystem.UI.Controllers
             return RedirectToAction("GetAllBlock");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetBlockWithBulding()
-        {
-            var blockWithBuilding = await _blockService.GetBlockWithBuldingAsync();
-            return View(blockWithBuilding);
-        }
+       
 
 
     }

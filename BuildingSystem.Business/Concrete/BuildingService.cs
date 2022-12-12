@@ -24,46 +24,34 @@ namespace BuildingSystem.Business.Concrete
             _mapper = mapper;
         }
 
-        public async Task<BuildingDto> AddAsync(BuildingDto dto)
+        public async Task<BuildingDto> AddAsync(BuildingDto buildingDto)
         {
-            var entityDto = _mapper.Map<Building>(dto);
+            var entityDto = _mapper.Map<Building>(buildingDto);
             await _buildingRepository.AddAsync(entityDto);
             await _unitOfWork.CommitAsync();
-            return dto;
+            return buildingDto;
         }
-
         public void Delete(int id)
         {
             var building =  _buildingRepository.GetById(id).Result;
             _buildingRepository.Delete(building);
             _unitOfWork.Commit();
-            
          }
-
         public async Task<IEnumerable<BuildingDto>> GetAllAsync()
         {
             var buildingList = await _buildingRepository.GetAll().ToListAsync();
             var buildingDto = _mapper.Map<IEnumerable<BuildingDto>>(buildingList);
             return buildingDto;
         }
-
-        //public async Task<BuildingWithFlatDto> GetBuildingByIdWithFlatAsync(int buildingId)
-        //{
-        //    var building = await _buildingRepository.GetBuildingByIdWithFlatAsync(buildingId);
-        //    var buildingDto = _mapper.Map<BuildingWithFlatDto>(building);
-        //    return buildingDto;
-        //}
-
         public async Task<BuildingDto> GetById(int Id)
         {
             var buildings = await _buildingRepository.GetById(Id);
             var buildingDto = _mapper.Map<BuildingDto>(buildings);
             return buildingDto;
         }
-
-        public void Update(BuildingDto dto)
+        public void Update(BuildingDto buildingDto)
         {
-            var entity = _mapper.Map<Building>(dto);
+            var entity = _mapper.Map<Building>(buildingDto);
             _buildingRepository.Update(entity);
              _unitOfWork.Commit();
         }

@@ -9,6 +9,6 @@ namespace BuildingSystem.DataAccess.Abstract
 {
     public interface IBuildingRepository:IGenericRepository<Building>
     {
-        Task<Building> GetBuildingByIdWithFlatAsync(int buildingId);
+       
     }
 }

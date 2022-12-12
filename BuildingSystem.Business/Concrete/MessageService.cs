@@ -30,12 +30,12 @@ namespace BuildingSystem.Business.Concrete
             _userService = userService;
         }
 
-        public async Task<MessageDto> AddAsync(MessageDto dto)
+        public async Task<MessageDto> AddAsync(MessageDto messageDto)
         {
-            var message = _mapper.Map<Message>(dto);
+            var message = _mapper.Map<Message>(messageDto);
             await _messageRepository.AddAsync(message);
             await _unitOfWork.CommitAsync();
-            return dto;
+            return messageDto;
         }
 
         public void Delete(int id)
@@ -58,9 +58,7 @@ namespace BuildingSystem.Business.Concrete
             var messageAll = await _messageRepository.GetAll().ToListAsync();
             var messegeDto = _mapper.Map<List<MessageDto>>(messageAll);
             return messegeDto;
-
         }
-
         public async Task<MessageDto> GetById(int id)
         {
             var message = await _messageRepository.GetById(id);
@@ -107,18 +105,16 @@ namespace BuildingSystem.Business.Concrete
             }
             return messageDtos;
         }
-
         public async Task<IEnumerable<MessageDto>> ToGetAll()
         {
             var getAllmessage = await _messageRepository.GetAll().Where(x => x.SenderMail == "B202102043@subu.edu.tr").ToListAsync();
             var messageDto = _mapper.Map<IEnumerable<MessageDto>>(getAllmessage);
             return messageDto;
         }
-
-        public void Update(MessageDto dto)
+        public void Update(MessageDto messageDto)
         {
-            var messageDto = _mapper.Map<Message>(dto);
-            _messageRepository.Update(messageDto);
+            var messagesDto = _mapper.Map<Message>(messageDto);
+            _messageRepository.Update(messagesDto);
             _unitOfWork.Commit();
         }
     }

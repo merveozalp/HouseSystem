@@ -26,12 +26,12 @@ namespace BuildingSystem.Business.Concrete
             _mapper = mapper;
             _unitOfWork=unitOfWork;
         }
-        public async Task<BlockDto> AddAsync(BlockDto dto)
+        public async Task<BlockDto> AddAsync(BlockDto blockDto)
         {
-            var entityDto = _mapper.Map<Block>(dto);
+            var entityDto = _mapper.Map<Block>(blockDto);
             await _blockRepository.AddAsync(entityDto);
             await _unitOfWork.CommitAsync();
-            return dto;
+            return blockDto;
         }
         public async Task Delete(int id)
         {
@@ -39,7 +39,6 @@ namespace BuildingSystem.Business.Concrete
             _blockRepository.Delete(block);
              _unitOfWork.Commit();
         }
-
         public async Task<IEnumerable<BlockDto>> GetAllAsync()
         {
            
@@ -47,29 +46,15 @@ namespace BuildingSystem.Business.Concrete
            return _mapper.Map<List<BlockDto>>(blockList);
 
         }
-
-        public async Task<List<BlockWithBuildingDto>> GetBlockWithBuldingAsync()
-        {
-            var block = await _blockRepository.GetBlockWithBuldingAsync();
-            var blockDto = block.Select(b => new BlockWithBuildingDto()
-            {
-                BlockName = b.BlockName,
-                BuildingName = b.Buildings.First().BuildingName,
-            }).ToList();
-
-            return blockDto;
-        }
-
         public async Task<BlockDto> GetById(int Id)
         {
            var block = await _blockRepository.GetById(Id);
             var blockDto = _mapper.Map<BlockDto>(block);
             return blockDto;
         }
-
-        public async Task UpdateAsync(BlockDto dto)
+        public async Task UpdateAsync(BlockDto blockDto)
         {
-            var entity = _mapper.Map<Block>(dto);
+            var entity = _mapper.Map<Block>(blockDto);
             _blockRepository.Update(entity);
             await _unitOfWork.CommitAsync();
         }

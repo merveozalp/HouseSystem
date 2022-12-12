@@ -27,13 +27,13 @@ namespace BuildingSystem.Business.Concrete
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<FlatCreateDto> AddAsync(FlatCreateDto dto)
+        public async Task<FlatCreateDto> AddAsync(FlatCreateDto flatCreateDto)
         {
            
-            var entityDto = _mapper.Map<Flat>(dto);
+            var entityDto = _mapper.Map<Flat>(flatCreateDto);
             await _flatRepository.AddAsync(entityDto);
             await _unitOfWork.CommitAsync();
-            return dto;
+            return flatCreateDto;
         }
 
         public async Task DeleteAsync(int id)
@@ -55,27 +55,44 @@ namespace BuildingSystem.Business.Concrete
             var flat = await _flatRepository.GetAllFlats();
             var flatsDto = flat.Select(x=> new FlatDto()
             { 
-                Id = x.Id,
+                //Id = x.Id,
                 FlatNumber=x.FlatNumber,
-                FlatType=x.FlatType,
+                //FlatType=x.FlatType,
                 IsEmpty=x.IsEmpty,
                 UserName=x.User.UserName,
-                BuildingName=x.Building.BuildingName
+                BuildingName=x.Building.BuildingName,
+                BlokName=x.Building.Block.BlockName
+                
             }).ToList();
 
             return flatsDto;
         }
 
-        public async Task<FlatDto> GetById(int Id)
+        public List<FlatDto> GetBlockBuildingAndFlat()
         {
-            var flats = await _flatRepository.GetById(Id);
+            var blockAndBuilding = _flatRepository.GetBlockBuildingAndFlat();
+            var blockAndBuildingDto = blockAndBuilding.Select(x => new FlatDto()
+            {
+
+                //BlockName = x.Building.Block.BlockName,
+                BuildingName = x.Building.BuildingName,
+                //TotalFlat = x.Building.TotalFlat
+            }).ToList();
+            return blockAndBuildingDto;
+
+
+        }
+
+        public async Task<FlatDto> GetById(int id)
+        {
+            var flats = await _flatRepository.GetById(id);
             var flatDto = _mapper.Map<FlatDto>(flats);
             return flatDto;
         }
 
-        public async Task UpdateAsync(FlatUpdateDto dto)
+        public async Task UpdateAsync(FlatUpdateDto flatUpdateDto)
         {
-            var entityDto = _mapper.Map<Flat>(dto);
+            var entityDto = _mapper.Map<Flat>(flatUpdateDto);
             _flatRepository.Update(entityDto);
             await _unitOfWork.CommitAsync();
         }

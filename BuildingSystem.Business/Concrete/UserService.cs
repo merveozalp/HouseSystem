@@ -27,7 +27,6 @@ namespace BuildingSystem.Business.Concrete
             _signInManager = signInManager;
             _userRepository = userRepository;
             _mapper = mapper;
-
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -38,39 +37,28 @@ namespace BuildingSystem.Business.Concrete
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "Resident");
-                
             }
-            
-           
         }
-
-        public async Task<Microsoft.AspNetCore.Identity.SignInResult> LogIn(LoginDto LoginDto)
+        public async Task<Microsoft.AspNetCore.Identity.SignInResult> LogIn(LoginDto loginDto)
         {
-            if (LoginDto.Email != null)
+            if (loginDto.Email != null)
             {
-                User user = await _userManager.FindByEmailAsync(LoginDto.Email);
+                User user = await _userManager.FindByEmailAsync(loginDto.Email);
                 if (user != null)
                 {
                     await _signInManager.SignOutAsync();
                 }
-                Microsoft.AspNetCore.Identity.SignInResult result = _signInManager.PasswordSignInAsync(user, LoginDto.Password,false,false).Result;
+                Microsoft.AspNetCore.Identity.SignInResult result = _signInManager.PasswordSignInAsync(user, loginDto.Password,false,false).Result;
                 return result;
             }
-
-
             return null;
         }
-
-
         public async Task<List<UserDto>> GetAllAsync()
         {
             var userGetAll = await _userRepository.GetAll().ToListAsync();
             var userList = _mapper.Map<List<UserDto>>(userGetAll);
             return userList;
         }
-
-       
-
         public async Task UpdateUserAsync(UserDto userDto)
         {
             var user = await _userManager.FindByIdAsync(userDto.Id);
@@ -89,30 +77,24 @@ namespace BuildingSystem.Business.Concrete
             var userDto = _mapper.Map<UserDto>(user);
              return userDto;
         }
-
         public async Task<UserDto> FindByName(string name)
         {
             var user = await _userManager.FindByNameAsync(name);
             var userDto = _mapper.Map<UserDto>(user);
             return userDto;
-            
-          
         }
-
         public async Task<UserDto> FindByEmail(string email)
         {
             var user = await _userManager.FindByNameAsync(email);
             var userDto = _mapper.Map<UserDto>(user);
             return userDto;
         }
-
         public void Delete(string id)
         {
             var user = _userManager.FindByIdAsync(id).Result;
             _userRepository.Delete(user);
             _unitOfWork.Commit();
         }
-
         public User GetUserFromSession()
         {
             var userName = _httpContextAccessor.HttpContext.User.Identity.Name;

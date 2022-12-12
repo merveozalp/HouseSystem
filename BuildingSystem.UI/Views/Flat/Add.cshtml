@@ -1,14 +1,13 @@
 ﻿@model FlatCreateDto
-
 <form asp-controller="Flat" asp-action="Add" class="was-validated">
-    <div class="mb-3">
+     @*<div class="mb-3">
         <label asp-for="UserId">Kullanıcı</label>
         <select asp-for="UserId" class="form-control"
-                asp-items="ViewBag.Users" required>
+                asp-items="@(new SelectList(Model.Users, "Id", "UserName"))" required>
             <option>Lütfen birini seçiniz</option>
         </select>
         <span asp-validation-for="UserId" class="text-danger"></span>
-    </div>
+    </div>*@
      <div class="mb-3">
         <label asp-for="BuildingId">Bina Seçiniz</label>
         <select asp-for="BuildingId" class="form-control"
@@ -17,30 +16,18 @@
         </select>
         <span asp-validation-for="BuildingId" class="text-danger"></span>
     </div>
-
+    <div class="mb-3">
+        <label asp-for="FlatTypeId">Daire Tipi Seçiniz</label>
+        <select asp-for="FlatTypeId" class="form-control"
+                asp-items="ViewBag.FlatTypes" required>
+            <option>Lütfen birini seçiniz</option>
+        </select>
+        <span asp-validation-for="FlatTypeId" class="text-danger"></span>
+    </div>
     <div class="mb-3 ">
         <label asp-for="FlatNumber">Daire Numarası</label>
         <input type="number" class="form-control" asp-for="FlatNumber" required />
         <span asp-validation-for="FlatNumber" class="text-danger"></span>
     </div>
-    <div class="mb-3 form-group">
-        <label asp-for="FlatType">Daire Tipi</label>
-        <input type="text" class="form-control" asp-for="FlatType" required />
-        <span asp-validation-for="FlatType" class="text-danger"></span>
-    </div>
-  
-
-@*    <div class="mb-3">
-        <label asp-for="blockId">Blok</label>
-        <select asp-for="blockId" class="form-control"
-                asp-items="ViewBag.Block" required>
-            <option>Lütfen birini seçiniz</option>
-        </select>
-        <span asp-validation-for="BuildingId" class="text-danger"></span>
-    </div>*@
-
-      
-
-
     <button type="submit" class="btn btn-primary">Ekle</button>
 </form>

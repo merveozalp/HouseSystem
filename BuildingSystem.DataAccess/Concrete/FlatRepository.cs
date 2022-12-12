@@ -16,9 +16,15 @@ namespace BuildingSystem.DataAccess.Concrete
         {
         }
 
+        // Blok ekledin.
         public async Task<List<Flat>> GetAllFlats()
         {
-            return await _db.Flats.Include(x => x.User).Include(x=>x.Building).OrderBy(x=>x.FlatNumber).ToListAsync();
+            return await _db.Flats.Include(x => x.User).Include(x=>x.Building).ThenInclude(x=>x.Block).OrderBy(x=>x.FlatNumber).ToListAsync();
+        }
+
+        public  List<Flat> GetBlockBuildingAndFlat()
+        {
+           return  _db.Flats.Include(x => x.Building).ThenInclude(x => x.Block).ToList();
         }
     }
 }

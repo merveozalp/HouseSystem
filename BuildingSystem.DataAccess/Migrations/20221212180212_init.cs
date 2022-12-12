@@ -77,6 +77,19 @@ namespace BuildingSystem.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FlatType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FlatTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FlatType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
                 {
@@ -205,7 +218,7 @@ namespace BuildingSystem.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuildingName = table.Column<byte>(type: "tinyint", nullable: false),
                     TotalFlat = table.Column<byte>(type: "tinyint", nullable: false),
                     BlockId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -227,11 +240,12 @@ namespace BuildingSystem.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FlatNumber = table.Column<byte>(type: "tinyint", nullable: false),
-                    FlatType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsEmpty = table.Column<bool>(type: "bit", nullable: false),
-                    HouseType = table.Column<int>(type: "int", nullable: false),
+                    IsOwner = table.Column<bool>(type: "bit", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    FlatTypeId = table.Column<int>(type: "int", nullable: true),
+                    FlatId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,6 +262,12 @@ namespace BuildingSystem.DataAccess.Migrations
                         principalTable: "Buildings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Flats_FlatType_FlatTypeId",
+                        column: x => x.FlatTypeId,
+                        principalTable: "FlatType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -256,7 +276,6 @@ namespace BuildingSystem.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExpenseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cost = table.Column<double>(type: "float", nullable: false),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
                     InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -346,6 +365,11 @@ namespace BuildingSystem.DataAccess.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Flats_FlatTypeId",
+                table: "Flats",
+                column: "FlatTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Flats_UserId",
                 table: "Flats",
                 column: "UserId");
@@ -388,6 +412,9 @@ namespace BuildingSystem.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Buildings");
+
+            migrationBuilder.DropTable(
+                name: "FlatType");
 
             migrationBuilder.DropTable(
                 name: "Blocks");

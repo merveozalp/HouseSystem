@@ -13,11 +13,11 @@ namespace BuildingSystem.Business.Abstract
     {
         Task<BlockDto> GetById(int Id);
         Task<IEnumerable<BlockDto>> GetAllAsync();
-        Task<BlockDto> AddAsync(BlockDto dto);
-        Task UpdateAsync(BlockDto dto);
+        Task<BlockDto> AddAsync(BlockDto blockDto);
+        Task UpdateAsync(BlockDto blockDto);
         Task Delete(int id);
 
-        Task<List<BlockWithBuildingDto>> GetBlockWithBuldingAsync();
+       
 
 
     }
