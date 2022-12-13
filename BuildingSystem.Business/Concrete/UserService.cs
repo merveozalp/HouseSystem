@@ -30,14 +30,12 @@ namespace BuildingSystem.Business.Concrete
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task AddAsync(LoginDto dto)    // Yeni User Oluşturuyorum.
+        public async Task AddAsync(LoginDto dto)
         {
             var user = _mapper.Map<User>(dto);
             var result = await _userManager.CreateAsync(user, dto.Password);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, "Resident");
-            }
+            await _userManager.AddToRoleAsync(user, "Resident");
+           
         }
         public async Task<Microsoft.AspNetCore.Identity.SignInResult> LogIn(LoginDto loginDto)
         {
@@ -48,7 +46,7 @@ namespace BuildingSystem.Business.Concrete
                 {
                     await _signInManager.SignOutAsync();
                 }
-                Microsoft.AspNetCore.Identity.SignInResult result = _signInManager.PasswordSignInAsync(user, loginDto.Password,false,false).Result;
+                Microsoft.AspNetCore.Identity.SignInResult result = _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false).Result;
                 return result;
             }
             return null;

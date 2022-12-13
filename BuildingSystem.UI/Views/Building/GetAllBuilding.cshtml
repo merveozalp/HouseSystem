@@ -15,20 +15,15 @@
 <table id="myDataTable" class="table table-hover table-striped">
     <thead class="thead-light">
         <tr>
-            
-            
-            <th scope="col">Blok İsmi</th>
             <th scope="col">Binanın İsmi</th>
             <th scope="col">Toplam Daire Sayısı</th>
-            
-
         </tr>
     </thead>
     <tbody>
         @if (Model.Count() == 0)
         {
             <tr>
-                <td colspan=3>Hiç bir üye yoktur</td>
+                <td colspan=3>Kayıtlı Bina Mevcut Değildir.</td>
             </tr>
         }
         else
@@ -36,9 +31,7 @@
             @foreach (var building in Model)
             {
               <tr>
-
-
-                    <td>@building.BlockName</td>
+                    
                     <td>@building.BuildingName</td>
                     <td>@building.TotalFlat</td>
              

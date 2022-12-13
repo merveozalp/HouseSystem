@@ -8,12 +8,9 @@ namespace BuildingSystem.Entities.Dtos
 {
     public class BuildingDto
     {
-
         public int Id { get; set; }
-        public byte BuildingName { get; set; }
+        public string BuildingName { get; set; }
         public byte TotalFlat { get; set; }
-      
-
 
     }
 }

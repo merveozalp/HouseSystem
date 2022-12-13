@@ -14,14 +14,12 @@ namespace BuildingSystem.Entities.Dtos
         public bool IsEmpty { get; set; }
         public string FlatType { get; set; }
         public byte FloorNumber { get; set; }
-
         public bool IsOwner { get; set; }
         public string UserId { get; set; }
-       
         public int BuildingId { get; set; }
 
-        public ICollection<User> Users { get; set; }
-        public ICollection<Building> Buildings { get; set; }
+        public ICollection<UserDto> Users { get; set; }
+        public ICollection<BuildingDto> Buildings { get; set; }
 
 
 

@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 namespace BuildingSystem.UI.Controllers
 {
     public class MailController : Controller
-
-      
     {
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;

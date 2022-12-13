@@ -18,22 +18,27 @@ namespace BuildingSystem.Business.Concrete
         private readonly IFlatRepository _flatRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IBuildingService buildingService;
+        private readonly IBuildingService _buildingService;
 
-        public FlatService(IFlatRepository flatRepository, IMapper mapper, IUnitOfWork unitOfWork)
+        public FlatService(IFlatRepository flatRepository, IMapper mapper, IUnitOfWork unitOfWork, IBuildingService buildingService)
         {
             _flatRepository = flatRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _buildingService = buildingService;
         }
 
-        public async Task<FlatCreateDto> AddAsync(FlatCreateDto flatCreateDto)
+        public async Task AddAsync(FlatCreateDto flatCreateDto)
         {
-           
-            var entityDto = _mapper.Map<Flat>(flatCreateDto);
-            await _flatRepository.AddAsync(entityDto);
-            await _unitOfWork.CommitAsync();
-            return flatCreateDto;
+            var building = await _buildingService.GetById(flatCreateDto.BuildingId);
+            var totalFlats = await _flatRepository.Where(x => x.BuildingId == flatCreateDto.BuildingId).CountAsync();
+            {
+                var entityDto = _mapper.Map<Flat>(flatCreateDto);
+                await _flatRepository.AddAsync(entityDto);
+                await _unitOfWork.CommitAsync();
+               
+            }
+          
         }
 
         public void DeleteAsync(int id)

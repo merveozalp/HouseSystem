@@ -2,6 +2,7 @@
 using BuildingSystem.Business.Abstract;
 using BuildingSystem.Entities.Dtos;
 using BuildingSystem.Entities.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BuildingController : Controller
     {
 

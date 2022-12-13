@@ -1,6 +1,7 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Business.Concrete;
 using BuildingSystem.Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    [Authorize(Roles="Yönetici")]
     public class ExpenseController : Controller
     {
         private readonly IExpenseService _expenseService;

@@ -2,6 +2,7 @@
 using BuildingSystem.Business.Concrete;
 using BuildingSystem.DataAccess.Context;
 using BuildingSystem.Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class FlatController : Controller
     {
         private readonly IFlatService _flatService;
@@ -23,14 +25,11 @@ namespace BuildingSystem.UI.Controllers
             _flatService = flatService;
             _buildingService = buildingService;
             _userService = userService;
-          
-            
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-
             var flats = await _flatService.GetAllFlatsWithRelation();
             return View(flats);
         }
@@ -42,21 +41,17 @@ namespace BuildingSystem.UI.Controllers
             return View(flats);
         }
 
-        [HttpGet]  // Block Alamıyorsun.
+        [HttpGet] 
         public async Task<IActionResult> Add()
         {
-
-           
-            //var buildings = await _buildingService.GetAllAsync();
-            //ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
-
             var buildingDto = await _buildingService.GetAllAsync();
             var userDto = await _userService.GetAllAsync();
-            //var flatAdd = new FlatCreateDto()
-            //{
-            //    Buildings = buildingDto,
-            //    Users = userDto
-            //};
+            var flatAdd = new FlatCreateDto()
+            {
+                Buildings=buildingDto,
+                Users=userDto
+
+            };
             return View();
         }
 
@@ -66,13 +61,10 @@ namespace BuildingSystem.UI.Controllers
             if (ModelState.IsValid)
             {
                 flatCreateDto.IsEmpty = true;
-                var expenses = await _flatService.AddAsync(flatCreateDto);
+                await _flatService.AddAsync(flatCreateDto);
                 return RedirectToAction("GetAll");
             }
-
-
-            var buildings = await _buildingService.GetAllAsync();
-            ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
+           
             return View(flatCreateDto);
         }
 

@@ -28,37 +28,52 @@ namespace BuildingSystem.UI.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult LogIn(string ReturnUrl = null)
+        public IActionResult LogIn(string returnUrl)
         {
-            return View(new LoginDto()
-            {
-                ReturnUrl = ReturnUrl
-            });
+            TempData["ReturnUrl"] = returnUrl;
+            return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginDto loginDto)
         {
-            if (!ModelState.IsValid) return View(loginDto);
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            if (user == null) return View(loginDto);
-            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, true, false);
-            if (result.Succeeded) return Redirect(loginDto.ReturnUrl ?? "~/");
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.LogIn(loginDto);
+                if (result.Succeeded)
+                {
+                    User user = await _userManager.FindByEmailAsync(loginDto.Email);
+                    IList<string> roles = await _userManager.GetRolesAsync(user);
+                    foreach (var item in roles)
+                    {
+                        if (item.Contains("Admin"))
+                        {
+                           
+                            return RedirectToAction("GetAllBuilding", "Building");
+                        }
+                        else if (item.Contains("Yönetici"))
+                        {
+                            
+                            return RedirectToAction("GetAllExpense", "Expense");
+                        }
+                    }
+                    return RedirectToAction("GetAllBuilding", "Building");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Geçersiz kullanıcı adi veya şifresi");
+                }
+            }
             return View(loginDto);
-
         }
-
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }
-
         public IActionResult SignUp()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> SignUp(UserDto dto)
         {
@@ -79,11 +94,7 @@ namespace BuildingSystem.UI.Controllers
                 return RedirectToAction("Login");
             }
             return View(dto);
-           
-           
-            
         }
-
         public IActionResult Privacy()
         {
             return View();

@@ -1,11 +1,5 @@
-﻿//using BuildingSystem.Entities.Entity;
-using BuildingSystem.Entities.Entity;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using BuildingSystem.Entities.Entity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entites.Entitiy
 {

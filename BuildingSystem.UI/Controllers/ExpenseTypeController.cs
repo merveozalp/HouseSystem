@@ -1,11 +1,13 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class ExpenseTypeController : Controller
     {
         private readonly IExpenseTypeService _expenseTypeService;

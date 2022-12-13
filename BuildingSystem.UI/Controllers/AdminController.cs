@@ -91,7 +91,7 @@ namespace BuildingSystem.UI.Controllers
                 }
               
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("GetAllUsers","User");
         }
     }
 }

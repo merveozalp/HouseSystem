@@ -12,7 +12,7 @@ namespace BuildingSystem.Business.Abstract
     {
         Task<FlatDto> GetById(int id);
         Task<List<FlatDto>> GetAllAsync();
-        Task<FlatCreateDto> AddAsync(FlatCreateDto flatCreateDto);
+        Task AddAsync(FlatCreateDto flatCreateDto);
         void UpdateAsync(FlatUpdateDto flatUpdateDto);
         void DeleteAsync(int id);
        

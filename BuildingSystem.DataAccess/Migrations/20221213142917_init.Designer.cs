@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221212180212_init")]
+    [Migration("20221213142917_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,9 +28,6 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BlockName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Blocks");
@@ -43,18 +40,13 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlockId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("BuildingName")
-                        .HasColumnType("tinyint");
+                    b.Property<string>("BuildingName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("TotalFlat")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BlockId");
 
                     b.ToTable("Buildings");
                 });
@@ -72,21 +64,6 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExpenseTypes");
-                });
-
-            modelBuilder.Entity("BuildingSystem.Entities.Entity.FlatType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FlatTypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FlatType");
                 });
 
             modelBuilder.Entity("BuildingSystem.Entities.Entity.Message", b =>
@@ -157,14 +134,14 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FlatId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("FlatNumber")
                         .HasColumnType("tinyint");
 
-                    b.Property<int?>("FlatTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("FlatType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("FloorNumber")
+                        .HasColumnType("tinyint");
 
                     b.Property<bool>("IsEmpty")
                         .HasColumnType("bit");
@@ -178,8 +155,6 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingId");
-
-                    b.HasIndex("FlatTypeId");
 
                     b.HasIndex("UserId");
 
@@ -397,17 +372,6 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BuildingSystem.Entities.Entity.Building", b =>
-                {
-                    b.HasOne("BuildingSystem.Entities.Entity.Block", "Block")
-                        .WithMany("Buildings")
-                        .HasForeignKey("BlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Block");
-                });
-
             modelBuilder.Entity("Entites.Entitiy.Expense", b =>
                 {
                     b.HasOne("BuildingSystem.Entities.Entity.ExpenseType", "ExpenceType")
@@ -435,17 +399,11 @@ namespace BuildingSystem.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BuildingSystem.Entities.Entity.FlatType", "FlatType")
-                        .WithMany("Flats")
-                        .HasForeignKey("FlatTypeId");
-
                     b.HasOne("Entites.Entitiy.User", "User")
                         .WithMany("Flats")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Building");
-
-                    b.Navigation("FlatType");
 
                     b.Navigation("User");
                 });
@@ -501,11 +459,6 @@ namespace BuildingSystem.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BuildingSystem.Entities.Entity.Block", b =>
-                {
-                    b.Navigation("Buildings");
-                });
-
             modelBuilder.Entity("BuildingSystem.Entities.Entity.Building", b =>
                 {
                     b.Navigation("Flats");
@@ -514,11 +467,6 @@ namespace BuildingSystem.DataAccess.Migrations
             modelBuilder.Entity("BuildingSystem.Entities.Entity.ExpenseType", b =>
                 {
                     b.Navigation("Expenses");
-                });
-
-            modelBuilder.Entity("BuildingSystem.Entities.Entity.FlatType", b =>
-                {
-                    b.Navigation("Flats");
                 });
 
             modelBuilder.Entity("Entites.Entitiy.Flat", b =>

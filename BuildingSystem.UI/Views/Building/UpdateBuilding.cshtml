@@ -5,11 +5,7 @@
 
 
 <form asp-controller="Building" asp-action="UpdateBuilding" class="was-validated">
-    <div class="mb-3">
-        <label asp-for="blockId" class="form-label"> Block Seçiniz </label>
-        <select asp-for="blockId" asp-items="ViewBag.Block" class="form-control"></select>
-        <span asp-validation-for="blockId" class="text-danger"></span>
-    </div>
+    
     <div class="mb-3">
         <label asp-for="BuildingName" class="form-label">Bina İsmi</label>
         <input type="text" class="form-control" asp-for="BuildingName" required>

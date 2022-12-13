@@ -43,6 +43,7 @@ namespace BuildingSystem.Business.AutoMapper
             CreateMap<Role,RoleDto>().ReverseMap();
             //CreateMap<Role,RoleAssignDto>().ReverseMap();
             CreateMap<User,UserDto>().ReverseMap();
+            CreateMap<User,LoginDto>().ReverseMap();
            
         }
     }

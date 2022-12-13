@@ -24,12 +24,12 @@
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Site Kullanıcı Bilgileri</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Admin" asp-action="Index">Kullanıcı Bilgileri</a></li>
+                    <li><a asp-controller="User" asp-action="GetAllUsers">Kullanıcı Bilgileri</a></li>
                     <li><a asp-controller="Admin" asp-action="GetAllRole">Role İsimleri</a></li>
                     <li><a asp-controller="Admin" asp-action="RoleCreate">Rol  Oluştur</a></li>
                 </ul>
             </li>
-            <li>
+           @* <li>
                 <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label">Blok İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a asp-controller="Block" asp-action="AddBlock">Block Ekle</a></li>
@@ -37,7 +37,7 @@
                     <li><a asp-controller="Block" asp-action="GetBlokWithBuilding">Blok ve Bina Listesi</a></li>
 
                 </ul>
-            </li>
+            </li>*@
             <li>
                 <a href="mailbox.html"><i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Bina İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
@@ -60,7 +60,7 @@
                     <li><a asp-controller="Expense" asp-action="Add">Gider Ekle</a></li>
                     <li><a asp-controller="Expense" asp-action="GetAllExpenses"> Gider listesi </a></li>
                     <li><a asp-controller="Expense" asp-action="GetIsPaid"> Ödeyen Kullanıcı Listesi </a></li>
-                    <li><a asp-controller="Expense" asp-action="GetUnIsPaid"> Ödemeyen Kullanıcı Listesi </a></li>
+                    <li><a asp-controller="Expense" asp-action="GetUnPaid"> Ödemeyen Kullanıcı Listesi </a></li>
                 </ul>
             </li>
             <li>
