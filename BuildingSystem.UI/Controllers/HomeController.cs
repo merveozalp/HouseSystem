@@ -17,6 +17,7 @@ namespace BuildingSystem.UI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserService _userService;
+        private readonly IExpenseService expenseService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 

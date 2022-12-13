@@ -15,53 +15,53 @@ namespace BuildingSystem.UI.Controllers
     [Validatefilter]
     public class BlockController : Controller
     {
-        private readonly IBlockService _blockService;
-        public BlockController(IBlockService blockService)
-        {
-            _blockService = blockService;
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetAllBlock()
-        {
-            var blocks = await _blockService.GetAllAsync();
-            return View(blocks);
-        }
+        //private readonly IBlockService _blockService;
+        //public BlockController(IBlockService blockService)
+        //{
+        //    _blockService = blockService;
+        //}
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllBlock()
+        //{
+        //    var blocks = await _blockService.GetAllAsync();
+        //    return View(blocks);
+        //}
       
-        [HttpGet]
-        public IActionResult AddBlock()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddBlock(BlockDto blockDto)
-        {
-            var block = await _blockService.AddAsync(blockDto);
-            return RedirectToAction("GetAllBlock");
-        }
+        //[HttpGet]
+        //public IActionResult AddBlock()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> AddBlock(BlockDto blockDto)
+        //{
+        //    var block = await _blockService.AddAsync(blockDto);
+        //    return RedirectToAction("GetAllBlock");
+        //}
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateBlock(int id)
-        {
-            var blocks = await _blockService.GetById(id);
-            if (blocks == null) return RedirectToAction("GetAllBlock");
-            return View(blocks);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> UpdateBlock(int id)
+        //{
+        //    var blocks = await _blockService.GetById(id);
+        //    if (blocks == null) return RedirectToAction("GetAllBlock");
+        //    return View(blocks);
+        //}
 
-        [HttpPost]
-        // Update metot hatalı Servisleri güncellemen lazım.
-        public IActionResult UpdateBlock(BlockDto blockDto)
-        {
-            _blockService.UpdateAsync(blockDto);
-            return RedirectToAction("GetAllBlock");
-        }
+        //[HttpPost]
+        //// Update metot hatalı Servisleri güncellemen lazım.
+        //public IActionResult UpdateBlock(BlockDto blockDto)
+        //{
+        //    _blockService.UpdateAsync(blockDto);
+        //    return RedirectToAction("GetAllBlock");
+        //}
 
-        [HttpGet]
-        public async  Task<IActionResult> Delete(int id)
-        {
+        //[HttpGet]
+        //public async  Task<IActionResult> Delete(int id)
+        //{
             
-            await _blockService.Delete(id);
-            return RedirectToAction("GetAllBlock");
-        }
+        //    await _blockService.Delete(id);
+        //    return RedirectToAction("GetAllBlock");
+        //}
 
        
 

@@ -18,15 +18,8 @@ namespace BuildingSystem.DataAccess.Concrete
         {
         }
 
-        public async Task<List<Block>> GetBlockWithBuldingAsync()
-        {
-            
-            return await _db.Blocks.Include(x=>x.Buildings).ToListAsync();
-        }
+      
 
-        public async Task<Block> GetsingleBlocByIdkWithBulding(int blockId)
-        {
-            return await _db.Blocks.Include(x=>x.Buildings).Where(x =>x.Id== blockId).SingleOrDefaultAsync();
-        }
+       
     }
 }

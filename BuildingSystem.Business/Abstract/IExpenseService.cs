@@ -12,10 +12,10 @@ namespace BuildingSystem.Business.Abstract
     public interface IExpenseService
     {
         Task<ExpenseDto> GetById(int Id);
-        Task<IEnumerable<ExpenseDto>> GetAllAsync();
+        Task<List<ExpenseDto>> GetAllAsync();
         Task<ExpenseCreateDto> AddAsync(ExpenseCreateDto expenseCreateDto);
-        Task UpdateAsync(ExpenseUpdateDto expenseCreateDto);
-        Task DeleteAsync(int id);
+        void UpdateAsync(ExpenseUpdateDto expenseCreateDto);
+        void DeleteAsync(int id);
         Task<List<ExpenseDto>> GetAllExpenses();
 
         void SendMail();

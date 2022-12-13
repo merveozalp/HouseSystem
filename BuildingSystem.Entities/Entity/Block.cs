@@ -9,13 +9,13 @@ namespace BuildingSystem.Entities.Entity
 {
     public class Block:Base
     {
-        public Block()
-        {
-            Buildings = new HashSet<Building>();   
-        }
-        public string BlockName { get; set; }
+        //public Block()
+        //{
+        //    Buildings = new HashSet<Building>();   
+        //}
+        //public string BlockName { get; set; }
 
-        public ICollection<Building> Buildings { get; set; }
+        //public ICollection<Building> Buildings { get; set; }
       
     }
 }

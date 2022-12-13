@@ -45,10 +45,10 @@ namespace BuildingSystem.Business.Concrete
             _unitOfWork.Commit();
         }
 
-        public async Task<IEnumerable<MessageDto>> FromGetAll()
+        public async Task<List<MessageDto>> FromGetAll()
         {
             var getAllmessage =  await _messageRepository.GetAll().Where(x => x.ReceiverMail == "B202102043@subu.edu.tr").ToListAsync();
-            var messageDto = _mapper.Map<IEnumerable<MessageDto>>(getAllmessage);
+            var messageDto = _mapper.Map<List<MessageDto>>(getAllmessage);
             return messageDto;
 
         }
@@ -105,10 +105,10 @@ namespace BuildingSystem.Business.Concrete
             }
             return messageDtos;
         }
-        public async Task<IEnumerable<MessageDto>> ToGetAll()
+        public async Task<List<MessageDto>> ToGetAll()
         {
             var getAllmessage = await _messageRepository.GetAll().Where(x => x.SenderMail == "B202102043@subu.edu.tr").ToListAsync();
-            var messageDto = _mapper.Map<IEnumerable<MessageDto>>(getAllmessage);
+            var messageDto = _mapper.Map<List<MessageDto>>(getAllmessage);
             return messageDto;
         }
         public void Update(MessageDto messageDto)

@@ -37,10 +37,10 @@ namespace BuildingSystem.Business.Concrete
             _buildingRepository.Delete(building);
             _unitOfWork.Commit();
          }
-        public async Task<IEnumerable<BuildingDto>> GetAllAsync()
+        public async Task<List<BuildingDto>> GetAllAsync()
         {
             var buildingList = await _buildingRepository.GetAll().ToListAsync();
-            var buildingDto = _mapper.Map<IEnumerable<BuildingDto>>(buildingList);
+            var buildingDto = _mapper.Map<List<BuildingDto>>(buildingList);
             return buildingDto;
         }
         public async Task<BuildingDto> GetById(int Id)

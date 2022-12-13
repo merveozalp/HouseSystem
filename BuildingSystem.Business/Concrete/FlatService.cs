@@ -36,51 +36,36 @@ namespace BuildingSystem.Business.Concrete
             return flatCreateDto;
         }
 
-        public async Task DeleteAsync(int id)
+        public void DeleteAsync(int id)
         {
-            var flat = await _flatRepository.GetById(id);
+            var flat = _flatRepository.GetById(id).Result;
             _flatRepository.Delete(flat);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
 
-        public async Task<IEnumerable<FlatDto>> GetAllAsync()
+        public async Task<List<FlatDto>> GetAllAsync()
         {
             var flatList = await _flatRepository.GetAll().ToListAsync();
-            var flatDto = _mapper.Map<IEnumerable<FlatDto>>(flatList);
+            var flatDto = _mapper.Map<List<FlatDto>>(flatList);
             return flatDto;
         }
 
-        public async Task<List<FlatDto>> GetAllFlats()
+        public async Task<List<FlatDto>> GetAllFlatsWithRelation()
         {
-            var flat = await _flatRepository.GetAllFlats();
+            var flat = await _flatRepository.GetAllFlatsWithRelation();
             var flatsDto = flat.Select(x=> new FlatDto()
             { 
-                //Id = x.Id,
+                Id = x.Id,
                 FlatNumber=x.FlatNumber,
-                //FlatType=x.FlatType,
+                FlatType=x.FlatType,
                 IsEmpty=x.IsEmpty,
                 UserName=x.User.UserName,
                 BuildingName=x.Building.BuildingName,
-                BlokName=x.Building.Block.BlockName
+               
                 
             }).ToList();
 
             return flatsDto;
-        }
-
-        public List<FlatDto> GetBlockBuildingAndFlat()
-        {
-            var blockAndBuilding = _flatRepository.GetBlockBuildingAndFlat();
-            var blockAndBuildingDto = blockAndBuilding.Select(x => new FlatDto()
-            {
-
-                //BlockName = x.Building.Block.BlockName,
-                BuildingName = x.Building.BuildingName,
-                //TotalFlat = x.Building.TotalFlat
-            }).ToList();
-            return blockAndBuildingDto;
-
-
         }
 
         public async Task<FlatDto> GetById(int id)
@@ -90,11 +75,11 @@ namespace BuildingSystem.Business.Concrete
             return flatDto;
         }
 
-        public async Task UpdateAsync(FlatUpdateDto flatUpdateDto)
+        public void UpdateAsync(FlatUpdateDto flatUpdateDto)
         {
             var entityDto = _mapper.Map<Flat>(flatUpdateDto);
             _flatRepository.Update(entityDto);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
     }
 }

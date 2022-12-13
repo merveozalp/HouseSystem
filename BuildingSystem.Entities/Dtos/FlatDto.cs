@@ -11,10 +11,12 @@ namespace BuildingSystem.Entities.Dtos
         public int Id { get; set; }
         public byte FlatNumber { get; set; }
         public string FlatType { get; set; }
+        public byte FloorNumber { get; set; }
+        public bool IsOwner { get; set; }
         public bool IsEmpty { get; set; }
         public string UserName { get; set; }
-        public byte BuildingName { get; set; }
-        public string BlokName { get; set; }
+        public string BuildingName { get; set; }
+       
 
       
     }

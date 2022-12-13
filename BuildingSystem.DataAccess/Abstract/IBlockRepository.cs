@@ -9,7 +9,6 @@ namespace BuildingSystem.DataAccess.Abstract
 {
     public interface IBlockRepository:IGenericRepository<Block>
     {
-        Task<List<Block>> GetBlockWithBuldingAsync();
-        Task<Block> GetsingleBlocByIdkWithBulding(int blockId);
+
     }
 }

@@ -12,8 +12,7 @@ namespace BuildingSystem.Entities.Dtos
         public int Id { get; set; }
         public byte BuildingName { get; set; }
         public byte TotalFlat { get; set; }
-        public int blockId { get; set; }
-        public string BlockName { get; set; }
+      
 
 
     }

@@ -10,7 +10,7 @@ namespace BuildingSystem.DataAccess.Abstract
 {
     public interface IFlatRepository:IGenericRepository<Flat>
     {
-        Task<List<Flat>> GetAllFlats();
-       List<Flat> GetBlockBuildingAndFlat();
+        Task<List<Flat>> GetAllFlatsWithRelation();
+      
     }
 }

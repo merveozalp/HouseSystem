@@ -11,8 +11,8 @@ namespace BuildingSystem.Business.Abstract
     {
         Task<MessageDto> GetById(int id);
         Task<List<MessageDto>> GetAllAsync();
-        Task<IEnumerable<MessageDto>> FromGetAll();
-        Task<IEnumerable<MessageDto>> ToGetAll();
+        Task<List<MessageDto>> FromGetAll();
+        Task<List<MessageDto>> ToGetAll();
         Task<MessageDto> AddAsync(MessageDto messageDto);
         void Update(MessageDto messageDto);
         void Delete(int id);

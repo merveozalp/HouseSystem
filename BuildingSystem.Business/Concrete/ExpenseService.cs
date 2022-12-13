@@ -41,17 +41,17 @@ namespace BuildingSystem.Business.Concrete
             return expenseCreateDto;
         }
 
-        public async Task DeleteAsync(int id)
+        public void DeleteAsync(int id)
         {
-            var expense = await _expenseRepository.GetById(id);
+            var expense =  _expenseRepository.GetById(id).Result;
             _expenseRepository.Delete(expense);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
 
-        public async Task<IEnumerable<ExpenseDto>> GetAllAsync()
+        public async Task<List<ExpenseDto>> GetAllAsync()
         {
             var expenseList = await _expenseRepository.GetAll().ToListAsync();
-            var expenseDto = _mapper.Map<IEnumerable<ExpenseDto>>(expenseList);
+            var expenseDto = _mapper.Map<List<ExpenseDto>>(expenseList);
             return expenseDto;
         }
 
@@ -63,6 +63,7 @@ namespace BuildingSystem.Business.Concrete
                 Id=x.Id,
                 IsPaid =x.IsPaid,
                 Cost=x.Cost,
+                InvoiceDate=x.InvoiceDate,
                 UserName=x.Flat.User.UserName,
                 FlatNumber=x.Flat.FlatNumber,
                 ExpenseTypeName=x.ExpenceType.ExpenseTypeName
@@ -104,11 +105,11 @@ namespace BuildingSystem.Business.Concrete
              //client.Disconnect(true);
             }
         }
-        public async Task UpdateAsync(ExpenseUpdateDto expenseCreateDto)
+        public void UpdateAsync(ExpenseUpdateDto expenseCreateDto)
         {
             var entityDto = _mapper.Map<Expense>(expenseCreateDto);
             _expenseRepository.Update(entityDto);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
     }
 }

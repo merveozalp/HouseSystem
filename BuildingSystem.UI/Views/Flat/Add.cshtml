@@ -1,17 +1,17 @@
 ﻿@model FlatCreateDto
 <form asp-controller="Flat" asp-action="Add" class="was-validated">
-     @*<div class="mb-3">
+     <div class="mb-3">
         <label asp-for="UserId">Kullanıcı</label>
         <select asp-for="UserId" class="form-control"
                 asp-items="@(new SelectList(Model.Users, "Id", "UserName"))" required>
             <option>Lütfen birini seçiniz</option>
         </select>
         <span asp-validation-for="UserId" class="text-danger"></span>
-    </div>*@
+    </div>
      <div class="mb-3">
         <label asp-for="BuildingId">Bina Seçiniz</label>
         <select asp-for="BuildingId" class="form-control"
-                asp-items="ViewBag.Building" required>
+                asp-items="@(new SelectList(Model.Buildings, "Id", "BuildingNumber"))" required>
             <option>Lütfen birini seçiniz</option>
         </select>
         <span asp-validation-for="BuildingId" class="text-danger"></span>
@@ -31,3 +31,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Ekle</button>
 </form>
+
+                  @* asp-items="ViewBag.Building" required>*@

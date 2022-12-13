@@ -34,17 +34,17 @@ namespace BuildingSystem.Business.Concrete
             return expenseTypeDto;
         }
 
-        public async Task DeleteAsync(int id)
+        public void Delete(int id)
         {
-            var expenses = await _expenseTypeRepository.GetById(id);
+            var expenses =  _expenseTypeRepository.GetById(id).Result;
             _expenseTypeRepository.Delete(expenses);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
 
-        public async Task<IEnumerable<ExpenseTypeDto>> GetAllAsync()
+        public async Task<List<ExpenseTypeDto>> GetAllAsync()
         {
             var expenseList = await _expenseTypeRepository.GetAll().ToListAsync();
-            var expenseTypeDto = _mapper.Map<IEnumerable<ExpenseTypeDto>>(expenseList);
+            var expenseTypeDto = _mapper.Map<List<ExpenseTypeDto>>(expenseList);
             return expenseTypeDto;
         }
 
@@ -55,11 +55,11 @@ namespace BuildingSystem.Business.Concrete
             return expenseTypeDto;
         }
 
-        public async Task UpdateAsync(ExpenseTypeDto expenseTypeDto)
+        public void Update(ExpenseTypeDto expenseTypeDto)
         {
             var entityDto = _mapper.Map<ExpenseType>(expenseTypeDto);
             _expenseTypeRepository.Update(entityDto);
-            await _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
     }
 }

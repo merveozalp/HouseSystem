@@ -17,16 +17,13 @@ namespace BuildingSystem.UI.Controllers
         private readonly IBuildingService _buildingService;
         private readonly IUserService _userService;
         private readonly IBlockService _blockService;
-        private readonly IFlatTypeService _flatTypeService;
-       
 
-
-        public FlatController(IFlatService flatService, IBuildingService buildingService, IUserService userService, IFlatTypeService flatTypeService)
+        public FlatController(IFlatService flatService, IBuildingService buildingService, IUserService userService)
         {
             _flatService = flatService;
             _buildingService = buildingService;
             _userService = userService;
-            _flatTypeService = flatTypeService;
+          
             
         }
 
@@ -34,7 +31,7 @@ namespace BuildingSystem.UI.Controllers
         public async Task<ActionResult> GetAll()
         {
 
-            var flats = await _flatService.GetAllFlats();
+            var flats = await _flatService.GetAllFlatsWithRelation();
             return View(flats);
         }
 
@@ -46,18 +43,25 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]  // Block Alamıyorsun.
-        public async  Task<IActionResult> Add()
+        public async Task<IActionResult> Add()
         {
-            
-            var flatTypes = await _flatTypeService.GetAllAsync();
-            ViewBag.FlatTypes = new SelectList(flatTypes, "Id", "FlatTypeName");
-            var buildings = await _buildingService.GetAllAsync();
-            ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
+
+           
+            //var buildings = await _buildingService.GetAllAsync();
+            //ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
+
+            var buildingDto = await _buildingService.GetAllAsync();
+            var userDto = await _userService.GetAllAsync();
+            //var flatAdd = new FlatCreateDto()
+            //{
+            //    Buildings = buildingDto,
+            //    Users = userDto
+            //};
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(FlatCreateDto flatCreateDto) // Blok Seçebilmeli
+        public async Task<IActionResult> Add(FlatCreateDto flatCreateDto) 
         {
             if (ModelState.IsValid)
             {
@@ -66,8 +70,6 @@ namespace BuildingSystem.UI.Controllers
                 return RedirectToAction("GetAll");
             }
 
-            var flatTypes = await _flatTypeService.GetAllAsync();
-            ViewBag.FlatTypes = new SelectList(flatTypes, "Id", "FlatTypeName");
 
             var buildings = await _buildingService.GetAllAsync();
             ViewBag.Building = new SelectList(buildings, "Id", "BuildingName");
@@ -102,10 +104,10 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             
-            await _flatService.DeleteAsync(id);
+            _flatService.DeleteAsync(id);
             return RedirectToAction("GetAll");
         }
 

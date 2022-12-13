@@ -11,11 +11,11 @@ namespace BuildingSystem.Business.Abstract
 {
     public interface IBlockService
     {
-        Task<BlockDto> GetById(int Id);
-        Task<IEnumerable<BlockDto>> GetAllAsync();
-        Task<BlockDto> AddAsync(BlockDto blockDto);
-        Task UpdateAsync(BlockDto blockDto);
-        Task Delete(int id);
+        //Task<BlockDto> GetById(int Id);
+        //Task<IEnumerable<BlockDto>> GetAllAsync();
+        //Task<BlockDto> AddAsync(BlockDto blockDto);
+        //Task UpdateAsync(BlockDto blockDto);
+        //Task Delete(int id);
 
        
 

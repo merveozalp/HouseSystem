@@ -13,12 +13,12 @@ namespace BuildingSystem.Entities.Entity
         {
             Flats = new HashSet<Flat>();
         }
-        public byte BuildingName { get; set; }  // 1-2-3 olarak grilecek
+        public string BuildingName { get; set; }  // 1-2-3 olarak grilecek
         public byte TotalFlat { get; set; }
         public ICollection<Flat> Flats { get; set; }
 
-        public Block Block { get; set; }
-        public int BlockId { get; set; }
+        //public Block Block { get; set; }
+        //public int BlockId { get; set; }
 
     }
 }

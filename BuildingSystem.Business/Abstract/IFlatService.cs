@@ -11,11 +11,11 @@ namespace BuildingSystem.Business.Abstract
     public interface IFlatService
     {
         Task<FlatDto> GetById(int id);
-        Task<IEnumerable<FlatDto>> GetAllAsync();
+        Task<List<FlatDto>> GetAllAsync();
         Task<FlatCreateDto> AddAsync(FlatCreateDto flatCreateDto);
-        Task UpdateAsync(FlatUpdateDto flatUpdateDto);
-        Task DeleteAsync(int id);
-        List<FlatDto> GetBlockBuildingAndFlat();
-        Task<List<FlatDto>> GetAllFlats();
+        void UpdateAsync(FlatUpdateDto flatUpdateDto);
+        void DeleteAsync(int id);
+       
+        Task<List<FlatDto>> GetAllFlatsWithRelation();
     }
 }

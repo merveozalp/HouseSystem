@@ -16,6 +16,8 @@ namespace Entites.Entitiy
             Expenses = new HashSet<Expense>();
         }
         public byte FlatNumber { get; set; }
+        public string FlatType { get; set; }
+        public byte FloorNumber{ get; set; }  // kat numarası
         public bool IsEmpty { get; set; }
         public bool IsOwner { get; set; }
         public Building Building { get; set; }
@@ -23,8 +25,8 @@ namespace Entites.Entitiy
         public User User { get; set; }
         public string UserId { get; set; }
         public ICollection<Expense> Expenses { get; set; }
-        public FlatType FlatType { get; set; }
-        public int FlatId { get; set;}
+       
+     
      
 
 

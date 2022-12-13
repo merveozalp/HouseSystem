@@ -37,10 +37,10 @@ namespace BuildingSystem.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete (int id)
+        public IActionResult Delete (int id)
         {
            
-            await _expenseTypeService.DeleteAsync(id);
+            _expenseTypeService.Delete(id);
             return RedirectToAction("GetAllExpenseType");
         }
         [HttpGet]
@@ -55,7 +55,7 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public IActionResult UpdateExpenseType(ExpenseTypeDto expenseTypeDto)
         {
-            _expenseTypeService.UpdateAsync(expenseTypeDto);
+            _expenseTypeService.Update(expenseTypeDto);
             return RedirectToAction("GetAllExpenseType");
 
         }
