@@ -14,7 +14,7 @@
     <div class="mb-3">
         <label asp-for="ExpenseTypeId">Gider Türü</label>
         <select asp-for="ExpenseTypeId" class="form-control"
-                asp-items="@(new SelectList(Model.ExpenseTypes, "Id", "TypeName"))" required>
+                asp-items="@(new SelectList(Model.ExpenseTypes, "Id", "ExpenseTypeName"))" required>
             <option>Lütfen birini seçiniz</option>
         </select>
         <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>

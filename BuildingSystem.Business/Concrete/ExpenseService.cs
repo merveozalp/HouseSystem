@@ -78,22 +78,20 @@ namespace BuildingSystem.Business.Concrete
             return blockDto;
         }
 
-        public void SendMail()
+        public async void SendMail()
         {
-            var expensedto = _expenseRepository.Where(x => !x.IsPaid).ToList();
-            User user = new User();
-            var users = _userManager.GetEmailAsync(user).Result;
+            var expensedto = await  _expenseRepository.GetAllExpenses();
             foreach (var item in expensedto)
             {
              MimeMessage mimeMessage = new MimeMessage();
              MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", "B202102043@subu.edu.tr");
              mimeMessage.From.Add(mailboxAddressFrom);
                     
-             MailboxAddress mailboxAddressTo = new MailboxAddress("User", users);
+             MailboxAddress mailboxAddressTo = new MailboxAddress("User", item.Flat.User.Email);
              mimeMessage.To.Add(mailboxAddressTo);
 
              var bodyByilder = new BodyBuilder();
-             //bodyByilder.TextBody=messageDto.MessageContent;
+         
              bodyByilder.TextBody = "Ödenmemiş Faturanız mecvuttur";
              mimeMessage.Body = bodyByilder.ToMessageBody();
              mimeMessage.Subject = "Site Yönetimi";

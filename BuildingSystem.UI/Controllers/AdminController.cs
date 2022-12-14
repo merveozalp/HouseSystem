@@ -34,7 +34,6 @@ namespace BuildingSystem.UI.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> RoleCreate(string roleName)
         {
@@ -42,7 +41,6 @@ namespace BuildingSystem.UI.Controllers
             await _roleService.CreateRole(roleName);
             return RedirectToAction("GetAllRole");
         }
-
         public IActionResult RoleAssign(string id)
         {
             User user = _userManager.FindByIdAsync(id).Result;
@@ -73,7 +71,6 @@ namespace BuildingSystem.UI.Controllers
             }
             return View(roleAssignDtos);
         }
-
         [HttpPost]
         public async Task<IActionResult> RoleAssign(List<RoleAssignDto> roleAssignDtos)
         {

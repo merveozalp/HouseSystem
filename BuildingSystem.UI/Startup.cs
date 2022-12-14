@@ -26,16 +26,12 @@ namespace BuildingSystem.UI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddAutoMapper(typeof(MapProfile));
-            services.AddHttpClient();
-
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddIdentity<User, Role>
@@ -49,44 +45,8 @@ namespace BuildingSystem.UI
              {
                  opts.UseSqlServer(Configuration.GetConnectionString("BuildingSystem"));
              });
-            services.Configure<IdentityOptions>(options => {
-                //password
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = false;
-
-                //lockout
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.AllowedForNewUsers = false;
-
-                //options.User.AllowedUserNameCharacters = "";
-                options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedPhoneNumber = false;
-
-            });
-            services.ConfigureApplicationCookie(options => {
-                options.LoginPath = "/home/logIn";
-                options.LogoutPath = "/home/logOut";
-                options.AccessDeniedPath = "/home/accessdenied";
-                options.SlidingExpiration = true;
-                options.ExpireTimeSpan = TimeSpan.FromDays(60);
-                options.Cookie = new CookieBuilder
-                {
-                    HttpOnly = true,
-                    Name = ".BuildingManager.Security.Cookie",
-                    SameSite = SameSiteMode.Strict
-                };
-            });
-           
-           
             services.AddHangfireServer();
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("BuildingSystem")));
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,39 +12,31 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+  
     public class BuildingController : Controller
     {
-
         private readonly IBuildingService _buildingService;
         private readonly IBlockService _blockService;
         private readonly IFlatService _flatService;
         private readonly IMapper _mapper;
-
-
         public BuildingController(IBuildingService buildingService, IBlockService blockService, IMapper mapper)
         {
             _buildingService = buildingService;
             _blockService = blockService;
             _mapper = mapper;
         }
-
-       
-
         [HttpGet]
         public async Task<IActionResult> GetAllBuilding()
         {
             var buildings = await _buildingService.GetAllAsync();
             return View(buildings);
         }
-
         [HttpGet]
         public IActionResult AddBuilding ()
         {
             
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> AddBuilding(BuildingDto buildingDto)
         {
@@ -57,9 +49,6 @@ namespace BuildingSystem.UI.Controllers
             return View();
 
         }
-
-        // Güncellemede Blok almak lazım alamıyorum . Bakılacak
-
         [HttpGet]
         public async Task<IActionResult> UpdateBuilding(int id)
         {
@@ -73,7 +62,6 @@ namespace BuildingSystem.UI.Controllers
             _buildingService.Update(buildingDto);
             return RedirectToAction("GetAllBuilding");
         }
-
         [HttpGet]
         public IActionResult Delete(int id)
         {

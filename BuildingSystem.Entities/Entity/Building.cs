@@ -17,8 +17,7 @@ namespace BuildingSystem.Entities.Entity
         public byte TotalFlat { get; set; }
         public ICollection<Flat> Flats { get; set; }
 
-        //public Block Block { get; set; }
-        //public int BlockId { get; set; }
+       
 
     }
 }

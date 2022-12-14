@@ -16,20 +16,17 @@ namespace BuildingSystem.UI.Controllers
         {
             _expenseTypeService = expenseTypeService;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAllExpenseType()
         {
             var expensesType = await _expenseTypeService.GetAllAsync();
             return View(expensesType);
         }
-
         [HttpGet]
         public IActionResult AddExpenseType()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> AddExpenseType (ExpenseTypeDto expenseTypeDto)
         {
@@ -37,7 +34,6 @@ namespace BuildingSystem.UI.Controllers
             await _expenseTypeService.AddAsync(expenseTypeDto);
             return RedirectToAction("GetAllExpenseType");
         }
-
         [HttpGet]
         public IActionResult Delete (int id)
         {
@@ -53,7 +49,6 @@ namespace BuildingSystem.UI.Controllers
             return View(expensesType);
             
         }
-
         [HttpPost]
         public IActionResult UpdateExpenseType(ExpenseTypeDto expenseTypeDto)
         {

@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class FlatController : Controller
     {
         private readonly IFlatService _flatService;
@@ -26,21 +25,18 @@ namespace BuildingSystem.UI.Controllers
             _buildingService = buildingService;
             _userService = userService;
         }
-
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
             var flats = await _flatService.GetAllFlatsWithRelation();
             return View(flats);
         }
-
         [HttpGet]
         public async Task<IActionResult> GetById(int id)
         {
             var flats = await _flatService.GetById(id);
             return View(flats);
         }
-
         [HttpGet] 
         public async Task<IActionResult> Add()
         {
@@ -49,12 +45,11 @@ namespace BuildingSystem.UI.Controllers
             var flatAdd = new FlatCreateDto()
             {
                 Buildings=buildingDto,
-                Users=userDto
+                Users = userDto
 
             };
-            return View();
+            return View(flatAdd);
         }
-
         [HttpPost]
         public async Task<IActionResult> Add(FlatCreateDto flatCreateDto) 
         {
@@ -67,18 +62,19 @@ namespace BuildingSystem.UI.Controllers
            
             return View(flatCreateDto);
         }
-
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
             var flat = await _flatService.GetById(id);
+            var flats = await _flatService.GetAllAsync();
             var buildingDto = await _buildingService.GetAllAsync();
             var userDto = await _userService.GetAllAsync();
            
             var flatUpdateDto = new FlatUpdateDto()
             {
                 Id = flat.Id,
-                FlatNumber = flat.FlatNumber,
+                FloorNumber=flat.FloorNumber,
+                IsOwner=flat.IsOwner,
                 IsEmpty = flat.IsEmpty,
                 FlatType = flat.FlatType,
                 Buildings = buildingDto,
@@ -86,7 +82,6 @@ namespace BuildingSystem.UI.Controllers
             };
             return View(flatUpdateDto);
         }
-
         [HttpPost]
         public IActionResult Update(FlatUpdateDto flatUpdateDto)
         {
@@ -94,7 +89,6 @@ namespace BuildingSystem.UI.Controllers
             _flatService.UpdateAsync(flatUpdateDto);
             return RedirectToAction("GetAll");
         }
-
         [HttpGet]
         public IActionResult Delete(int id)
         {

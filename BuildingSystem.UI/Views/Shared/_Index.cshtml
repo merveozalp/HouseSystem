@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Moden Evler eHoşgeldiniz</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,700&display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    </a>
+                    @RenderBody()
+                    <div class="navbar-collapse" id="">
+                        <ul class="navbar-nav justify-content-between ">
+                            <div class="User_option">
+                            <li class="">
+                                <a class="mr-4" asp-action="LogIn" asp-controller="Home">
+                                    Giriş Yap
+                                </a>
+                                <a class="" asp-action="SignUp" asp-controller="Home">
+                                    Kayıt Ol
+                                </a>
+                            </li>
+                    </div>
+                    </ul>
+                    <div class="custom_menu-btn">
+                        <button onclick="openNav()">
+                            <span class="s-1">
+
+                            </span>
+                            <span class="s-2">
+
+                            </span>
+                            <span class="s-3">
+
+                            </span>
+                        </button>
+                    </div>
+                   
+                    </div>
+            </div>
+            </nav>
+  
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 offset-md-1">
+                    <div class="detail-box">
+                        <h1>
+                            <span> Modern</span> <br>
+                            Apartman <br>
+                           
+                        </h1>
+                        <p>
+                            Modern Apartman Sitemize Hoşgeldiniz
+                        </p>
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end slider section -->
+    </div>
+
+   
+    <!-- about section -->
+
+    <section class="about_section layout_padding-bottom">
+        <div class="square-box">
+            <img src="~/images/square.png" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="~/images/about-img.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-box">
+                        <div class="heading_container">
+                            <h2>
+                               Apartmanımız Hakkında 
+                            </h2>
+                        </div>
+                        <p>
+                           Apartmanlarımız modern tasarımı ile sizleri beklemektedir.
+                        </p>
+                        @*<a href="">
+                            Read More
+                        </a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end about section -->
+    <!-- sale section -->
+
+    <section class="sale_section layout_padding-bottom">
+        <div class="container-fluid">
+            <div class="heading_container">
+                <h2>
+                    Daire Satışlarımız 
+                </h2>
+                <p>
+                    Dairelerimizi Kiralayabilir ve satın alabilirsiniz.
+                </p>
+            </div>
+            <div class="sale_container">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="~/images/s-1.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h6>
+                            Apartmanlarımız
+                        </h6>
+                      
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="img-box">
+                        <img src="/images/s-2.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h6>
+                           Modern Tasarımlı Daireler
+                        </h6>
+                        
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="img-box">
+               
+                        <img src="~/images/s-3.jpg" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h6>
+                            Renkli Yaşam
+                        </h6>
+                        
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+</body>
+</html>

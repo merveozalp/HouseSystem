@@ -53,7 +53,7 @@ namespace BuildingSystem.UI.Controllers
                         else if (item.Contains("Yönetici"))
                         {
                             
-                            return RedirectToAction("GetAllExpense", "Expense");
+                            return RedirectToAction("Add", "Expense");
                         }
                     }
                     return RedirectToAction("GetAllBuilding", "Building");
@@ -74,6 +74,7 @@ namespace BuildingSystem.UI.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> SignUp(UserDto dto)
         {

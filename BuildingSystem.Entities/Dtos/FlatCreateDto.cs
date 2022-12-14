@@ -10,6 +10,7 @@ namespace BuildingSystem.Entities.Dtos
 {
     public class FlatCreateDto
     {
+        public int FlatId { get; set; }
         public byte FlatNumber { get; set; }
         public bool IsEmpty { get; set; }
         public string FlatType { get; set; }
@@ -20,6 +21,7 @@ namespace BuildingSystem.Entities.Dtos
 
         public ICollection<UserDto> Users { get; set; }
         public ICollection<BuildingDto> Buildings { get; set; }
+      
 
 
 

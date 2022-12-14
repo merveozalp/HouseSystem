@@ -16,8 +16,11 @@ namespace BuildingSystem.Entities.Dtos
         public int FlatId { get; set; }
         public string ExpenseTypeName { get; set; }
         public byte FlatNumber { get; set; }
+        public int BuildingId { get; set; }
+        public string BuildingName { get; set; }
 
         public IEnumerable<ExpenseTypeDto> ExpenseTypes { get; set; }
         public IEnumerable<FlatDto> Flats { get; set; }
+        public IEnumerable<BuildingDto> Buildings { get; set; }
     }
 }

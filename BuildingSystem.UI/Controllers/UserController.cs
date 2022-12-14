@@ -22,7 +22,6 @@ namespace BuildingSystem.UI.Controllers
             {
                 return View();
             }
-
         [HttpPost]
         public async Task<IActionResult> AddUser(UserDto userDto)
         {
@@ -44,28 +43,24 @@ namespace BuildingSystem.UI.Controllers
             }
             return View(userDto);
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
              var result = await _userService.GetAllAsync();
              return View(result);
         }
-
         [HttpGet]
         public IActionResult DeleteUser(string id)
         {
             _userService.Delete(id);
             return RedirectToAction("GetAllUsers");
         }
-
         [HttpGet]
         public async Task<IActionResult> UpdateUser(string id)
         {
             var user = await _userService.FindById(id);
             return View(user);
         }
-
         [HttpPost]
         public async Task<IActionResult> UpdateUser(UserDto userDto)
         {
