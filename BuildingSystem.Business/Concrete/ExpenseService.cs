@@ -78,30 +78,31 @@ namespace BuildingSystem.Business.Concrete
             return blockDto;
         }
 
-        public async void SendMail()
+        public void SendMail()
         {
-            var expensedto = await  _expenseRepository.GetAllExpenses();
-            foreach (var item in expensedto)
-            {
-             MimeMessage mimeMessage = new MimeMessage();
-             MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", "B202102043@subu.edu.tr");
-             mimeMessage.From.Add(mailboxAddressFrom);
-                    
-             MailboxAddress mailboxAddressTo = new MailboxAddress("User", item.Flat.User.Email);
-             mimeMessage.To.Add(mailboxAddressTo);
 
-             var bodyByilder = new BodyBuilder();
-         
-             bodyByilder.TextBody = "Ödenmemiş Faturanız mecvuttur";
-             mimeMessage.Body = bodyByilder.ToMessageBody();
-             mimeMessage.Subject = "Site Yönetimi";
 
-             SmtpClient client = new SmtpClient();
-             client.Connect("smtp.gmail.com", 587, false);
-             client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
-             client.Send(mimeMessage);
-             //client.Disconnect(true);
-            }
+            //MimeMessage mimeMessage = new MimeMessage();
+            //MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", "B202102043@subu.edu.tr");
+            //mimeMessage.From.Add(mailboxAddressFrom);
+
+            //MailboxAddress mailboxAddressTo = new MailboxAddress("User", "merve.ozalp034@gmail.com");
+            //mimeMessage.To.Add(mailboxAddressTo);
+
+            //var bodyByilder = new BodyBuilder();
+
+            //bodyByilder.TextBody = "Ödenmemiş Faturanız mecvuttur";
+            //mimeMessage.Body = bodyByilder.ToMessageBody();
+            //mimeMessage.Subject = "Site Yönetimi";
+
+            //SmtpClient client = new SmtpClient();
+            //client.Connect("smtp.gmail.com", 587, false);
+            //client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
+            //client.Send(mimeMessage);
+            ////client.Disconnect(true);
+            ///
+            var message = "Merve";
+
         }
         public void UpdateAsync(ExpenseUpdateDto expenseCreateDto)
         {

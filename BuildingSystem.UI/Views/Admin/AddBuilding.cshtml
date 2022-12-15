@@ -1,0 +1,22 @@
+﻿@model BuildingDto
+@{
+    ViewData["Title"] = "AddBuilding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Building" asp-action="AddBuilding" method="post" class="was-validated">
+
+   
+    <div class="mb-3">
+        <label asp-for="BuildingName" class="form-label"> Bina İsmi</label>
+        <input type="text" class="form-control" asp-for="BuildingName" required>
+        <span asp-validation-for="BuildingName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="TotalFlat" class="form-label">Toplam Daire Sayısı</label>
+        <input type="number" class="form-control" asp-for="TotalFlat" required>
+        <span asp-validation-for="TotalFlat" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Gönder</button>
+</form>
+

@@ -18,7 +18,7 @@ namespace BuildingSystem.UI
 
             recurringJobManager.AddOrUpdate("ExpenseMail",
                 () => serviceProvider.GetService<IExpenseService>().SendMail(),
-              Cron.Minutely);
+              Cron.Monthly);
             return app;
         }
     }

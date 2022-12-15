@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-   
+    //[Authorize(Roles = "Yönetici")]
     public class ExpenseController : Controller
     {
         private readonly IExpenseService _expenseService;

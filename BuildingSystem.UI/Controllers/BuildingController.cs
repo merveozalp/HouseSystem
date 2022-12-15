@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-  
+    //[Authorize(Roles = "Admin")]
     public class BuildingController : Controller
     {
         private readonly IBuildingService _buildingService;

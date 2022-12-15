@@ -28,42 +28,46 @@ namespace BuildingSystem.UI.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult LogIn(string returnUrl)
+        public IActionResult LogIn()
         {
-            TempData["ReturnUrl"] = returnUrl;
+            
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> LogIn(LoginDto loginDto)
+        public async Task<IActionResult> LogIn(LoginDto model)
         {
+
             if (ModelState.IsValid)
             {
-                var result = await _userService.LogIn(loginDto);
+                var result = await _userService.LogIn(model);
                 if (result.Succeeded)
                 {
-                    User user = await _userManager.FindByEmailAsync(loginDto.Email);
-                    IList<string> roles = await _userManager.GetRolesAsync(user);
+                    User user = await _userManager.FindByEmailAsync(model.Email);
+                    if (_userManager.IsEmailConfirmedAsync(user).Result == false)
+                    {
+                        ModelState.AddModelError("", "Email adresiniz onaylanmamıştır.");
+                    }
+                        IList<string> roles = await _userManager.GetRolesAsync(user);
                     foreach (var item in roles)
                     {
-                        if (item.Contains("Admin"))
-                        {
-                           
-                            return RedirectToAction("GetAllBuilding", "Building");
-                        }
-                        else if (item.Contains("Yönetici"))
-                        {
-                            
-                            return RedirectToAction("Add", "Expense");
+                        
+                            if (item.Contains("Admin"))
+                            {
+                                return RedirectToAction("Index", "Admin");
+                            }
+                            else if (item.Contains("Yönetici"))
+                            {
+                                return RedirectToAction("Index", "Occupant");
+                            }
                         }
                     }
-                    return RedirectToAction("GetAllBuilding", "Building");
-                }
+                
                 else
                 {
                     ModelState.AddModelError("", "Geçersiz kullanıcı adi veya şifresi");
                 }
             }
-            return View(loginDto);
+            return View();
         }
         public async Task<IActionResult> Logout()
         {

@@ -12,7 +12,7 @@ namespace BuildingSystem.UI.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
-
+        private readonly IExpenseService expenseService;
         public MailController(IMessageService messageService, IUserService userService)
         {
             _messageService = messageService;
@@ -28,6 +28,7 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public IActionResult SendMail(MessageDto messageDto)
         {
+
             MimeMessage mimeMessage = new MimeMessage();
             MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi","B202102043@subu.edu.tr");
             mimeMessage.From.Add(mailboxAddressFrom);

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class FlatController : Controller
     {
         private readonly IFlatService _flatService;

@@ -41,33 +41,33 @@
             <li>
                 <a href="mailbox.html"><i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Bina İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Building" asp-action="GetAllBuilding">Bina Listesi</a></li>
-                    <li><a asp-controller="Building" asp-action="AddBuilding">Bina Ekle </a></li>
+                    <li><a asp-controller="Admin" asp-action="GetAllBuilding">Bina Listesi</a></li>
+                    <li><a asp-controller="Admin" asp-action="AddBuilding">Bina Ekle </a></li>
                    
                 </ul>
             </li>
             <li>
                 <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label">Daire İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Flat" asp-action="Add">Daire Ekle</a></li>
-                    <li><a asp-controller="Flat" asp-action="GetAll">Daire Listesi </a></li>
+                    <li><a asp-controller="Admin" asp-action="AddFlat">Daire Ekle</a></li>
+                    <li><a asp-controller="Admin" asp-action="GetAllFlat">Daire Listesi </a></li>
                    
                 </ul>
             </li>
             <li>
                 <a href="mailbox.html"><i class="fa fa-money"></i> <span class="nav-label">Gider İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Expense" asp-action="Add">Gider Ekle</a></li>
-                    <li><a asp-controller="Expense" asp-action="GetAllExpenses"> Gider listesi </a></li>
-                    <li><a asp-controller="Expense" asp-action="GetIsPaid"> Ödeyen Kullanıcı Listesi </a></li>
-                    <li><a asp-controller="Expense" asp-action="GetUnPaid"> Ödemeyen Kullanıcı Listesi </a></li>
+                    <li><a asp-controller="Admin" asp-action="AddExpense">Gider Ekle</a></li>
+                    <li><a asp-controller="Admin" asp-action="GetAllExpenses"> Gider listesi </a></li>
+                    <li><a asp-controller="Admin" asp-action="GetIsPaidExpense"> Ödeyen Kullanıcı Listesi </a></li>
+                    <li><a asp-controller="Admin" asp-action="GetUnPaidExpense"> Ödemeyen Kullanıcı Listesi </a></li>
                 </ul>
             </li>
             <li>
                 <a href="mailbox.html"><i class="fa fa-money" aria-hidden="true"></i> <span class="nav-label">Gider Türü İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="ExpenseType" asp-action="AddExpenseType"> Gider Türü Ekle</a></li>
-                    <li><a asp-controller="ExpenseType" asp-action="GetAllExpenseType">Giderleri Türlerini Listele</a></li>
+                    <li><a asp-controller="Admin" asp-action="AddExpenseType"> Gider Türü Ekle</a></li>
+                    <li><a asp-controller="Admin" asp-action="GetAllExpenseType">Giderleri Türlerini Listele</a></li>
                      
                 </ul>
             </li>
