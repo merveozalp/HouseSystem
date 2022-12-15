@@ -1,10 +1,16 @@
 ﻿@model List<MessageDto>
+@{
+    ViewData["Title"] = "Outbox";
+    Layout = "~/Views/Shared/_OccupantLayout.cshtml";
+}
+
+
 <table id="myDataTable" class="table table-hover table-striped">
     <thead class="thead-light">
         <tr>
-            <th scope="col">Gönderen</th>
-            <th scope="col">Konu Başlığı</th>
-             <th scope="col">Konu İçeriği</th>
+            <th scope="col">Id</th>
+            <th scope="col">Message</th>
+            <th scope="col">Alıcı</th>
 
         </tr>
     </thead>
@@ -12,10 +18,12 @@
         @foreach (var menu in Model)
         {
             <tr>
+                <td>@menu.Id</td>
+                <td>@Html.Raw(menu.MessageContent)</td>
                 <td>@menu.UserName</td>
-                <td>@Html.Raw(@menu.MessageContent)</td>
-                <td>@Html.Raw(menu.Body)</td>
+
             </tr>
         }
     </tbody>
 </table>
+

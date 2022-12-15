@@ -21,20 +21,20 @@
                 </div>
             </li>
              
-         @*   <li>
-                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Site Kullanıcı Bilgileri</span><span class="fa arrow"></span></a>
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Gider Bilgileri</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="User" asp-action="GetAllUsers">Kullanıcı Bilgileri</a></li>
-                    <li><a asp-controller="Admin" asp-action="GetAllRole">Role İsimleri</a></li>
-                    <li><a asp-controller="Admin" asp-action="RoleCreate">Rol  Oluştur</a></li>
+                    <li><a asp-controller="Occupant" asp-action="GetAllUsers">GetPaidExpense</a></li>
+                    <li><a asp-controller="Occupant" asp-action="GetAllRole">GetUnPaidExpense</a></li>
+                   @* <li><a asp-controller="Occupant" asp-action="RoleCreate">Rol  Oluştur</a></li>*@
                 </ul>
-            </li>*@
+            </li>
             <li>
                 <a href="mailbox.html"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="nav-label">Mail İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                   @* <li><a asp-controller="Mail" asp-action="Inbox"> Gelen Mailler</a></li>
-                    <li><a asp-controller="Mail" asp-action="OutBox">Gönderilen Mailler</a></li>*@
-                    <li><a asp-controller="Mail" asp-action="SendMail">Mail Gönderim</a></li>
+                    <li><a asp-controller="Occupant" asp-action="Inbox"> Gelen Mesajlar</a></li>
+                    <li><a asp-controller="Occupant" asp-action="OutBox">Gönderilen Mesajlar</a></li>
+                    <li><a asp-controller="Occupant" asp-action="SendMessageToAdmin">Mail Mesajlar</a></li>
                 </ul>
             </li>
          @*   <li>

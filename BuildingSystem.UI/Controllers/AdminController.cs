@@ -5,6 +5,7 @@ using Entites.Entitiy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace BuildingSystem.UI.Controllers
             _messageService = messageService;
         }
 
-        #region About User
+        #region About Role
         // Kullanıcıları getiriyorum. Bunlar Async metotlar 
         public IActionResult Index()
         {
@@ -108,6 +109,61 @@ namespace BuildingSystem.UI.Controllers
             }
             return RedirectToAction("GetAllUsers","User");
         }
+        #endregion
+
+        #region About user
+        [HttpGet]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddUser(UserDto userDto)
+        {
+            User user = new User()
+            {
+                IdentityNo = userDto.IdentityNo,
+                UserName = userDto.UserName,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                CarNo = userDto.CarNo,
+                PhoneNumber = userDto.PhoneNumber,
+
+            };
+            IdentityResult result = await _userManager.CreateAsync(user, userDto.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("GetAllUsers");
+            }
+            return View(userDto);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var result = await _userService.GetAllAsync();
+            return View(result);
+        }
+        [HttpGet]
+        public IActionResult DeleteUser(string id)
+        {
+            _userService.Delete(id);
+            return RedirectToAction("GetAllUsers");
+        }
+        [HttpGet]
+        public async Task<IActionResult> UpdateUser(string id)
+        {
+            var user = await _userService.FindById(id);
+            return View(user);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UserDto userDto)
+        {
+            if (!ModelState.IsValid) return View(userDto);
+            await _userService.UpdateUserAsync(userDto);
+            return RedirectToAction("GetAllUsers");
+        }
+
         #endregion
 
         #region About Building
@@ -350,56 +406,7 @@ namespace BuildingSystem.UI.Controllers
         }
         #endregion
 
-        #region About Mesaage
-
-        [HttpGet]
-        public async Task<IActionResult> Inbox()
-        {
-            var user = _userService.GetUserFromSession();
-            var allMessages = await _messageService.GetAllAsync();
-            if (allMessages != null)
-            {
-                var messageList = allMessages.Where(m => m.ReceiverId == user.Id).ToList();
-                var inboxList = await _messageService.GetListInbox(messageList);
-                return View(inboxList.Data);
-            }
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Outbox()
-        {
-            var user = _userService.GetUserFromSession();
-            var allMessages = await _messageService.GetAllAsync();
-            if (allMessages != null)
-            {
-                var messageList = allMessages.Where(m => m.SenderId == user.Id).ToList();
-                var outBoxList = await _messageService.GetListOutbox(messageList);
-                return View(outBoxList.Data);
-            }
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> SendMessage()
-        {
-            var userList = await _userService.GetAllAsync();
-            var messageDto = new MessageDto
-            {
-                Users = userList
-            }
-            return View(messageDto);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SendMessage(MessageDto message)
-        {
-            var user = _userService.GetUserFromSession();
-            message.SenderMail = user.Id;
-            await _messageService.AddAsync(message);
-            return RedirectToAction("OutBox");
-        }
-        #endregion
+      
 
     }
 }

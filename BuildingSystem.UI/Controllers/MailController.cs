@@ -30,9 +30,9 @@ namespace BuildingSystem.UI.Controllers
         {
 
             MimeMessage mimeMessage = new MimeMessage();
-            MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi","B202102043@subu.edu.tr");
+            MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", messageDto.SenderMail );
             mimeMessage.From.Add(mailboxAddressFrom);
-            MailboxAddress mailboxAddressTo = new MailboxAddress("User", messageDto.ReceiverMail);
+            MailboxAddress mailboxAddressTo = new MailboxAddress("User", "B202102043@subu.edu.tr");
             mimeMessage.To.Add(mailboxAddressTo);
 
             var bodyByilder = new BodyBuilder();
@@ -47,6 +47,7 @@ namespace BuildingSystem.UI.Controllers
             client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
             client.Send(mimeMessage);
             client.Disconnect(true);
+
             return RedirectToAction("Inbox");
         }
 

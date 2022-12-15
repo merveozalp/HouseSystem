@@ -4,10 +4,13 @@ using BuildingSystem.Business.UnitOfWork;
 using BuildingSystem.DataAccess.Abstract;
 using BuildingSystem.Entities.Dtos;
 using BuildingSystem.Entities.Entity;
+using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +23,7 @@ namespace BuildingSystem.Business.Concrete
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
+        private readonly IExpenseRepository _expenseRepository;
 
 
         public MessageService(IMessageRepository messageRepository, IMapper mapper, IUnitOfWork unitOfWork, IUserService userService)
@@ -28,6 +32,7 @@ namespace BuildingSystem.Business.Concrete
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _userService = userService;
+           
         }
 
         public async Task<MessageDto> AddAsync(MessageDto messageDto)
@@ -44,15 +49,6 @@ namespace BuildingSystem.Business.Concrete
             _messageRepository.Delete(message);
             _unitOfWork.Commit();
         }
-
-        public async Task<List<MessageDto>> FromGetAll()
-        {
-            var getAllmessage =  await _messageRepository.GetAll().Where(x => x.ReceiverMail == "B202102043@subu.edu.tr").ToListAsync();
-            var messageDto = _mapper.Map<List<MessageDto>>(getAllmessage);
-            return messageDto;
-
-        }
-
         public async Task<List<MessageDto>> GetAllAsync()
         {
             var messageAll = await _messageRepository.GetAll().ToListAsync();
@@ -105,12 +101,7 @@ namespace BuildingSystem.Business.Concrete
             }
             return messageDtos;
         }
-        public async Task<List<MessageDto>> ToGetAll()
-        {
-            var getAllmessage = await _messageRepository.GetAll().Where(x => x.SenderMail == "B202102043@subu.edu.tr").ToListAsync();
-            var messageDto = _mapper.Map<List<MessageDto>>(getAllmessage);
-            return messageDto;
-        }
+      
         public void Update(MessageDto messageDto)
         {
             var messagesDto = _mapper.Map<Message>(messageDto);

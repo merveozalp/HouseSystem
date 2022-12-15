@@ -11,14 +11,15 @@ namespace BuildingSystem.Business.Abstract
     {
         Task<MessageDto> GetById(int id);
         Task<List<MessageDto>> GetAllAsync();
-        Task<List<MessageDto>> FromGetAll();
-        Task<List<MessageDto>> ToGetAll();
+      
         Task<MessageDto> AddAsync(MessageDto messageDto);
         void Update(MessageDto messageDto);
         void Delete(int id);
 
         Task<List<MessageDto>> GetListOutbox(List<MessageDto> messageList);
         Task<List<MessageDto>> GetListInbox(List<MessageDto> messageList);
+
+       
 
 
     }
