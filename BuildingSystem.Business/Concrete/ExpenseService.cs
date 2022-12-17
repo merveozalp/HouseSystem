@@ -4,15 +4,13 @@ using BuildingSystem.Business.UnitOfWork;
 using BuildingSystem.DataAccess.Abstract;
 using BuildingSystem.Entities.Dtos;
 using Entites.Entitiy;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MimeKit;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using BuildingSystem.Entities.Entity;
-using MailKit.Net.Smtp;
 
 namespace BuildingSystem.Business.Concrete
 {
@@ -30,9 +28,7 @@ namespace BuildingSystem.Business.Concrete
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _userManager = userManager;
-           
         }
-
         public async Task<ExpenseCreateDto> AddAsync(ExpenseCreateDto expenseCreateDto)
         {
             var entityDto = _mapper.Map<Expense>(expenseCreateDto);
@@ -78,30 +74,35 @@ namespace BuildingSystem.Business.Concrete
             return blockDto;
         }
 
-        public void SendMail()
+        public async Task SendMail()
         {
+            var expenseList = await  _expenseRepository.GetAllExpenses();
+            foreach (var item in expenseList.Where(x => !x.IsPaid))
+            {
+                var ReceiverEmail = item.Flat.User.Email;
+                var ExpenseType = item.ExpenceType.ExpenseTypeName;
+                MimeMessage mimeMessage = new MimeMessage();
+                MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", "B202102043@subu.edu.tr");
+                mimeMessage.From.Add(mailboxAddressFrom);
 
+                MailboxAddress mailboxAddressTo = new MailboxAddress("User", ReceiverEmail);
+                mimeMessage.To.Add(mailboxAddressTo);
 
-            //MimeMessage mimeMessage = new MimeMessage();
-            //MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", "B202102043@subu.edu.tr");
-            //mimeMessage.From.Add(mailboxAddressFrom);
+                var bodyByilder = new BodyBuilder();
 
-            //MailboxAddress mailboxAddressTo = new MailboxAddress("User", "merve.ozalp034@gmail.com");
-            //mimeMessage.To.Add(mailboxAddressTo);
+                bodyByilder.TextBody = ExpenseType + " " + item.Cost + "TL" + " " + "Tutarıda Ödenmemiş Faturanız mecvuttur";
+                mimeMessage.Body = bodyByilder.ToMessageBody();
+                mimeMessage.Subject = "Site Yönetimi";
 
-            //var bodyByilder = new BodyBuilder();
+                SmtpClient client = new SmtpClient();
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
+                client.Send(mimeMessage);
+               
 
-            //bodyByilder.TextBody = "Ödenmemiş Faturanız mecvuttur";
-            //mimeMessage.Body = bodyByilder.ToMessageBody();
-            //mimeMessage.Subject = "Site Yönetimi";
+            }
 
-            //SmtpClient client = new SmtpClient();
-            //client.Connect("smtp.gmail.com", 587, false);
-            //client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
-            //client.Send(mimeMessage);
-            ////client.Disconnect(true);
-            ///
-            var message = "Merve";
+           
 
         }
         public void UpdateAsync(ExpenseUpdateDto expenseCreateDto)

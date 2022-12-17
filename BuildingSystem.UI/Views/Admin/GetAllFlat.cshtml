@@ -28,7 +28,15 @@
                 <td>@menu.BuildingName</td>
                 <td>@menu.FlatNumber</td>
                 <td>@menu.FlatType</td>
-                <td>@menu.IsOwner</td>
+                <td>@if (menu.IsOwner == false)
+                    {
+                        <span class="badge badge-success">Kiracı</span>
+
+                    }
+                    else
+                    {
+                        <span class="badge badge-success">Ev Sahibi</span>
+                    }</td>
                 <td>
                     @if (menu.IsEmpty == false)
                     {
@@ -40,12 +48,17 @@
                         <span class="badge badge-success">Dolu</span>
                     }
                 </td>
-                
                 <td>
-                    <a href="/Flat/Update?id=@menu.Id" class="btn btn-warning">Düzenle</a>
-                    <a href="/Flat/Delete?id=@menu.Id" class="btn btn-danger">Sil</a>
-
+                    <a class="btn btn-warning " asp-controller="Admin" asp-action="UpdateFlat"
+                   asp-route-id="@menu.Id">
+                        Güncelle
+                    </a>
+                    <a class="btn btn-danger " asp-controller="Admin" asp-action="DeleteFlat"
+                   asp-route-id="@menu.Id">
+                        Sil
+                    </a>
                 </td>
+             
             </tr>
         }
     </tbody>

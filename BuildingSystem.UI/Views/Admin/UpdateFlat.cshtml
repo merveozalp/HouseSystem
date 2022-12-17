@@ -39,6 +39,12 @@
         <input type="text" class="form-control" asp-for="IsOwner" required />
         <span asp-validation-for="IsOwner" class="text-danger"></span>
     </div>
+
+    <div class="mb-3 form-group">
+        <label asp-for="IsEmpty">Daire Durumu</label>
+        <input type="text" class="form-control" asp-for="IsEmpty" required />
+        <span asp-validation-for="IsEmpty" class="text-danger"></span>
+    </div>
    
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-primary">Ekle</button>

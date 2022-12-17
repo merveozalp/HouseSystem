@@ -8,12 +8,12 @@
     
     <div class="mb-3">
         <label asp-for="BuildingName" class="form-label">Bina İsmi</label>
-        <input type="text" class="form-control" asp-for="BuildingName" required>
+        <input type="text" class="form-control" asp-for="BuildingName" >
         <span asp-validation-for="BuildingName" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="TotalFlat" class="form-label">Toplam Daire Sayısı</label>
-        <input type="number" class="form-control" asp-for="TotalFlat" required>
+        <input type="number" class="form-control" asp-for="TotalFlat" >
         <span asp-validation-for="TotalFlat" class="text-danger"></span>
     </div>
     <input type="hidden" asp-for="Id" />

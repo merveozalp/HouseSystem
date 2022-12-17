@@ -1,25 +1,26 @@
 ﻿@model FlatCreateDto
+
+
 <form asp-controller="Admin" asp-action="AddFlat" class="was-validated">
-     <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="UserId">Kullanıcı</label>
         <select asp-for="UserId" class="form-control"
-                asp-items="@(new SelectList(Model.Users, "Id", "UserName"))" required>
-            <option>Lütfen birini seçiniz</option>
+                asp-items="@(new SelectList(Model.Users, "Id", "UserName"))">
         </select>
-        <span asp-validation-for="UserId" class="text-danger"></span>
+        @*<span asp-validation-for="UserId" class="text-danger"></span>*@
     </div>
-     <div class="mb-3">
+    <div class="mb-3">
         <label asp-for="BuildingId">Bina Seçiniz</label>
         <select asp-for="BuildingId" class="form-control"
-                asp-items="@(new SelectList(Model.Buildings, "Id", "BuildingName"))" required>
+                asp-items="@(new SelectList(Model.Buildings, "Id", "BuildingName"))" >
             <option>Lütfen birini seçiniz</option>
         </select>
-        <span asp-validation-for="BuildingId" class="text-danger"></span>
+       @* <span asp-validation-for="BuildingId" class="text-danger"></span>*@
     </div>
-   
+
     <div class="mb-3 ">
         <label asp-for="FlatType">Daire Tipi</label>
-        <input type="text" class="form-control" asp-for="FlatType" required />
+        <input type="text" class="form-control" asp-for="FlatType" />
         <span asp-validation-for="FlatType" class="text-danger"></span>
     </div>
     <div class="mb-3 ">
@@ -27,8 +28,8 @@
         <input type="number" class="form-control" asp-for="FlatNumber" required />
         <span asp-validation-for="FlatNumber" class="text-danger"></span>
     </div>
-    
-   
+
+
     <div class="mb-3 form-group">
         <label asp-for="FloorNumber">Kat Numarası</label>
         <input type="number" class="form-control" asp-for="FloorNumber" required />
@@ -39,7 +40,5 @@
         <input type="text" class="form-control" asp-for="IsOwner" required />
         <span asp-validation-for="IsOwner" class="text-danger"></span>
     </div>
-     <button type="submit" class="btn btn-primary">Ekle</button>
+    <button type="submit" class="btn btn-primary">Ekle</button>
 </form>
-
-                

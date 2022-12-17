@@ -1,22 +1,18 @@
 using BuildingSystem.Business.AutoMapper;
 using BuildingSystem.DataAccess.Context;
 using Entites.Entitiy;
-using FluentValidation.AspNetCore;
 using Hangfire;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace BuildingSystem.UI
 {
@@ -30,8 +26,16 @@ namespace BuildingSystem.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+            
+            services.AddControllersWithViews().AddWebCore();
+            services.AddApplicationServices();
+            //.AddMvcOptions(options => options.Filters.Add<ModelStateFilterAttribute>());
+            //services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
+            //services.AddFluentValidationAutoValidation();
+            //services.AddFluentValidationClientsideAdapters();
+            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(typeof(MapProfile));
+            
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddIdentity<User, Role>

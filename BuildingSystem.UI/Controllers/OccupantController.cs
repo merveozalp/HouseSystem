@@ -1,6 +1,7 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Business.Concrete;
 using BuildingSystem.Entities.Dtos;
+using BuildingSystem.UI.Filters;
 using Entites.Entitiy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace BuildingSystem.UI.Controllers
 {
     //[Authorize(Roles = "Yönetici")]
+   
     public class OccupantController : Controller
     {
         private readonly UserManager<User> _userManager;

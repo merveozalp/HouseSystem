@@ -20,16 +20,11 @@ namespace BuildingSystem.DataAccess.Context
         {
 
         }
-
-        public DbSet<Block> Blocks { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<ExpenseType> ExpenseTypes { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Flat> Flats { get; set; }
         public DbSet<Message> Messages { get; set; }
-        
-       
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Flat>()

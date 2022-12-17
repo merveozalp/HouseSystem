@@ -1,6 +1,6 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Entities.Dtos;
-using BuildingSystem.UI.Models;
+using BuildingSystem.UI.Filters;
 using Entites.Entitiy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,7 +21,6 @@ namespace BuildingSystem.UI.Controllers
         private readonly IExpenseService expenseService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-
         public HomeController(ILogger<HomeController> logger, IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _logger = logger;
@@ -78,7 +78,6 @@ namespace BuildingSystem.UI.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> SignUp(UserDto dto)
         {
@@ -104,7 +103,5 @@ namespace BuildingSystem.UI.Controllers
         {
             return View();
         }
-
-       
     }
 }

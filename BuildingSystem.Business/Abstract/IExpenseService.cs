@@ -18,7 +18,7 @@ namespace BuildingSystem.Business.Abstract
         void DeleteAsync(int id);
         Task<List<ExpenseDto>> GetAllExpenses();
 
-        void SendMail();
+        Task SendMail();
 
     }
 }

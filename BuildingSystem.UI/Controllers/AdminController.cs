@@ -1,10 +1,12 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Business.Concrete;
 using BuildingSystem.Entities.Dtos;
+using BuildingSystem.UI.Filters;
 using Entites.Entitiy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MimeKit;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ using System.Threading.Tasks;
 namespace BuildingSystem.UI.Controllers
 {
     //[Authorize(Roles="Admin")]
+    
     public class AdminController : Controller
     {
         private UserManager<User> _userManager { get; }
@@ -56,10 +59,14 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> RoleCreate(string roleName)
         {
-          
-            await _roleService.CreateRole(roleName);
-            return RedirectToAction("GetAllRole");
+            if (ModelState.IsValid)
+            {
+                await _roleService.CreateRole(roleName);
+                return RedirectToAction("GetAllRole");
+            }
+            return View();
         }
+        [HttpGet]
         public IActionResult RoleAssign(string id)
         {
             User user = _userManager.FindByIdAsync(id).Result;
@@ -107,7 +114,7 @@ namespace BuildingSystem.UI.Controllers
                 }
               
             }
-            return RedirectToAction("GetAllUsers","User");
+            return RedirectToAction("GetAllUsers");
         }
         #endregion
 
@@ -120,23 +127,12 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(UserDto userDto)
         {
-            User user = new User()
-            {
-                IdentityNo = userDto.IdentityNo,
-                UserName = userDto.UserName,
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                Email = userDto.Email,
-                CarNo = userDto.CarNo,
-                PhoneNumber = userDto.PhoneNumber,
-
-            };
-            IdentityResult result = await _userManager.CreateAsync(user, userDto.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("GetAllUsers");
-            }
-            return View(userDto);
+            
+                await _userService.AddAsync(userDto);
+               return RedirectToAction("GetAllUsers");
+            
+            
+          
         }
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
@@ -181,13 +177,9 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBuilding(BuildingDto buildingDto)
         {
-            if (ModelState.IsValid)
-            {
-                var buildings = await _buildingService.AddAsync(buildingDto);
-                return RedirectToAction("GetAllBuilding");
-            }
 
-            return View();
+                var buildings = await _buildingService.AddAsync(buildingDto);
+            return View(buildingDto);
 
         }
         [HttpGet]
@@ -339,17 +331,14 @@ namespace BuildingSystem.UI.Controllers
             var flats = await _flatService.GetAllFlatsWithRelation();
             return View(flats);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var flats = await _flatService.GetById(id);
-            return View(flats);
-        }
+       
         [HttpGet]
         public async Task<IActionResult> AddFlat()
         {
             var buildingDto = await _buildingService.GetAllAsync();
+            //ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
             var userDto = await _userService.GetAllAsync();
+            //ViewBag.User = new SelectList(userDto, "Id", "UserName");
             var flatAdd = new FlatCreateDto()
             {
                 Buildings = buildingDto,
@@ -365,10 +354,11 @@ namespace BuildingSystem.UI.Controllers
             {
                 flatCreateDto.IsEmpty = true;
                 await _flatService.AddAsync(flatCreateDto);
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetAllFlat");
             }
-
+          
             return View(flatCreateDto);
+
         }
         [HttpGet]
         public async Task<IActionResult> UpdateFlat(int id)
@@ -395,14 +385,14 @@ namespace BuildingSystem.UI.Controllers
         {
             if (!ModelState.IsValid) return View(flatUpdateDto);
             _flatService.UpdateAsync(flatUpdateDto);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllFlat");
         }
         [HttpGet]
         public IActionResult DeleteFlat(int id)
         {
 
             _flatService.DeleteAsync(id);
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetAllFlat");
         }
         #endregion
 

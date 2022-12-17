@@ -1,16 +1,6 @@
-using Autofac.Core;
-using BuildingSystem.Business.Abstract;
-using BuildingSystem.Business.AutoMapper;
-using BuildingSystem.Business.Concrete;
-using BuildingSystem.Business.UnitOfWork;
-using BuildingSystem.DataAccess.Abstract;
-using BuildingSystem.DataAccess.Concrete;
 using BuildingSystem.DataAccess.Context;
-using BuldingSystem.API.Filters;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

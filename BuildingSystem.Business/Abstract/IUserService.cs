@@ -8,7 +8,7 @@ namespace BuildingSystem.Business.Abstract
 {
     public interface IUserService
     {
-        Task AddAsync(LoginDto loginDto);
+        Task AddAsync(UserDto loginDto);
         Task<SignInResult> LogIn(LoginDto loginDto);
         Task<List<UserDto>> GetAllAsync();
         Task UpdateUserAsync(UserDto userDto);

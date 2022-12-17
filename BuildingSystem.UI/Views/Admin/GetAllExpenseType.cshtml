@@ -24,11 +24,11 @@
                 <td>@expenseType.ExpenseTypeName</td>
 
                 <td>
-                    <a class="btn btn-warning " asp-controller="ExpenseType" asp-action="UpdateExpenseType"
+                    <a class="btn btn-warning " asp-controller="Admin" asp-action="UpdateExpenseType"
                    asp-route-id="@expenseType.Id">
                         Güncelle
                     </a>
-                    <a class="btn btn-danger " asp-controller="ExpenseType" asp-action="Delete"
+                    <a class="btn btn-danger " asp-controller="Admin" asp-action="DeleteExpenseType"
                    asp-route-id="@expenseType.Id">
                         Sil
                     </a>

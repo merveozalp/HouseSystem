@@ -4,9 +4,9 @@ using BuildingSystem.Business.UnitOfWork;
 using BuildingSystem.DataAccess.Abstract;
 using BuildingSystem.Entities.Dtos;
 using Entites.Entitiy;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,12 +30,22 @@ namespace BuildingSystem.Business.Concrete
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task AddAsync(LoginDto dto)
+        public async Task AddAsync(UserDto userDto)
         {
-            var user = _mapper.Map<User>(dto);
-            var result = await _userManager.CreateAsync(user, dto.Password);
-            await _userManager.AddToRoleAsync(user, "Resident");
-           
+            User user = new User()
+            {
+                IdentityNo = userDto.IdentityNo,
+                UserName = userDto.UserName,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                CarNo = userDto.CarNo,
+                PhoneNumber = userDto.PhoneNumber,
+
+            };
+            IdentityResult result = await _userManager.CreateAsync(user, userDto.Password);
+
+
         }
         public async Task<Microsoft.AspNetCore.Identity.SignInResult> LogIn(LoginDto loginDto)
         {

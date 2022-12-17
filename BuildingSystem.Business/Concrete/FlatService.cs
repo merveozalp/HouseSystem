@@ -32,15 +32,14 @@ namespace BuildingSystem.Business.Concrete
         {
             var building = await _buildingService.GetById(flatCreateDto.BuildingId);
             var totalFlats = await _flatRepository.Where(x => x.BuildingId == flatCreateDto.BuildingId).CountAsync();
+            if(building.TotalFlat>=totalFlats)
             {
                 var entityDto = _mapper.Map<Flat>(flatCreateDto);
                 await _flatRepository.AddAsync(entityDto);
                 await _unitOfWork.CommitAsync();
-               
             }
-          
+            
         }
-
         public void DeleteAsync(int id)
         {
             var flat = _flatRepository.GetById(id).Result;
