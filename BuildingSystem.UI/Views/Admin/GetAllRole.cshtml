@@ -1,5 +1,4 @@
-﻿@using Entites.Entitiy;
-@model List<Role>
+﻿@model List<Role>
 @{
     ViewData["Title"] = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,8 +16,11 @@
             <tr>
 
                 <td>@item.Name</td>
-                
+              <td>  <form asp-action="RoleDelete" asp-route-id="@item.Id" method="post">
 
+                    <button class="btn btn-success" type="submit">Sil</button>
+                </form>
+            </td>
             </tr>
         }
     

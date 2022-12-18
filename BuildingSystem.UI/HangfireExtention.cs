@@ -1,5 +1,4 @@
 ﻿using BuildingSystem.Business.Abstract;
-using BuildingSystem.UI.Controllers;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,10 +12,10 @@ namespace BuildingSystem.UI
             IBackgroundJobClient backgroundJobs, IRecurringJobManager recurringJobManager,
             IServiceProvider serviceProvider)
         {
-            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+            backgroundJobs.Enqueue(() => Console.WriteLine("Hello Hangfire"));
             recurringJobManager.AddOrUpdate("ExpenseMail",
                 () => serviceProvider.GetService<IExpenseService>().SendMail(),
-              Cron.Minutely);
+              Cron.Daily);
             return app;
         }
     }

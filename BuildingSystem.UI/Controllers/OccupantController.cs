@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-    //[Authorize(Roles = "Yönetici")]
-   
+    [Authorize(Roles = "Yönetici")]
+
     public class OccupantController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -116,7 +116,7 @@ namespace BuildingSystem.UI.Controllers
         {
             var user = _userService.GetUserFromSession();
             message.SenderMail = user.Id;
-            message.ReceiverMail = "f4003c4c-8e15-4b1c-835d-21d2a42fce7a"; // Kendi tanımladıüım Admin Id
+            message.ReceiverMail = "f4003c4c-8e15-4b1c-835d-21d2a42fce7a"; // Kendi tanımladığım Admin Id
             await _messageService.AddAsync(message);
             return RedirectToAction("OutBox");
         }

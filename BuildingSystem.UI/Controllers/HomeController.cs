@@ -1,19 +1,14 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Entities.Dtos;
-using BuildingSystem.UI.Filters;
 using Entites.Entitiy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -43,6 +38,10 @@ namespace BuildingSystem.UI.Controllers
                     if (item.Contains("Admin"))
                     {
                         return RedirectToAction("Index", "Admin");
+                    }
+                    else if (item.Contains("Resident"))
+                    {
+                        return RedirectToAction("Resident");
                     }
                     else if (item.Contains("Yönetici"))
                     {
@@ -82,5 +81,7 @@ namespace BuildingSystem.UI.Controllers
         {
             return View();
         }
+        public IActionResult Resident()
+        { return View(); }
     }
 }

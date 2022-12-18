@@ -10,6 +10,7 @@ namespace BuildingSystem.Business.Abstract
     public interface IRoleService
     {
        Task CreateRole (string roleName);
+        Task<Role> Delete(string id);
        List<Role> GetAllRole();
     }
 }

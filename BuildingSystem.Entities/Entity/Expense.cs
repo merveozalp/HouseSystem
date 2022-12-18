@@ -9,6 +9,7 @@ namespace Entites.Entitiy
 {
     public class Expense:Base
     {
+        
         public double Cost { get; set; }
         public bool IsPaid  { get; set; }
         public DateTime InvoiceDate { get; set; }

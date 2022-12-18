@@ -19,18 +19,6 @@ namespace BuildingSystem.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BuildingSystem.Entities.Entity.Block", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Blocks");
-                });
-
             modelBuilder.Entity("BuildingSystem.Entities.Entity.Building", b =>
                 {
                     b.Property<int>("Id")
@@ -86,7 +74,12 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.Property<string>("SenderMail")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Messages");
                 });
@@ -370,6 +363,15 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("BuildingSystem.Entities.Entity.Message", b =>
+                {
+                    b.HasOne("Entites.Entitiy.User", "User")
+                        .WithMany("Message")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Entites.Entitiy.Expense", b =>
                 {
                     b.HasOne("BuildingSystem.Entities.Entity.ExpenseType", "ExpenceType")
@@ -475,6 +477,8 @@ namespace BuildingSystem.DataAccess.Migrations
             modelBuilder.Entity("Entites.Entitiy.User", b =>
                 {
                     b.Navigation("Flats");
+
+                    b.Navigation("Message");
                 });
 #pragma warning restore 612, 618
         }

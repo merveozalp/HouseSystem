@@ -29,8 +29,14 @@ namespace BuildingSystem.DataAccess.Context
         {
             builder.Entity<Flat>()
             .HasIndex(p => new { p.FlatNumber, p.BuildingId }).IsUnique();
+            builder.Entity<Building>().HasIndex(p => p.BuildingName).IsUnique();
+            builder.Entity<ExpenseType>().HasIndex(p => p.ExpenseTypeName).IsUnique();
+            builder.Entity<User>().HasIndex(p => p.IdentityNo).IsUnique();
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
+
+          
         }
 
     }

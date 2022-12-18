@@ -2,16 +2,17 @@
 using BuildingSystem.Entities.Dtos;
 using Entites.Entitiy;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MimeKit;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MailController : Controller
     {
         private readonly IMessageService _messageService;
@@ -55,7 +56,7 @@ namespace BuildingSystem.UI.Controllers
                 client.Disconnect(true);
             
 
-            return View(messageDto);
+            return RedirectToAction("Inbox");
         }
 
         [HttpGet]
@@ -87,27 +88,26 @@ namespace BuildingSystem.UI.Controllers
         }
 
         //---------------------------------------------------------------------------------
-        [HttpGet]
-        public async Task<IActionResult> SendMessage()
-        {
-            var userList = await _userService.GetAllAsync();
-            var messageDto = new MessageDto
-            {
-                Users = userList
-            };
-            return View(messageDto);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> SendMessage()
+        //{
+        //    var userList = await _userService.GetAllAsync();
+        //    var messageDto = new MessageDto
+        //    {
+        //        Users = userList
+        //    };
+        //    return View(messageDto);
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> SendMessage(MessageDto message)
-        {
-            var users = await _userService.GetAllAsync();
-            var userList = new SelectList(users, "Id", "UserName");
-            var user = _userService.GetUserFromSession();
-            message.SenderMail = user.Id;
-            await _messageService.AddAsync(message);
-            return RedirectToAction("OutBox");
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> SendMessage(MessageDto message)
+        //{
+          
+        //    var user = _userService.GetUserFromSession();
+        //    message.SenderMail = user.Id;
+        //    await _messageService.AddAsync(message);
+        //    return RedirectToAction("OutBox");
+        //}
 
     }
 }

@@ -15,8 +15,7 @@ namespace BuildingSystem.Entities.Entity
         public string MessageContent { get; set; }
         public string Body { get; set; }
         public bool IsRead { get; set; } = false;
-        public User User { get; set; }
-        public string UserId { get; set; }
+    
 
     }
 }

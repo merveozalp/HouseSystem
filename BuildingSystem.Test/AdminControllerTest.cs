@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingSystem.Entities.ViewModel
+namespace BuildingSystem.Test
 {
-    public class ErrorViewModel
+    internal class AdminControllerTest
     {
-        public List<string> Error { get; set; }
     }
 }

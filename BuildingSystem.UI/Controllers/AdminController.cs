@@ -1,13 +1,10 @@
 ﻿using BuildingSystem.Business.Abstract;
-using BuildingSystem.Business.Concrete;
 using BuildingSystem.Entities.Dtos;
-using BuildingSystem.UI.Filters;
 using Entites.Entitiy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-    //[Authorize(Roles="Admin")]
-    
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private UserManager<User> _userManager { get; }
@@ -116,6 +112,16 @@ namespace BuildingSystem.UI.Controllers
             }
             return RedirectToAction("GetAllUsers");
         }
+        public async Task<IActionResult> RoleDelete(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _roleService.Delete(id);
+                return RedirectToAction("GetAllRole");
+            }
+
+            return View();
+        }
         #endregion
 
         #region About user
@@ -179,7 +185,7 @@ namespace BuildingSystem.UI.Controllers
         {
 
                 var buildings = await _buildingService.AddAsync(buildingDto);
-            return View(buildingDto);
+            return RedirectToAction("GetAllBuilding");
 
         }
         [HttpGet]

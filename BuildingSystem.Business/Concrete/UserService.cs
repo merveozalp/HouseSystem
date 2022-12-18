@@ -127,7 +127,7 @@ namespace BuildingSystem.Business.Concrete
             var result = await _userManager.CreateAsync(user, dto.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "Yönetici");
+                await _userManager.AddToRoleAsync(user, "Resident");
             }
             return result;
         }

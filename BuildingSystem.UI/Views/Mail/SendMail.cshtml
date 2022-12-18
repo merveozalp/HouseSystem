@@ -1,17 +1,15 @@
 ﻿@model MessageDto
 @{
     ViewData["Title"] = "SendMail";
-   
 }
 
 <form method ="post">
-
-
     <div class="mb-3">
-        <label asp-for="ReceiverMail" class="form-label"> Alıcı Mail Adresi</label>
+        <label asp-for="ReceiverMail" class="form-label">Mail Adresini Giriniz</label>
         <input type="text" class="form-control" asp-for="ReceiverMail" required>
         <span asp-validation-for="ReceiverMail" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
         <label asp-for="MessageContent" class="form-label">konu Başlığı</label>
         <input type="text" class="form-control" asp-for="MessageContent" required>
