@@ -1,5 +1,4 @@
-﻿@using Entites.Entitiy;
-@model IEnumerable<BuildingDto>
+﻿@model IEnumerable<BuildingDto>
 @{
     ViewData["Title"] = "GetAllBuilding";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +6,7 @@
 
 <div class="m-0">
     <h3>Siteye Yeni Bir Bina Ekle</h3>
-    <a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="AddBuilding">
+    <a class="btn btn-success btn-sm" asp-controller="Building" asp-action="AddBuilding">
         Bina Ekle
     </a>
 </div>
@@ -36,11 +35,11 @@
                     <td>@building.TotalFlat</td>
              
                     <td>
-                        <a class="btn btn-warning" asp-controller="Admin" asp-action="UpdateBuilding"
+                        <a class="btn btn-warning" asp-controller="Building" asp-action="UpdateBuilding"
                          asp-route-id="@building.Id">
                             Güncelle
                     </a>
-                        <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteBuilding"
+                        <a class="btn btn-danger" asp-controller="Building" asp-action="DeleteBuilding"
                         asp-route-id="@building.Id">
                         Sil
                     </a>

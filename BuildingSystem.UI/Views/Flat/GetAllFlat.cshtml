@@ -1,7 +1,7 @@
 ﻿@model List<FlatDto>
 <div class="m-0">
     <h3>Siteye Yeni Bir Daire Ekle</h3>
-    <a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="AddFlat">
+    <a class="btn btn-success btn-sm" asp-controller="Flat" asp-action="AddFlat">
         Daire Ekle
     </a>
 </div>
@@ -49,11 +49,11 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-warning " asp-controller="Admin" asp-action="UpdateFlat"
+                    <a class="btn btn-warning " asp-controller="Flat" asp-action="UpdateFlat"
                    asp-route-id="@menu.Id">
                         Güncelle
                     </a>
-                    <a class="btn btn-danger " asp-controller="Admin" asp-action="DeleteFlat"
+                    <a class="btn btn-danger " asp-controller="Flat" asp-action="DeleteFlat"
                    asp-route-id="@menu.Id">
                         Sil
                     </a>

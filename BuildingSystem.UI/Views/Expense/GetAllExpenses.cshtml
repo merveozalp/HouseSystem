@@ -5,7 +5,7 @@
     Toplu Borçlandır
     </a>
     *@
-    <a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="AddExpense">
+    <a class="btn btn-success btn-sm" asp-controller="Expense" asp-action="AddExpense">
         Borçlandır
     </a>
 </div>
@@ -46,11 +46,11 @@
 
 
                 <td>
-                    <a class="btn btn-warning " asp-controller="Admin" asp-action="UpdateExpense"
+                    <a class="btn btn-warning " asp-controller="Expense" asp-action="UpdateExpense"
                    asp-route-id="@expense.Id">
                         Güncelle
                     </a>
-                    <a class="btn btn-danger " asp-controller="Admin" asp-action="DeleteExpense"
+                    <a class="btn btn-danger " asp-controller="Expense" asp-action="DeleteExpense"
                    asp-route-id="@expense.Id">
                         Sil
                     </a>

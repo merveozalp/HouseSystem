@@ -1,10 +1,9 @@
-﻿@model ExpenseCreateDto
-<form asp-controller="Admin" asp-action="AddExpense" method="post"  class="was-validated">
+﻿@model ExpenseUpdateDto
+<form asp-controller="Expense" asp-action="UpdateExpense" method="post" class="was-validated">
     <div class="mb-3">
-        <label asp-for="BuildingId">Blok Numarası</label>
+        <label asp-for="BuildingId">Bina Numarası</label>
         <select asp-for="BuildingId" class="form-control"
-                asp-items="ViewBag.building" >
-                <option>Lütfen Biriniz Seçiniz</option>
+                asp-items="ViewBag.building" required>
             
         </select>
         <span asp-validation-for="BuildingId" class="text-danger"></span>
@@ -14,27 +13,29 @@
         <label asp-for="FlatId">Daire Numarası</label>
         <select asp-for="FlatId" class="form-control"
                 asp-items="ViewBag.flat" required>
-            <option>Lütfen Biriniz Seçiniz</option>
-            
+          
         </select>
         <span asp-validation-for="FlatId" class="text-danger"></span>
-
     </div>
 
     <div class="mb-3">
         <label asp-for="ExpenseTypeId">Gider Türü</label>
         <select asp-for="ExpenseTypeId" class="form-control"
                 asp-items="ViewBag.expenseType" required>
-            <option>Lütfen Biriniz Seçiniz</option>
-         
+           
         </select>
         <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>
     </div>
-
     <div class="mb-3 ">
         <label asp-for="Cost">Ücret</label>
         <input type="number" class="form-control" asp-for="Cost" required />
         <span asp-validation-for="Cost" class="text-danger"></span>
     </div>
+    <div class="mb-3 ">
+        <label asp-for="IsPaid">Ödeme Durumu</label>
+        <input type="text" class="form-control" asp-for="IsPaid" required />
+        <span asp-validation-for="IsPaid" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Ekle</button>
 </form>

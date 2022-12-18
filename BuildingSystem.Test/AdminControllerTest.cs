@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.Test
 {
-    internal class AdminControllerTest
+    class AdminControllerTest
     {
     }
 }
