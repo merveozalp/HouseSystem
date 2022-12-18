@@ -28,7 +28,7 @@
                 <td>@menu.BuildingName</td>
                 <td>@menu.FlatNumber</td>
                 <td>@menu.FlatType</td>
-                <td>@if (menu.IsOwner == false)
+                <td>@if(menu.IsOwner == FlatIsOwner.Kiracı)
                     {
                         <span class="badge badge-success">Kiracı</span>
 
@@ -38,7 +38,8 @@
                         <span class="badge badge-success">Ev Sahibi</span>
                     }</td>
                 <td>
-                    @if (menu.IsEmpty == false)
+                    <td>
+                    @if(menu.IsEmpty== FlatIsEmpty.Boş)
                     {
                         <span class="badge badge-success">Boş</span>
 

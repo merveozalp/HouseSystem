@@ -53,8 +53,8 @@ namespace BuildingSystem.UI.Controllers
                 ViewBag.building = new SelectList(buildings, "Id", "BuildingName");
                 return View(expenseCreateDto);
             }
-            expenseCreateDto.InvoiceDate = DateTime.Now;
             expenseCreateDto.IsPaid = false;
+            expenseCreateDto.InvoiceDate = DateTime.Now;
             var expenses = await _expenseService.AddAsync(expenseCreateDto);
             return RedirectToAction("GetAllExpenses");
         }

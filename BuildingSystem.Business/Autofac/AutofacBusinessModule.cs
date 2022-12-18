@@ -30,19 +30,6 @@ namespace BuildingSystem.Business.Autofac
            ("Service")).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             //InstancePerLifetimeScope => Scope karşılık gelir.
-
-
-
-            //builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>));
-            //builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>));
-
-            //builder.RegisterType(typeof(BlockService)).As(typeof(IBlockService));
-            //builder.RegisterType(typeof(BlockRepository)).As(typeof(IBlockRepository));
-            //builder.RegisterType(typeof(BuildingRepository)).As(typeof(IBuildingRepository));
-            //builder.RegisterType(typeof(BuildingService)).As(typeof(BuildingService));
-
-
-
         }
     }
 }

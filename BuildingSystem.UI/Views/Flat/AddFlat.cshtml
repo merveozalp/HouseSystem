@@ -15,7 +15,6 @@
         </select>
         <span asp-validation-for="BuildingId" class="text-danger"></span>
     </div>
-
     <div class="mb-3 ">
         <label asp-for="FlatType">Daire Tipi</label>
         <input type="text" class="form-control" asp-for="FlatType" required />
@@ -26,18 +25,26 @@
         <input type="number" class="form-control" asp-for="FlatNumber" required />
         <span asp-validation-for="FlatNumber" class="text-danger"></span>
     </div>
-
-
     <div class="mb-3 form-group">
         <label asp-for="FloorNumber">Kat Numarası</label>
         <input type="number" class="form-control" asp-for="FloorNumber" required />
         <span asp-validation-for="FloorNumber" class="text-danger"></span>
     </div>
-    <div class="mb-3 form-group">
-        <label asp-for="IsOwner">Konaklama Şekli</label>
-        <input type="text" class="form-control" asp-for="IsOwner" required />
+    <div class="mb-3">
+        <label asp-for="IsOwner">Kullanıcı</label>
+        <select asp-for="IsOwner" class="form-control"
+                asp-items="Html.GetEnumSelectList<FlatIsOwner>()" >
+        </select>
         <span asp-validation-for="IsOwner" class="text-danger"></span>
     </div>
+    <div class="mb-3">
+        <label asp-for="IsEmpty">Daire Durumu</label>
+        <select asp-for="IsEmpty" class="form-control"
+                asp-items="Html.GetEnumSelectList<FlatIsEmpty>()">
+        </select>
+        <span asp-validation-for="IsEmpty" class="text-danger"></span>
+    </div>
+    
     <button type="submit" class="btn btn-primary">Ekle</button>
 </form>
 

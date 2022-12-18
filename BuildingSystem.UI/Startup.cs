@@ -38,7 +38,7 @@ namespace BuildingSystem.UI
             
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddIdentity<User, Role>
+            services.AddIdentity<User,Role>
                 (opts =>
                 {
                     opts.User.RequireUniqueEmail = true;

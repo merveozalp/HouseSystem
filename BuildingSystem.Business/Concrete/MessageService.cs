@@ -34,7 +34,6 @@ namespace BuildingSystem.Business.Concrete
             _userService = userService;
            
         }
-
         public async Task<MessageDto> AddAsync(MessageDto messageDto)
         {
             var message = _mapper.Map<Message>(messageDto);
@@ -42,7 +41,6 @@ namespace BuildingSystem.Business.Concrete
             await _unitOfWork.CommitAsync();
             return messageDto;
         }
-
         public void Delete(int id)
         {
             var message = _messageRepository.GetById(id).Result;

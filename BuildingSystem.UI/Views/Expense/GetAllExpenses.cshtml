@@ -1,10 +1,6 @@
 ﻿@model List<ExpenseDto>
 <div class="m-0">
     <h3>Borçlandırma İşlemleri</h3>
-    @*<a class="btn btn-success btn-sm" asp-controller="Expense" asp-action="AddExpenseToAll">
-    Toplu Borçlandır
-    </a>
-    *@
     <a class="btn btn-success btn-sm" asp-controller="Expense" asp-action="AddExpense">
         Borçlandır
     </a>
@@ -18,9 +14,7 @@
             <th scope="col">Gider Tarihi</th>
             <th scope="col">Ücret</th>
             <th scope="col">Ödenme Durumu</th>
-
             <th>
-
             </th>
         </tr>
     </thead>
@@ -41,10 +35,6 @@
                 {
                     <td><span class="badge badge-danger">Ödenmedi</span></td>
                 }
-
-
-
-
                 <td>
                     <a class="btn btn-warning " asp-controller="Expense" asp-action="UpdateExpense"
                    asp-route-id="@expense.Id">

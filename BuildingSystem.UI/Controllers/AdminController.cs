@@ -18,23 +18,15 @@ namespace BuildingSystem.UI.Controllers
         private UserManager<User> _userManager { get; }
         private RoleManager<Role> _roleManager { get; }
         private IRoleService _roleService { get; }
-        private readonly IBuildingService _buildingService;
-        private readonly IExpenseService _expenseService;
-        private readonly IExpenseTypeService _expenseTypeService;
-        private readonly IFlatService _flatService;
         private readonly IUserService _userService;
         private readonly IMessageService _messageService;
-        public AdminController(UserManager<User> userManager, RoleManager<Role> roleManager, IRoleService roleService, IBuildingService buildingService, IExpenseService expenseService, IExpenseTypeService expenseTypeService, IFlatService flatService, IUserService userService, IMessageService messageService)
+        public AdminController(UserManager<User> userManager, RoleManager<Role> roleManager, IRoleService roleService,  IUserService userService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _roleService = roleService;
-            _buildingService = buildingService;
-            _expenseService = expenseService;
-            _expenseTypeService = expenseTypeService;
-            _flatService = flatService;
             _userService = userService;
-            _messageService = messageService;
+       
         }
 
         #region About Role
@@ -170,88 +162,7 @@ namespace BuildingSystem.UI.Controllers
 
      
 
-        //#region About Flat
-        //[HttpGet]
-        //public async Task<ActionResult> GetAllFlat()
-        //{
-        //    var flats = await _flatService.GetAllFlatsWithRelation();
-        //    return View(flats);
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> AddFlat()
-        //{
-        //    var buildingDto = await _buildingService.GetAllAsync();
-        //    ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
-        //    var userDto = await _userService.GetAllAsync();
-        //    ViewBag.User = new SelectList(userDto, "Id", "UserName");
-           
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddFlat(FlatCreateDto flatCreateDto)
-        //{
-        //    if(!ModelState.IsValid)
-        //    {
-        //        var buildingDto = await _buildingService.GetAllAsync();
-        //        ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
-        //        var userDto = await _userService.GetAllAsync();
-        //        ViewBag.User = new SelectList(userDto, "Id", "UserName");
-        //        return View(flatCreateDto);
-        //    }
-
-        //    flatCreateDto.IsEmpty = true;
-        //    await _flatService.AddAsync(flatCreateDto);
-        //    return RedirectToAction("GetAllFlat");
-        //}
-        //[HttpGet]
-        //public async Task<IActionResult> UpdateFlat(int id)
-        //{
-        //    var flat = await _flatService.GetById(id);
-        //    var flats = await _flatService.GetAllAsync();
-        //    var buildingDto = await _buildingService.GetAllAsync();
-        //    ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
-        //    var userDto = await _userService.GetAllAsync();
-        //    ViewBag.User = new SelectList(userDto, "Id", "UserName");
-
-        //    var flatUpdateDto = new FlatUpdateDto()
-        //    {
-        //        Id = flat.Id,
-        //        FloorNumber = flat.FloorNumber,
-        //        IsOwner = flat.IsOwner,
-        //        IsEmpty = flat.IsEmpty,
-        //        FlatType = flat.FlatType,
-        //        FlatNumber=flat.FlatNumber,
-                
-                
-               
-        //    };
-        //    return View(flatUpdateDto);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> UpdateFlat(FlatUpdateDto flatUpdateDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        var buildingDto = await _buildingService.GetAllAsync();
-        //        ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
-        //        var userDto = await _userService.GetAllAsync();
-        //        ViewBag.User = new SelectList(userDto, "Id", "UserName");
-        //        return View(flatUpdateDto);
-        //    }
-        //    _flatService.UpdateAsync(flatUpdateDto);
-        //    return RedirectToAction("GetAllFlat");
-        //}
-        //[HttpGet]
-        //public IActionResult DeleteFlat(int id)
-        //{
-
-        //    _flatService.DeleteAsync(id);
-        //    return RedirectToAction("GetAllFlat");
-        //}
-        //#endregion
-
+      
       
 
     }

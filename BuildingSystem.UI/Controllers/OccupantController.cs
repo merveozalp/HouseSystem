@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-    [Authorize(Roles = "Yönetici")]
+    [Authorize(Roles = "User")]
 
     public class OccupantController : Controller
     {
@@ -95,7 +95,6 @@ namespace BuildingSystem.UI.Controllers
                         SenderMail = item.SenderMail,
                         ReceiverMail = item.ReceiverMail,
                         MessageContent = item.MessageContent,
-                        UserName = receiver.UserName,
                         Body = item.Body
                     };
                     messageDtos.Add(messageDto);

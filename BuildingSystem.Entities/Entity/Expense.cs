@@ -1,4 +1,5 @@
 ﻿using BuildingSystem.Entities.Entity;
+using BuildingSystem.Entities.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;

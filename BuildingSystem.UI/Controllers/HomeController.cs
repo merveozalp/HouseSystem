@@ -43,9 +43,9 @@ namespace BuildingSystem.UI.Controllers
                     {
                         return RedirectToAction("Resident");
                     }
-                    else if (item.Contains("Yönetici"))
+                    else if (item.Contains("User"))
                     {
-                        return RedirectToAction("Inbox", "Occupant");
+                        return RedirectToAction("Index", "Occupant");
                     }
                 }
             }

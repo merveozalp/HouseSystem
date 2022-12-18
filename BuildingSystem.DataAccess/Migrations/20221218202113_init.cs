@@ -28,7 +28,7 @@ namespace BuildingSystem.DataAccess.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentityNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdentityNo = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CarNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -51,24 +51,12 @@ namespace BuildingSystem.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Blocks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blocks", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Buildings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuildingName = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TotalFlat = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
@@ -82,7 +70,7 @@ namespace BuildingSystem.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExpenseTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ExpenseTypeName = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -221,8 +209,8 @@ namespace BuildingSystem.DataAccess.Migrations
                     FlatNumber = table.Column<byte>(type: "tinyint", nullable: false),
                     FlatType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FloorNumber = table.Column<byte>(type: "tinyint", nullable: false),
-                    IsEmpty = table.Column<bool>(type: "bit", nullable: false),
-                    IsOwner = table.Column<bool>(type: "bit", nullable: false),
+                    IsEmpty = table.Column<int>(type: "int", nullable: false),
+                    IsOwner = table.Column<int>(type: "int", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -272,6 +260,11 @@ namespace BuildingSystem.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "CarNo", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IdentityNo", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "a21ccc6c-6a3e-4127-af9c-d537d19eb5cc", 0, null, "634da625-4f57-44fc-85d8-cac332cffc48", "admin@admin.com", true, "Admin", "532515412352", "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEHiWZ+yCs696aPgCHUa5VMS6u6PtZOE9kjgNKRw/LYjvKtwz7ekuts9/NCyqj/87RQ==", null, false, "f933b49d-04fa-4c71-9001-5d71e4dccffe", false, "admin" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -305,11 +298,25 @@ namespace BuildingSystem.DataAccess.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_IdentityNo",
+                table: "AspNetUsers",
+                column: "IdentityNo",
+                unique: true,
+                filter: "[IdentityNo] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Buildings_BuildingName",
+                table: "Buildings",
+                column: "BuildingName",
+                unique: true,
+                filter: "[BuildingName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_ExpenseTypeId",
@@ -320,6 +327,13 @@ namespace BuildingSystem.DataAccess.Migrations
                 name: "IX_Expenses_FlatId",
                 table: "Expenses",
                 column: "FlatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExpenseTypes_ExpenseTypeName",
+                table: "ExpenseTypes",
+                column: "ExpenseTypeName",
+                unique: true,
+                filter: "[ExpenseTypeName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Flats_BuildingId",
@@ -354,9 +368,6 @@ namespace BuildingSystem.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Blocks");
 
             migrationBuilder.DropTable(
                 name: "Expenses");

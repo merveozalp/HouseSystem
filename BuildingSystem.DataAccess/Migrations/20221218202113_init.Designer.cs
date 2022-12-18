@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221213142917_init")]
+    [Migration("20221218202113_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,18 +21,6 @@ namespace BuildingSystem.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BuildingSystem.Entities.Entity.Block", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Blocks");
-                });
-
             modelBuilder.Entity("BuildingSystem.Entities.Entity.Building", b =>
                 {
                     b.Property<int>("Id")
@@ -41,12 +29,16 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BuildingName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<byte>("TotalFlat")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BuildingName")
+                        .IsUnique()
+                        .HasFilter("[BuildingName] IS NOT NULL");
 
                     b.ToTable("Buildings");
                 });
@@ -59,9 +51,13 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ExpenseTypeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExpenseTypeName")
+                        .IsUnique()
+                        .HasFilter("[ExpenseTypeName] IS NOT NULL");
 
                     b.ToTable("ExpenseTypes");
                 });
@@ -143,11 +139,11 @@ namespace BuildingSystem.DataAccess.Migrations
                     b.Property<byte>("FloorNumber")
                         .HasColumnType("tinyint");
 
-                    b.Property<bool>("IsEmpty")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsEmpty")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsOwner")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsOwner")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -217,7 +213,7 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdentityNo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -257,6 +253,10 @@ namespace BuildingSystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdentityNo")
+                        .IsUnique()
+                        .HasFilter("[IdentityNo] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -266,6 +266,27 @@ namespace BuildingSystem.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a21ccc6c-6a3e-4127-af9c-d537d19eb5cc",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "634da625-4f57-44fc-85d8-cac332cffc48",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            IdentityNo = "532515412352",
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHiWZ+yCs696aPgCHUa5VMS6u6PtZOE9kjgNKRw/LYjvKtwz7ekuts9/NCyqj/87RQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f933b49d-04fa-4c71-9001-5d71e4dccffe",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

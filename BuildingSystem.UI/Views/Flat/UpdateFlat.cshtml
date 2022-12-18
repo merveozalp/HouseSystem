@@ -1,4 +1,5 @@
-﻿@model FlatUpdateDto
+﻿
+@model FlatUpdateDto
 <form asp-controller="Flat" asp-action="UpdateFlat" class="was-validated">
     <div class="mb-3 ">
 
@@ -6,7 +7,6 @@
             <label asp-for="UserId">Kullanıcı</label>
             <select asp-for="UserId" class="form-control"
                     asp-items="@ViewBag.User" required>
-                
             </select>
             <span asp-validation-for="UserId" class="text-danger"></span>
         </div>
@@ -33,17 +33,20 @@
         <input type="text" class="form-control" asp-for="FlatType" required />
         <span asp-validation-for="FlatType" class="text-danger"></span>
     </div>
-   
-    <div class="mb-3 form-group">
-        <label asp-for="IsOwner">Konaklama Şekli</label>
-        <input type="text" class="form-control" asp-for="IsOwner" required />
+    <div class="mb-3">
+        <label asp-for="IsOwner">Kullanıcı</label>
+        <select asp-for="IsOwner" class="form-control"
+                asp-items="Html.GetEnumSelectList<FlatIsOwner>()">
+        </select>
         <span asp-validation-for="IsOwner" class="text-danger"></span>
     </div>
 
-    <div class="mb-3 form-group">
+   <div class="mb-3">
         <label asp-for="IsEmpty">Daire Durumu</label>
-        <input type="text" class="form-control" asp-for="IsEmpty" required />
-        <span asp-validation-for="IsEmpty" class="text-danger"></span>
+        <select asp-for="IsEmpty" class="form-control"
+                asp-items="Html.GetEnumSelectList<FlatIsEmpty>()">
+        </select>
+     <span asp-validation-for="IsEmpty" class="text-danger"></span>
     </div>
    
     <input type="hidden" asp-for="Id" />

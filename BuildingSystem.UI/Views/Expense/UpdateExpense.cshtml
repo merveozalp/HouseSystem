@@ -4,25 +4,20 @@
         <label asp-for="BuildingId">Bina Numarası</label>
         <select asp-for="BuildingId" class="form-control"
                 asp-items="ViewBag.building" required>
-            
         </select>
         <span asp-validation-for="BuildingId" class="text-danger"></span>
-
     </div>
     <div class="mb-3">
         <label asp-for="FlatId">Daire Numarası</label>
         <select asp-for="FlatId" class="form-control"
                 asp-items="ViewBag.flat" required>
-          
         </select>
         <span asp-validation-for="FlatId" class="text-danger"></span>
     </div>
-
     <div class="mb-3">
         <label asp-for="ExpenseTypeId">Gider Türü</label>
         <select asp-for="ExpenseTypeId" class="form-control"
                 asp-items="ViewBag.expenseType" required>
-           
         </select>
         <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>
     </div>

@@ -51,7 +51,7 @@ namespace BuildingSystem.UI.Controllers
                 return View(flatCreateDto);
             }
 
-            flatCreateDto.IsEmpty = true;
+            
             await _flatService.AddAsync(flatCreateDto);
             return RedirectToAction("GetAllFlat");
         }

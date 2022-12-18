@@ -63,6 +63,7 @@ namespace BuildingSystem.Business.Concrete
                 FlatNumber=x.FlatNumber,
                 FlatType=x.FlatType,
                 IsEmpty=x.IsEmpty,
+                IsOwner=x.IsOwner,
                 UserName=x.User.UserName,
                 BuildingName=x.Building.BuildingName,
                
