@@ -11,6 +11,7 @@
             <th scope="col">Fatura Tarihi</th>
             <th scope="col">Gider Türü</th>
             <th scope="col">Ücret</th>
+            <th scope="col">Ödeme Durumu</th>
 
             <th>
 
@@ -26,9 +27,10 @@
                 <td>@menu.InvoiceDate</td>
                 <td>@menu.ExpenseTypeName</td>
                 <td>@menu.Cost</td>
+                <td>@menu.IsPaid</td>
                 <td>
-                    <a href="/Expense/Delete?id=@menu.Id" class="btn btn-danger">Sil</a>
-                    <a href="/Expense/Update?id=@menu.Id" class="btn btn-warning">Düzenle</a>
+                    <a href="/Admin/DeleteExpense?id=@menu.Id" class="btn btn-danger">Sil</a>
+                    <a href="/Admin/UpdateExpense?id=@menu.Id" class="btn btn-warning">Düzenle</a>
                 </td>
             </tr>
         }

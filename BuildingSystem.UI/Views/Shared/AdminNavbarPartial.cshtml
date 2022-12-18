@@ -9,9 +9,6 @@
                      
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        @*<li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                        <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                        <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>*@
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" asp-controller="Home" asp-action="LogOut" asp-route-returnUrl="/Home/LogIn">Logout</a></li>
                     </ul>
@@ -29,15 +26,6 @@
                     <li><a asp-controller="Admin" asp-action="RoleCreate">Rol  Oluştur</a></li>
                 </ul>
             </li>
-           @* <li>
-                <a href="mailbox.html"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label">Blok İşlemleri </span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Block" asp-action="AddBlock">Block Ekle</a></li>
-                    <li><a asp-controller="Block" asp-action="GetAllBlock">Blok Listesi</a></li>
-                    <li><a asp-controller="Block" asp-action="GetBlokWithBuilding">Blok ve Bina Listesi</a></li>
-
-                </ul>
-            </li>*@
             <li>
                 <a href="mailbox.html"><i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Bina İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
@@ -74,13 +62,13 @@
             <li>
                 <a href="mailbox.html"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="nav-label">Mail İşlemleri </span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Mail" asp-action="Inbox"> Gelen Mailler</a></li>
-                    <li><a asp-controller="Mail" asp-action="OutBox">Gönderilen Mailler</a></li>
+                    <li><a asp-controller="Mail" asp-action="Inbox"> Gelen Mesajlar</a></li>
+                    <li><a asp-controller="Mail" asp-action="OutBox">Gönderilen Mesajlar</a></li>
+                    <li><a asp-controller="Mail" asp-action="SendMessage">Mesaj Gönder</a></li>
                     <li><a asp-controller="Mail" asp-action="SendMail">Mail Gönderim</a></li>
+                   
                 </ul>
             </li>
-         @*   <li>
-                <a asp-action="SendMail" asp-controller="Mail"><i class="menu-icon tf-icons bx-mail-send"></i> <span class="nav-label">Mail Gönder</span>  </a>
-            </li>*@
+       
     </div>
 </nav>

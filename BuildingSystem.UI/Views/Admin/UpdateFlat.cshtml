@@ -5,15 +5,15 @@
         <div class="mb-3">
             <label asp-for="UserId">Kullanıcı</label>
             <select asp-for="UserId" class="form-control"
-                    asp-items="@(new SelectList(Model.Users, "Id", "UserName"))" required>
-                <option>Lütfen birini seçiniz</option>
+                    asp-items="@ViewBag.User" required>
+                
             </select>
             <span asp-validation-for="UserId" class="text-danger"></span>
         </div>
          <div class="mb-3">
         <label asp-for="BuildingId">Bina Seçiniz</label>
         <select asp-for="BuildingId" class="form-control"
-                asp-items="@(new SelectList(Model.Buildings, "Id", "BuildingName"))" required>
+                    asp-items="ViewBag.Building" required>
             <option>Lütfen birini seçiniz</option>
         </select>
         <span asp-validation-for="BuildingId" class="text-danger"></span>

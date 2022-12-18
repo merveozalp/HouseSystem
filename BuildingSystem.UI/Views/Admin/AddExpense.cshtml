@@ -1,11 +1,21 @@
 ﻿@model ExpenseCreateDto
-<form asp-controller="Admin" asp-action="AddExpense" class="was-validated">
+<form asp-controller="Admin" asp-action="AddExpense" method="post"  class="was-validated">
+    <div class="mb-3">
+        <label asp-for="BuildingId">Blok Numarası</label>
+        <select asp-for="BuildingId" class="form-control"
+                asp-items="ViewBag.building" >
+                <option>Lütfen Biriniz Seçiniz</option>
+            
+        </select>
+        <span asp-validation-for="BuildingId" class="text-danger"></span>
 
+    </div>
     <div class="mb-3">
         <label asp-for="FlatId">Daire Numarası</label>
         <select asp-for="FlatId" class="form-control"
-                asp-items="@(new SelectList(Model.Flats, "Id", "FlatNumber"))" required>
-            <option>Lütfen birini seçiniz</option>
+                asp-items="ViewBag.flat" required>
+            <option>Lütfen Biriniz Seçiniz</option>
+            
         </select>
         <span asp-validation-for="FlatId" class="text-danger"></span>
 
@@ -14,8 +24,9 @@
     <div class="mb-3">
         <label asp-for="ExpenseTypeId">Gider Türü</label>
         <select asp-for="ExpenseTypeId" class="form-control"
-                asp-items="@(new SelectList(Model.ExpenseTypes, "Id", "ExpenseTypeName"))" required>
-            <option>Lütfen birini seçiniz</option>
+                asp-items="ViewBag.expenseType" required>
+            <option>Lütfen Biriniz Seçiniz</option>
+         
         </select>
         <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>
     </div>

@@ -1,6 +1,6 @@
 ﻿
 @model ExpenseTypeDto
-<form asp-controller="Admin" asp-action="AddExpenseType" class="was-validated">
+<form asp-controller="Admin" asp-action="AddExpenseType" method="post" class="was-validated">
     <div class="mb-3">
         <label asp-for="ExpenseTypeName" class="form-label"> Fatura/Gider İsmi</label>
         <input type="text" class="form-control" asp-for="ExpenseTypeName" required>

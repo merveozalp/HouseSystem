@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_OccupantLayout.cshtml";
+  
 }
 
 <table id="myDataTable" class="table table-hover table-striped">
@@ -11,7 +11,7 @@
             <th scope="col">Gönderici</th>
             <th scope="col">Mesaj Başlığı</th>
             <th scope="col">Mesaj İçeriği</th>
-            
+
 
 
         </tr>
@@ -23,7 +23,7 @@
                 <td>@menu.UserName</td>
                 <td>@Html.Raw(@menu.MessageContent)</td>
                 <td>@Html.Raw(@menu.Body)</td>
-                
+
 
             </tr>
         }

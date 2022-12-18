@@ -1,13 +1,19 @@
 ﻿@model MessageDto
 @{
     ViewData["Title"] = "SendMessageToAdmin";
-    Layout = "~/Views/Shared/_OccupantLayout.cshtml";
+   
 }
 
 
 <form asp-controller="Occupant" asp-action="SendMessageToAdmin" class="was-validated">
- 
+    <div class="mb-3">
+        <label asp-for="UserId">Blok Numarası</label>
+        <select asp-for="UserId" class="form-control"
+                asp-items="ViewBag.userList">
+            <option>Lütfen Biriniz Seçiniz</option>
 
+        </select>
+        <span asp-validation-for="UserId" class="text-danger"></span>
     <div class="mb-3">
     <label asp-for="MessageContent" class="form-label">Konu Başlığı</label>
     <input type="text" class="form-control" asp-for="MessageContent" required>

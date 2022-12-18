@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BuildingSystem.Entities.Entity;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
 namespace Entites.Entitiy
@@ -15,5 +16,6 @@ namespace Entites.Entitiy
         public string CarNo { get; set; }
 
         public ICollection<Flat> Flats { get; set; }
+        public ICollection<Message> Message { get; set; }
     }
 }

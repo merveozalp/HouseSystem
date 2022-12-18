@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuildingSystem.UI.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,43 +30,32 @@ namespace BuildingSystem.UI.Controllers
         }
         public IActionResult LogIn()
         {
-            
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginDto model)
         {
-
             if (ModelState.IsValid)
             {
                 var result = await _userService.LogIn(model);
-                if (result.Succeeded)
+                foreach (var item in result.ToList())
                 {
-                    User user = await _userManager.FindByEmailAsync(model.Email);
-                    if (_userManager.IsEmailConfirmedAsync(user).Result == false)
+                    if (item.Contains("Admin"))
                     {
-                        ModelState.AddModelError("", "Email adresiniz onaylanmamıştır.");
+                        return RedirectToAction("Index", "Admin");
                     }
-                        IList<string> roles = await _userManager.GetRolesAsync(user);
-                    foreach (var item in roles)
+                    else if (item.Contains("Yönetici"))
                     {
-                        
-                            if (item.Contains("Admin"))
-                            {
-                                return RedirectToAction("Index", "Admin");
-                            }
-                            else if (item.Contains("Yönetici"))
-                            {
-                                return RedirectToAction("Index", "Occupant");
-                            }
-                        }
+                        return RedirectToAction("Inbox", "Occupant");
                     }
-                
-                else
-                {
-                    ModelState.AddModelError("", "Geçersiz kullanıcı adi veya şifresi");
                 }
             }
+
+            else
+            {
+                ModelState.AddModelError("", "Geçersiz kullanıcı adi veya şifresi");
+            }
+
             return View();
         }
         public async Task<IActionResult> Logout()
@@ -81,18 +70,8 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(UserDto dto)
         {
-            User user = new User()
-            {
-                IdentityNo = dto.IdentityNo,
-                UserName = dto.UserName,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.Email,
-                CarNo = dto.CarNo,
-                PhoneNumber = dto.PhoneNumber,
-
-            };
-            IdentityResult result = await _userManager.CreateAsync(user, dto.Password);
+            
+            var result = await _userService.UserRegister(dto);
             if (result.Succeeded)
             {
                 return RedirectToAction("Login");

@@ -9,7 +9,7 @@ namespace BuildingSystem.Business.Abstract
     public interface IUserService
     {
         Task AddAsync(UserDto loginDto);
-        Task<SignInResult> LogIn(LoginDto loginDto);
+        Task<IList<string>> LogIn(LoginDto loginDto);
         Task<List<UserDto>> GetAllAsync();
         Task UpdateUserAsync(UserDto userDto);
         Task<UserDto> FindById(string id);
@@ -17,6 +17,7 @@ namespace BuildingSystem.Business.Abstract
         Task<UserDto> FindByEmail(string email);
         void Delete(string id);
         User GetUserFromSession();
+        Task<IdentityResult> UserRegister(UserDto userDto);
 
     }
 }

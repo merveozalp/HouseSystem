@@ -67,6 +67,7 @@ namespace BuildingSystem.UI.Controllers
                         SenderMail = item.SenderMail,
                         ReceiverMail = item.ReceiverMail,
                         MessageContent = item.MessageContent,
+                        Body = item.Body,
                         UserName = sender.UserName
                     };
                     messageDtos.Add(messageDto);
@@ -94,7 +95,8 @@ namespace BuildingSystem.UI.Controllers
                         SenderMail = item.SenderMail,
                         ReceiverMail = item.ReceiverMail,
                         MessageContent = item.MessageContent,
-                        UserName = receiver.UserName
+                        UserName = receiver.UserName,
+                        Body = item.Body
                     };
                     messageDtos.Add(messageDto);
                 }

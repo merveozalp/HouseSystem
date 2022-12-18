@@ -64,7 +64,7 @@ namespace BuildingSystem.UI.Controllers
                 await _roleService.CreateRole(roleName);
                 return RedirectToAction("GetAllRole");
             }
-            return View();
+            return View(roleName);
         }
         [HttpGet]
         public IActionResult RoleAssign(string id)
@@ -127,12 +127,12 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(UserDto userDto)
         {
-            
+            if (ModelState.IsValid)
+            {
                 await _userService.AddAsync(userDto);
-               return RedirectToAction("GetAllUsers");
-            
-            
-          
+                return RedirectToAction("GetAllUsers");
+            }
+            return View(userDto);
         }
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
@@ -207,19 +207,32 @@ namespace BuildingSystem.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> AddExpense()
         {
-            var expenseType = await _expenseTypeService.GetAllAsync();
+            var expenseTypes = await _expenseTypeService.GetAllAsync();
+            ViewBag.expenseType = new SelectList(expenseTypes, "Id", "ExpenseTypeName");
+
             var flats = await _flatService.GetAllAsync();
-            var createExpense = new ExpenseCreateDto()
-            {
-                ExpenseTypes = expenseType,
-                Flats = flats
-            };
-            return View(createExpense);
+            ViewBag.flat = new SelectList(flats, "Id", "FlatNumber");
+
+            var buildings = await _buildingService.GetAllAsync();
+            ViewBag.building = new SelectList(buildings, "Id", "BuildingName");
+
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> AddExpense(ExpenseCreateDto expenseCreateDto)
         {
-            if (!ModelState.IsValid) return View(expenseCreateDto);
+            if (!ModelState.IsValid)
+            {
+                var expenseTypes = await _expenseTypeService.GetAllAsync();
+                ViewBag.expenseType = new SelectList(expenseTypes, "Id", "ExpenseTypeName");
+
+                var flats = await _flatService.GetAllAsync();
+                ViewBag.flat = new SelectList(flats, "Id", "FlatNumber");
+
+                var buildings = await _buildingService.GetAllAsync();
+                ViewBag.building = new SelectList(buildings, "Id", "BuildingName");
+                return View(expenseCreateDto);
+            }
             expenseCreateDto.InvoiceDate = DateTime.Now;
             expenseCreateDto.IsPaid = false;
             var expenses = await _expenseService.AddAsync(expenseCreateDto);
@@ -229,26 +242,44 @@ namespace BuildingSystem.UI.Controllers
         public async Task<IActionResult> UpdateExpense(int id)
         {
             var expenses = await _expenseService.GetById(id);
+
             var expenseTypes = await _expenseTypeService.GetAllAsync();
+           ViewBag.expenseType = new SelectList(expenseTypes, "Id", "ExpenseTypeName");
+
             var flats = await _flatService.GetAllAsync();
+           ViewBag.flat = new SelectList(flats, "Id", "FlatNumber");
+
             var buildings = await _buildingService.GetAllAsync();
+            ViewBag.building = new SelectList(buildings, "Id", "BuildingName");
+
             var expenseDto = new ExpenseUpdateDto()
             {
                 Id = expenses.Id,
                 IsPaid = expenses.IsPaid,
                 InvoiceDate = DateTime.Now,
                 Cost = expenses.Cost,
-                ExpenseTypes = expenseTypes,
-                Flats = flats,
-                Buildings = buildings
+                //ExpenseTypes = expenseTypes,
+                //Flats = flats,
+                //Buildings = buildings
 
             };
             return View(expenseDto);
         }
         [HttpPost]
-        public IActionResult UpdateExpense(ExpenseUpdateDto updateExpenseDto)
+        public async Task<IActionResult> UpdateExpense(ExpenseUpdateDto updateExpenseDto)
         {
-            if (!ModelState.IsValid) return View(updateExpenseDto);
+            if (!ModelState.IsValid)
+            {
+                var expenseTypes = await _expenseTypeService.GetAllAsync();
+                ViewBag.expenseType = new SelectList(expenseTypes, "Id", "ExpenseTypeName");
+
+                var flats = await _flatService.GetAllAsync();
+                ViewBag.flat = new SelectList(flats, "Id", "FlatNumber");
+
+                var buildings = await _buildingService.GetAllAsync();
+                ViewBag.building = new SelectList(buildings, "Id", "BuildingName");
+                return View(updateExpenseDto);
+            }
             _expenseService.UpdateAsync(updateExpenseDto);
             return RedirectToAction("GetAllExpenses");
 
@@ -331,34 +362,33 @@ namespace BuildingSystem.UI.Controllers
             var flats = await _flatService.GetAllFlatsWithRelation();
             return View(flats);
         }
-       
+
         [HttpGet]
         public async Task<IActionResult> AddFlat()
         {
             var buildingDto = await _buildingService.GetAllAsync();
-            //ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
+            ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
             var userDto = await _userService.GetAllAsync();
-            //ViewBag.User = new SelectList(userDto, "Id", "UserName");
-            var flatAdd = new FlatCreateDto()
-            {
-                Buildings = buildingDto,
-                Users = userDto
-
-            };
-            return View(flatAdd);
+            ViewBag.User = new SelectList(userDto, "Id", "UserName");
+           
+            return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddFlat(FlatCreateDto flatCreateDto)
         {
-            if (ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-                flatCreateDto.IsEmpty = true;
-                await _flatService.AddAsync(flatCreateDto);
-                return RedirectToAction("GetAllFlat");
+                var buildingDto = await _buildingService.GetAllAsync();
+                ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
+                var userDto = await _userService.GetAllAsync();
+                ViewBag.User = new SelectList(userDto, "Id", "UserName");
+                return View(flatCreateDto);
             }
-          
-            return View(flatCreateDto);
 
+            flatCreateDto.IsEmpty = true;
+            await _flatService.AddAsync(flatCreateDto);
+            return RedirectToAction("GetAllFlat");
         }
         [HttpGet]
         public async Task<IActionResult> UpdateFlat(int id)
@@ -366,7 +396,9 @@ namespace BuildingSystem.UI.Controllers
             var flat = await _flatService.GetById(id);
             var flats = await _flatService.GetAllAsync();
             var buildingDto = await _buildingService.GetAllAsync();
+            ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
             var userDto = await _userService.GetAllAsync();
+            ViewBag.User = new SelectList(userDto, "Id", "UserName");
 
             var flatUpdateDto = new FlatUpdateDto()
             {
@@ -375,15 +407,24 @@ namespace BuildingSystem.UI.Controllers
                 IsOwner = flat.IsOwner,
                 IsEmpty = flat.IsEmpty,
                 FlatType = flat.FlatType,
-                Buildings = buildingDto,
-                Users = userDto
+                FlatNumber=flat.FlatNumber,
+                
+                
+               
             };
             return View(flatUpdateDto);
         }
         [HttpPost]
-        public IActionResult UpdateFlat(FlatUpdateDto flatUpdateDto)
+        public async Task<IActionResult> UpdateFlat(FlatUpdateDto flatUpdateDto)
         {
-            if (!ModelState.IsValid) return View(flatUpdateDto);
+            if (!ModelState.IsValid)
+            {
+                var buildingDto = await _buildingService.GetAllAsync();
+                ViewBag.Building = new SelectList(buildingDto, "Id", "BuildingName");
+                var userDto = await _userService.GetAllAsync();
+                ViewBag.User = new SelectList(userDto, "Id", "UserName");
+                return View(flatUpdateDto);
+            }
             _flatService.UpdateAsync(flatUpdateDto);
             return RedirectToAction("GetAllFlat");
         }

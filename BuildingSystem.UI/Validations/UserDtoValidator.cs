@@ -19,6 +19,7 @@ namespace BuildingManager.Web.ValidationRules.FluentValidation
             RuleFor(x => x.IdentityNo).MaximumLength(11).WithMessage("Kimlik Numaranýzýn uzunluðuna Dikkat Ediniz.");
             RuleFor(x => x.CarNo).NotNull().WithMessage("Araba Plakanýzý Giriniz. ");
             RuleFor(x => x.CarNo).MaximumLength(10).WithMessage("Araba Plaka Uzunluðunuzu Kontrol Ediniz.");
+            RuleFor(x => x.Password).MaximumLength(10).WithMessage("Lütfen þifre giriniz..");
         }
     }
 }

@@ -15,6 +15,7 @@ namespace BuildingSystem.Entities.Dtos
         public string MessageContent { get; set; }
         public string Body { get; set; }
         public string UserName { get; set; }
+        public string UserId { get; set; }
         public List<UserDto> Users { get; set; }
         //public bool IsRead { get; set; } = false;
     }

@@ -1,26 +1,24 @@
 ﻿@model FlatCreateDto
-
-
 <form asp-controller="Admin" asp-action="AddFlat" class="was-validated">
     <div class="mb-3">
         <label asp-for="UserId">Kullanıcı</label>
         <select asp-for="UserId" class="form-control"
-                asp-items="@(new SelectList(Model.Users, "Id", "UserName"))">
+                asp-items="ViewBag.User" required>
         </select>
-        @*<span asp-validation-for="UserId" class="text-danger"></span>*@
+        <span asp-validation-for="UserId" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="BuildingId">Bina Seçiniz</label>
         <select asp-for="BuildingId" class="form-control"
-                asp-items="@(new SelectList(Model.Buildings, "Id", "BuildingName"))" >
+                asp-items="ViewBag.Building">
             <option>Lütfen birini seçiniz</option>
         </select>
-       @* <span asp-validation-for="BuildingId" class="text-danger"></span>*@
+        <span asp-validation-for="BuildingId" class="text-danger"></span>
     </div>
 
     <div class="mb-3 ">
         <label asp-for="FlatType">Daire Tipi</label>
-        <input type="text" class="form-control" asp-for="FlatType" />
+        <input type="text" class="form-control" asp-for="FlatType" required />
         <span asp-validation-for="FlatType" class="text-danger"></span>
     </div>
     <div class="mb-3 ">
@@ -42,3 +40,4 @@
     </div>
     <button type="submit" class="btn btn-primary">Ekle</button>
 </form>
+

@@ -47,7 +47,7 @@ namespace BuildingSystem.Business.Concrete
 
 
         }
-        public async Task<Microsoft.AspNetCore.Identity.SignInResult> LogIn(LoginDto loginDto)
+        public async Task<IList<string>> LogIn(LoginDto loginDto)
         {
             if (loginDto.Email != null)
             {
@@ -56,8 +56,9 @@ namespace BuildingSystem.Business.Concrete
                 {
                     await _signInManager.SignOutAsync();
                 }
-                Microsoft.AspNetCore.Identity.SignInResult result = _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false).Result;
-                return result;
+               SignInResult result = _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false).Result;
+                IList<string> roles = await _userManager.GetRolesAsync(user);
+                return roles;
             }
             return null;
         }
@@ -108,6 +109,27 @@ namespace BuildingSystem.Business.Concrete
             var userName = _httpContextAccessor.HttpContext.User.Identity.Name;
             var user = _userManager.FindByNameAsync(userName).Result;
             return user;
+        }
+
+        public async Task<IdentityResult> UserRegister(UserDto dto)
+        {
+            User user = new User()
+            {
+                IdentityNo = dto.IdentityNo,
+                UserName = dto.UserName,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                CarNo = dto.CarNo,
+                PhoneNumber = dto.PhoneNumber,
+
+            };
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Yönetici");
+            }
+            return result;
         }
     }
 }

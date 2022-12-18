@@ -18,9 +18,9 @@ namespace BuildingSystem.Entities.Dtos
         public int BuildingId { get; set; }
         public int FlatId { get; set; }
 
-        public IEnumerable<BuildingDto> Buildings { get; set; } //id
-        public IEnumerable<UserDto> Users { get; set; }//id
-        public ICollection<FlatDto> Flats { get; set; }
+        //public IEnumerable<BuildingDto> Buildings { get; set; } //id
+        //public IEnumerable<UserDto> Users { get; set; }//id
+        //public ICollection<FlatDto> Flats { get; set; }
 
     }
 }

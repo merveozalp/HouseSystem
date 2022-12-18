@@ -24,8 +24,8 @@
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Gider Bilgileri</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a asp-controller="Occupant" asp-action="GetAllUsers">GetPaidExpense</a></li>
-                    <li><a asp-controller="Occupant" asp-action="GetAllRole">GetUnPaidExpense</a></li>
+                    <li><a asp-controller="Occupant" asp-action="GetPaidExpense">Ödenmiş Faturalar</a></li>
+                    <li><a asp-controller="Occupant" asp-action="GetUnPaidExpense">Ödenmemiş Faturalar</a></li>
                    @* <li><a asp-controller="Occupant" asp-action="RoleCreate">Rol  Oluştur</a></li>*@
                 </ul>
             </li>
@@ -35,6 +35,7 @@
                     <li><a asp-controller="Occupant" asp-action="Inbox"> Gelen Mesajlar</a></li>
                     <li><a asp-controller="Occupant" asp-action="OutBox">Gönderilen Mesajlar</a></li>
                     <li><a asp-controller="Occupant" asp-action="SendMessageToAdmin">Mail Mesajlar</a></li>
+                   
                 </ul>
             </li>
          @*   <li>

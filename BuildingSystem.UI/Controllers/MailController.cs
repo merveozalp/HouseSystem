@@ -1,7 +1,11 @@
 ﻿using BuildingSystem.Business.Abstract;
 using BuildingSystem.Entities.Dtos;
+using Entites.Entitiy;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MimeKit;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +16,13 @@ namespace BuildingSystem.UI.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
-        private readonly IExpenseService expenseService;
-        public MailController(IMessageService messageService, IUserService userService)
+        private readonly IExpenseService _expenseService;
+        private readonly UserManager<User> _userManager;
+        public MailController(IMessageService messageService, IUserService userService, IExpenseService expenseService)
         {
             _messageService = messageService;
             _userService = userService;
+            _expenseService = expenseService;
         }
 
         [HttpGet]
@@ -28,27 +34,28 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public IActionResult SendMail(MessageDto messageDto)
         {
+          
+                MimeMessage mimeMessage = new MimeMessage();
+                MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", "B202102043@subu.edu.tr");
+                mimeMessage.From.Add(mailboxAddressFrom);
+                MailboxAddress mailboxAddressTo = new MailboxAddress("User", messageDto.ReceiverMail);
+                mimeMessage.To.Add(mailboxAddressTo);
 
-            MimeMessage mimeMessage = new MimeMessage();
-            MailboxAddress mailboxAddressFrom = new MailboxAddress("Site Yönetimi", messageDto.SenderMail );
-            mimeMessage.From.Add(mailboxAddressFrom);
-            MailboxAddress mailboxAddressTo = new MailboxAddress("User", "B202102043@subu.edu.tr");
-            mimeMessage.To.Add(mailboxAddressTo);
-
-            var bodyByilder = new BodyBuilder();
-            bodyByilder.TextBody = messageDto.Body;
-            mimeMessage.Body = bodyByilder.ToMessageBody();
+                var bodyByilder = new BodyBuilder();
+                bodyByilder.TextBody = messageDto.Body;
+                mimeMessage.Body = bodyByilder.ToMessageBody();
 
 
-            mimeMessage.Subject = messageDto.MessageContent;
+                mimeMessage.Subject = messageDto.MessageContent;
 
-            SmtpClient client = new SmtpClient();
-            client.Connect("smtp.gmail.com", 587, false);
-            client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
-            client.Send(mimeMessage);
-            client.Disconnect(true);
+                SmtpClient client = new SmtpClient();
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("B202102043@subu.edu.tr", "mbduhgnbuzuautxy");
+                client.Send(mimeMessage);
+                client.Disconnect(true);
+            
 
-            return RedirectToAction("Inbox");
+            return View(messageDto);
         }
 
         [HttpGet]
@@ -94,6 +101,8 @@ namespace BuildingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMessage(MessageDto message)
         {
+            var users = await _userService.GetAllAsync();
+            var userList = new SelectList(users, "Id", "UserName");
             var user = _userService.GetUserFromSession();
             message.SenderMail = user.Id;
             await _messageService.AddAsync(message);

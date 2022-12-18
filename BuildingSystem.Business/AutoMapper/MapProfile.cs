@@ -34,6 +34,7 @@ namespace BuildingSystem.Business.AutoMapper
             CreateMap<Flat,FlatDto>().ReverseMap();
             CreateMap<Flat,FlatCreateDto>().ReverseMap();
             CreateMap<Flat,FlatUpdateDto>().ReverseMap();
+            CreateMap<Flat,FlatViewModel>().ReverseMap();
             //CreateMap<Flat, BlockAndBuildingDto>().ReverseMap();
             //CreateMap<FlatType, FlatTypeDto>().ReverseMap();
 

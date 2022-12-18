@@ -1,18 +1,19 @@
 ﻿@model ExpenseUpdateDto
-<form asp-controller="Admin" asp-action="UpdateExpense" class="was-validated">
+<form asp-controller="Admin" asp-action="UpdateExpense" method="post" class="was-validated">
     <div class="mb-3">
         <label asp-for="BuildingId">Bina Numarası</label>
         <select asp-for="BuildingId" class="form-control"
-                asp-items="@(new SelectList(Model.Buildings, "Id" , "BuildingName"))" required>
-            <option>Lütfenbirini seçiniz</option>
+                asp-items="ViewBag.building" required>
+            
         </select>
-        <span asp-validation-for="FlatId" class="text-danger"></span>
+        <span asp-validation-for="BuildingId" class="text-danger"></span>
+
     </div>
     <div class="mb-3">
         <label asp-for="FlatId">Daire Numarası</label>
         <select asp-for="FlatId" class="form-control"
-                asp-items="@(new SelectList(Model.Flats, "Id" , "FlatNumber"))" required>
-            <option>Lütfen birini seçiniz</option>
+                asp-items="ViewBag.flat" required>
+          
         </select>
         <span asp-validation-for="FlatId" class="text-danger"></span>
     </div>
@@ -20,8 +21,8 @@
     <div class="mb-3">
         <label asp-for="ExpenseTypeId">Gider Türü</label>
         <select asp-for="ExpenseTypeId" class="form-control"
-                asp-items="@(new SelectList(Model.ExpenseTypes, "Id" , "ExpenseTypeName"))" required>
-            <option>Lütfen birini seçiniz</option>
+                asp-items="ViewBag.expenseType" required>
+           
         </select>
         <span asp-validation-for="ExpenseTypeId" class="text-danger"></span>
     </div>
@@ -29,6 +30,11 @@
         <label asp-for="Cost">Ücret</label>
         <input type="number" class="form-control" asp-for="Cost" required />
         <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+    <div class="mb-3 ">
+        <label asp-for="IsPaid">Ödeme Durumu</label>
+        <input type="text" class="form-control" asp-for="IsPaid" required />
+        <span asp-validation-for="IsPaid" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Ekle</button>

@@ -1,12 +1,16 @@
 using BuildingSystem.Business.AutoMapper;
 using BuildingSystem.DataAccess.Context;
+using BuildingSystem.UI.Filters;
 using Entites.Entitiy;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Hangfire;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,14 +30,16 @@ namespace BuildingSystem.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddControllersWithViews().AddWebCore();
-            services.AddApplicationServices();
+
+            services.AddControllersWithViews();
             //.AddMvcOptions(options => options.Filters.Add<ModelStateFilterAttribute>());
-            //services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
-            //services.AddFluentValidationAutoValidation();
+            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            //services.AddApplicationServices();
+            services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
+            services.AddFluentValidationAutoValidation();
             //services.AddFluentValidationClientsideAdapters();
-            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(typeof(MapProfile));
             
             // RunTime'da sayfa güncellemesini görebilmek için ekliyoruz.
@@ -93,7 +99,7 @@ namespace BuildingSystem.UI
             app.UseHttpsRedirection();
            app.UseHangfireDashboard("/myjobs");
 
-            app.UseApplicationModule(backgroundJobs, recurringJobManager, serviceProvider); // Hangfire
+            //app.UseApplicationModule(backgroundJobs, recurringJobManager, serviceProvider); // Hangfire
 
             app.UseStaticFiles();
 
